@@ -18,15 +18,10 @@
     [multiple],
     textarea,
     select {
-        @apply rounded focus:outline-none focus:ring focus:ring-purple-400;
+        @apply rounded border-gray-400 focus:border-gray-600 focus:outline-none focus:ring focus:ring-primary-varient;
     }
 
     [type="checkbox"] {
-        @apply rounded-sm focus:outline-none focus:ring focus:ring-purple-400;
-    }
-
-    /* for active menu button */
-    .adminActiveMenuItem .adminActiveMenuItemLink {
-        @apply bg-purple-400 bg-opacity-50 font-bold;
+        @apply rounded-sm border-gray-400 focus:border-gray-600 focus:outline-none focus:ring focus:ring-primary-varient;
     }
 }

@@ -4,13 +4,13 @@ const IconButton = ({ className, label, counter, children, ...rest }) => {
     return (
         <button
             {...rest}
-            className={`relative p-2 rounded-lg text-gray-600 flex flex-col items-center transition hover:text-purple-500 focus:outline-none focus:ring focus:ring-inset focus:ring-purple-300 ${className}`}
+            className={`relative p-2 rounded-lg text-gray-600 flex flex-col items-center transition hover:text-gray-700 focus:outline-none focus:ring focus:ring-inset focus:ring-primary-varient ${className}`}
         >
             {  
                 counter ? 
                 <div className="flex items-center">
                     {children}
-                    <div className="px-1 text-sm font-bold bg-purple-500 text-gray-50 rounded">
+                    <div className="px-1 text-sm font-bold bg-primary text-gray-600 rounded">
                         {counter}
                     </div>
                 </div> : 
