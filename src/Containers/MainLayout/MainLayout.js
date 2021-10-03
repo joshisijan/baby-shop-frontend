@@ -6,7 +6,7 @@ const MainLayout = (props) => {
     return (
         <div>
             <Navbar />
-            <div>
+            <div className="pt-28">
                 {props.children}
             </div>
             <Footer />

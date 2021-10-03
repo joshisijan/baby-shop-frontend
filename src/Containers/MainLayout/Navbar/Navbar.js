@@ -10,7 +10,6 @@ import {
 import MenuLink from '../Navbar/MenuLink/MenuLink'
 import IconButton from './IconButton/IconButton';
 
-import FadeTransition from '../../../Components/Transition/FadeTransition'
 
 const categoriesList = [
     'Clothings',
@@ -18,28 +17,21 @@ const categoriesList = [
     'Accessories',
     'Strollers',
 ]
-
-const scrollStateValue = {
-    up: 'up',
-    down: 'down',
-    top: 'top',
-}
-
 const Navbar = () => {
 
-    const [scrollState, setScrollState] = useState(scrollStateValue.top);
+    const [navbarShown, setNavbarShown] = useState(true);
     const [menuShown, setMenuShown] = useState(false);
 
     useEffect(() => {
         let oldScrollY = 0;
         const handleScroll = () => {
-            if (window.scrollY > 0) {
+            if (window.scrollY !== 0) {
                 const tempScrollY = window.scrollY;
-                if (tempScrollY > oldScrollY) setScrollState(scrollStateValue.down);
-                else setScrollState(scrollStateValue.up);
+                if (tempScrollY > oldScrollY) setNavbarShown(false);
+                else setNavbarShown(true);
                 oldScrollY = window.scrollY;
             } else {
-                setScrollState(scrollStateValue.top);
+                setNavbarShown(true);
             }
         }
         window.addEventListener("scroll", handleScroll);
@@ -59,7 +51,7 @@ const Navbar = () => {
         }
     }, [menuShown]);
     return (
-        <div className={`bg-white shadow-sm transition duration-500 transform fixed ${scrollState === scrollStateValue.top ? 'relative translate-y-0' : scrollState === scrollStateValue.up ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
+        <div className={`bg-white shadow-sm transition transform fixed ${navbarShown ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
             <div className="px-6 py-2 space-x-2 flex items-center w-full max-w-6xl">
                 <IconButton className="md:hidden" onClick={() => setMenuShown(true)}>
                     <MenuIcon className="w-5 h-5" />
@@ -85,7 +77,7 @@ const Navbar = () => {
             {/* search bar for smaller devices */}
             <div className="relative py-2 px-6 w-full md:hidden">
                 <input className="w-full pr-12" type="text" placeholder="Search" />
-                <button className="bg-primary text-gray-50 p-2 absolute right-7 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                <button className="bg-primary text-gray-600 p-2 absolute right-7 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
                     <SearchIcon className="w-5 h-5" />
                 </button>
             </div>
