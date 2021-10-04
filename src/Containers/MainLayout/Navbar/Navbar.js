@@ -52,8 +52,8 @@ const Navbar = () => {
         }
     }, [menuShown]);
     return (
-        <div className={`bg-white shadow-sm transition transform fixed ${navbarShown ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
-            <div className="px-6 py-2 space-x-2 flex items-center w-full max-w-6xl">
+        <div className={`z-10 bg-white shadow-sm transition transform fixed ${navbarShown ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
+            <div className="p-2 lg:px-6 lg:py-2 space-x-2 flex items-center w-full max-w-6xl">
                 <IconButton className="md:hidden" onClick={() => setMenuShown(true)}>
                     <MenuIcon className="w-5 h-5" />
                 </IconButton>
