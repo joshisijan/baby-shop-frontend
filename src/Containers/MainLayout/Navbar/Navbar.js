@@ -26,7 +26,7 @@ const Navbar = () => {
     useEffect(() => {
         let oldScrollY = 0;
         const handleScroll = () => {
-            if (window.scrollY !== 0) {
+            if (window.scrollY > 100) {
                 const tempScrollY = window.scrollY;
                 if (tempScrollY > oldScrollY) setNavbarShown(false);
                 else setNavbarShown(true);

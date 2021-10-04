@@ -5,7 +5,7 @@ import homeTopBanner from '../../../static/image/homeTopBanner.jpg'
 
 const TopBannerImage = () => {
     return (
-        <div className="px-2 pb-2 lg:px-6 mt-2 grid justify-items-center">
+        <div className="px-2 lg:px-6 mt-2 grid justify-items-center">
             <div className="relative overflow-hidden max-w-6xl h-full w-full aspect-w-1 aspect-h-1 md:aspect-w-5 md:aspect-h-3 lg:aspect-w-5 lg:aspect-h-2">
                 <div>
                     <LazyLoadImage
