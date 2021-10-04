@@ -4,7 +4,7 @@ import MainLayout from '../MainLayout/MainLayout'
 const HomePage = () => {
     return (
         <MainLayout>
-            <div className="p-4 min-h-screen">
+            <div className="min-h-screen">
                 <h1 className="text-4xl">1</h1>
                 <h1 className="text-4xl">2</h1>
                 <h1 className="text-4xl">3</h1>

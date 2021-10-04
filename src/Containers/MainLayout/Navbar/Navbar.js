@@ -4,11 +4,12 @@ import {
     SearchIcon,
     UserIcon,
     ShoppingCartIcon,
-    InformationCircleIcon,
+    HomeIcon,
     XIcon,
 } from '@heroicons/react/outline'
 import MenuLink from '../Navbar/MenuLink/MenuLink'
 import IconButton from './IconButton/IconButton';
+import { Link } from 'react-router-dom';
 
 
 const categoriesList = [
@@ -64,9 +65,11 @@ const Navbar = () => {
                         <SearchIcon className="w-5 h-5" />
                     </button>
                 </div>
-                <IconButton label="Help">
-                    <InformationCircleIcon className="w-5 h-5" />
-                </IconButton>
+                <Link to="/">
+                    <IconButton label="Home">
+                        <HomeIcon className="w-5 h-5" />
+                    </IconButton>
+                </Link>
                 <IconButton label="Account">
                     <UserIcon className="w-5 h-5" />
                 </IconButton>

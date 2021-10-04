@@ -5,6 +5,7 @@ import {
     MailIcon,
     PhoneIcon,
 } from '@heroicons/react/outline'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -26,9 +27,11 @@ const Footer = () => {
                         <h1 className="font-bold">Information</h1>
                         <ul className="text-sm">
                             <li>
-                                <NormalLink>
-                                    About us
-                                </NormalLink>
+                                <Link to="/about">
+                                    <NormalLink>
+                                        About us
+                                    </NormalLink>
+                                </Link>
                             </li>
                             <li>
                                 <NormalLink>
