@@ -70,9 +70,11 @@ const Navbar = () => {
                         <HomeIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>
-                <IconButton label="Account">
-                    <UserIcon className="w-5 h-5" />
-                </IconButton>
+                <Link to="/account">
+                    <IconButton label="Account">
+                        <UserIcon className="w-5 h-5" />
+                    </IconButton>
+                </Link>
                 <IconButton label="Cart" counter={2}>
                     <ShoppingCartIcon className="w-5 h-5" />
                 </IconButton>

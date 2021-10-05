@@ -7,7 +7,7 @@ module.exports = {
         primary: {
           DEFAULT: '#F2C2C2',
           varient: '#F5E4DC',
-          light: '#F4C9D1',          
+          light: '#F4C9D1',
           dark: '#F3CCC1',
         },
         secondary: {
@@ -22,7 +22,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [  
+  plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
   ],

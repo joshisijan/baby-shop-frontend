@@ -1,9 +1,8 @@
 import React from 'react'
-import MainLayout from '../MainLayout/MainLayout'
 
 const AboutPage = () => {
     return (
-        <MainLayout>
+        <div>
             About page
             <h1 className="text-4xl">1</h1>
             <h1 className="text-4xl">2</h1>
@@ -17,7 +16,7 @@ const AboutPage = () => {
             <h1 className="text-4xl">10</h1>
             <h1 className="text-4xl">11</h1>
             <h1 className="text-4xl">12</h1>
-        </MainLayout>
+        </div>
     )
 }
 
