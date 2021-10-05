@@ -9,7 +9,7 @@ const MainLayout = (props) => {
     // scroll to top in new page
     const scrollToTop = () => {
         if(window.scrollY !== 0) {
-            window.scrollY = 0;
+            window.scrollTo(0,0);
         }
     }
 
