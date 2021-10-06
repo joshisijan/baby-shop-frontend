@@ -82,9 +82,9 @@ const Navbar = () => {
                 </Link>
             </div>
             {/* search bar for smaller devices */}
-            <div className="relative py-2 px-6 w-full md:hidden">
+            <div className="relative px-4 py-2 w-full md:hidden">
                 <input className="w-full pr-12" type="text" placeholder="Search" />
-                <button className="bg-primary text-gray-600 p-2 absolute right-7 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                <button className="bg-primary text-gray-600 p-2 absolute right-5 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
                     <SearchIcon className="w-5 h-5" />
                 </button>
             </div>
