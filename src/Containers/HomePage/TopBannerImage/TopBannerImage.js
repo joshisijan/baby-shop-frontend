@@ -2,6 +2,7 @@ import React from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import PrimaryTextButton from '../../../Components/Button/PrimaryTextButton'
 import homeTopBanner from '../../../static/image/homeTopBanner.jpg'
+import homeTopBannerPlaceholder from '../../../static/image/homeTopBannerPlaceholder.jpg'
 
 const TopBannerImage = () => {
     return (
@@ -15,7 +16,7 @@ const TopBannerImage = () => {
                         width="100%"
                         height="100%"
                         src={homeTopBanner}
-                        placeholderSrc={homeTopBanner}
+                        placeholderSrc={homeTopBannerPlaceholder}
                     />
                 </div>
                 <div className="p-10 absolute inset-0 bg-black bg-opacity-20 grid justify-items-center">

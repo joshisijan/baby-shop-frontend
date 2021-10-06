@@ -2,6 +2,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import HomePage from './Containers/HomePage/HomePage';
 import AboutPage from './Containers/AboutPage/AboutPage';
 import AccountOptionPage from './Containers/AccountOptionPage/AccountOptionPage';
+import CartPage from './Containers/CartPage/CartPage'
 import MainLayout from './Containers/MainLayout/MainLayout';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import './app.css';
@@ -23,6 +24,9 @@ function App() {
             </Route>
             <Route path="/account" exact>
               <AccountOptionPage />
+            </Route>
+            <Route path="/cart" exact>
+              <CartPage />
             </Route>
             <Route path="/about" exact>
               <AboutPage />

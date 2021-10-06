@@ -75,9 +75,11 @@ const Navbar = () => {
                         <UserIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>
+                <Link to="/cart">
                 <IconButton label="Cart" counter={2}>
                     <ShoppingCartIcon className="w-5 h-5" />
                 </IconButton>
+                </Link>
             </div>
             {/* search bar for smaller devices */}
             <div className="relative py-2 px-6 w-full md:hidden">
