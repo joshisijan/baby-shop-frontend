@@ -14,7 +14,10 @@ module.exports = {
           DEFAULT: '#9EC4C5',
           varient: '#C1DDD8',
           light: '#AACDC8',
-          dark: '#9DBCC6',
+          dark: {
+            DEFAULT: '#9DBCC6',
+            extra: '#3f4e4f',
+          },
         },
       }
     },

@@ -15,7 +15,7 @@ const TopBannerImage = () => {
                 </div>
                 <div className="p-10 absolute inset-0 bg-black bg-opacity-20 grid justify-items-center">
                     <div className="h-full max-w-md flex flex-col justify-center items-end">
-                        <h1 className="text-4xl font-bold text-white">Store for baby</h1>
+                        <h1 className="text-4xl font-bold text-white">New arrivals</h1>
                         <p className="text-right text-gray-100">
                             Adipisicing laboris id anim consequat commodo dolore in dolore consequat amet amet mollit eiusmod.
                         </p>

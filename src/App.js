@@ -6,6 +6,7 @@ import CartPage from './Containers/CartPage/CartPage'
 import MainLayout from './Containers/MainLayout/MainLayout';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import './app.css';
+import ProductPage from './Containers/ProductPage/ProductPage';
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,9 @@ function App() {
             </Route>
             <Route path="/cart" exact>
               <CartPage />
+            </Route>
+            <Route path="/product/:id" exact>
+              <ProductPage />
             </Route>
             <Route path="/about" exact>
               <AboutPage />
