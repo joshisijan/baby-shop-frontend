@@ -13,17 +13,22 @@ import storage from 'redux-persist/lib/storage'
 import registrationSlice from "./features/registration/registrationSlice"
 import loginSlice from './features/login/loginSlice'
 import userDetailSlice from "./features/userDetail/userDetailSlice"
+import categoryListSlice from "./features/categoryList/categoryListSlice"
 
 const reducers = combineReducers({
     registration: registrationSlice,
     login: loginSlice,
     userDetail: userDetailSlice,
+    categoryList: categoryListSlice,
 });
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ["userDetail"],
+    whitelist: [ 
+        "userDetail",
+        "categoryList",
+    ],
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);

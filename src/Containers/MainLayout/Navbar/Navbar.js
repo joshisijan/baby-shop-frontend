@@ -10,6 +10,7 @@ import {
 import MenuLink from '../Navbar/MenuLink/MenuLink'
 import IconButton from './IconButton/IconButton';
 import { Link } from 'react-router-dom';
+import CategoryList from './CategoryList/CategoryList';
 
 
 const categoriesList = [
@@ -76,9 +77,9 @@ const Navbar = () => {
                     </IconButton>
                 </Link>
                 <Link to="/cart">
-                <IconButton label="Cart" counter={2}>
-                    <ShoppingCartIcon className="w-5 h-5" />
-                </IconButton>
+                    <IconButton label="Cart" counter={2}>
+                        <ShoppingCartIcon className="w-5 h-5" />
+                    </IconButton>
                 </Link>
             </div>
             {/* search bar for smaller devices */}
@@ -106,10 +107,14 @@ const Navbar = () => {
             {/* fullscreen overlay */}
             <div onClick={() => setMenuShown(false)} className={`${menuShown ? 'fixed top-0 left-0 w-screen h-screen bg-black opacity-50' : 'hidden'}`}></div>
             {/* Category Menu */}
-            <div className={`bg-secondary fixed top-0 left-0 h-screen w-full max-w-xs transition duration-500 transform ${menuShown ? 'translate-x-0' : '-translate-x-full'}`}>
-                <IconButton label="Close" onClick={() => setMenuShown(false)}>
-                    <XIcon className="w-5 h-5" />
-                </IconButton>
+            <div className={`px-6 py-4 bg-white fixed top-0 left-0 h-screen w-full max-w-xs transition duration-500 transform ${menuShown ? 'translate-x-0' : '-translate-x-full'}`}>
+                <div className="flex justify-end">
+                    <IconButton onClick={() => setMenuShown(false)}>
+                        <XIcon className="w-5 h-5" />
+                    </IconButton>
+                </div>
+                <div className="font-bold">Categories</div>
+                <CategoryList />
             </div>
         </div>
     )

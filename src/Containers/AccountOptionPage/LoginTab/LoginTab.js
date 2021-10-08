@@ -58,7 +58,7 @@ const LoginTab = () => {
             <FadeTransition show={loginState.error !== null}>
                 {loginState.error !== null ? authErrorGenerator(loginState.error) : null}
             </FadeTransition>
-            <form className="mt-6 flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+            <form className="mt-6 flex flex-col gap-2" noValidate={true} onSubmit={handleSubmit(onSubmit)}>
                 {/* email */}
                 <div className="flex flex-col">
                     <label className="text-sm font-medium" htmlFor="email">Email:</label>

@@ -2,7 +2,12 @@ import React, { useEffect } from 'react'
 import Footer from './Footer/Footer'
 import Navbar from './Navbar/Navbar'
 import { Toaster } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { fetchCategoryList } from '../../features/categoryList/categoryListAction';
 const MainLayout = (props) => {
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
         scrollToTop();
     });
@@ -12,6 +17,11 @@ const MainLayout = (props) => {
             window.scrollTo(0, 0);
         }
     }
+
+    // for getting container
+    useEffect(() => {
+        dispatch(fetchCategoryList());
+    }, [dispatch]);
 
     return (
         <div>

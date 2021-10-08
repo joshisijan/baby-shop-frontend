@@ -1,5 +1,4 @@
 import React from 'react'
-import toast from 'react-hot-toast'
 import PrimaryTextButton from '../../../Components/Button/PrimaryTextButton'
 import homeTopBanner from '../../../static/image/homeTopBanner.jpg'
 
