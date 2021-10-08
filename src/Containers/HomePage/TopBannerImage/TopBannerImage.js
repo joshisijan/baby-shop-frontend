@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 import PrimaryTextButton from '../../../Components/Button/PrimaryTextButton'
 import homeTopBanner from '../../../static/image/homeTopBanner.jpg'
 
@@ -19,7 +20,7 @@ const TopBannerImage = () => {
                         <p className="text-right text-gray-100">
                             Adipisicing laboris id anim consequat commodo dolore in dolore consequat amet amet mollit eiusmod.
                         </p>
-                        <PrimaryTextButton className="mt-4">Shop Now</PrimaryTextButton>
+                        <PrimaryTextButton onClick={() => toast.success('Successfyl congratulation')} className="mt-4">Shop Now</PrimaryTextButton>
                     </div>
                 </div>
             </div>
