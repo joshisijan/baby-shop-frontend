@@ -20,7 +20,7 @@ const TopBannerImage = () => {
                         <p className="text-right text-gray-100">
                             Adipisicing laboris id anim consequat commodo dolore in dolore consequat amet amet mollit eiusmod.
                         </p>
-                        <PrimaryTextButton onClick={() => toast.success('Successfyl congratulation')} className="mt-4">Shop Now</PrimaryTextButton>
+                        <PrimaryTextButton className="mt-4">Shop Now</PrimaryTextButton>
                     </div>
                 </div>
             </div>

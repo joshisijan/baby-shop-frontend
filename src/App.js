@@ -7,6 +7,8 @@ import MainLayout from './Containers/MainLayout/MainLayout';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import './app.css';
 import ProductPage from './Containers/ProductPage/ProductPage';
+import ProtectedRoute from './Components/Route/ProtectedRoute';
+import ProfilePage from './Containers/ProfilePage/ProfilePage';
 
 function App() {
   const location = useLocation();
@@ -24,7 +26,10 @@ function App() {
               <HomePage />
             </Route>
             <Route path="/account" exact>
-              <AccountOptionPage />
+              <ProtectedRoute   
+                unprotectedComponent={AccountOptionPage}
+                protectedComponent={ProfilePage}
+              />
             </Route>
             <Route path="/cart" exact>
               <CartPage />

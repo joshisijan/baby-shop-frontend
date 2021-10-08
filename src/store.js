@@ -1,46 +1,43 @@
-// import { configureStore, combineReducers } from "@reduxjs/toolkit"
-// import {
-//     persistStore,
-//     persistReducer,
-//     FLUSH,
-//     REHYDRATE,
-//     PAUSE,
-//     PERSIST,
-//     PURGE,
-//     REGISTER,
-// } from 'redux-persist'
-// import storage from 'redux-persist/lib/storage'
+import { configureStore, combineReducers } from "@reduxjs/toolkit"
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import registrationSlice from "./features/registration/registrationSlice"
+import loginSlice from './features/login/loginSlice'
+import userDetailSlice from "./features/userDetail/userDetailSlice"
 
-// import authSlice from "./features/auth/authSlice"
-// import userSlice from './features/user/userSlice'
-// import navMenuSlice from "./features/navMenu/navMenuSlice";
-// import registerSlice from "./features/register/registerSlice"
+const reducers = combineReducers({
+    registration: registrationSlice,
+    login: loginSlice,
+    userDetail: userDetailSlice,
+});
 
-// const reducers = combineReducers({
-//     auth: authSlice,
-//     user: userSlice,
-//     register: registerSlice,
-//     navMenu: navMenuSlice,
-// });
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ["userDetail"],
+}
 
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-//     whitelist: ["user"],
-// }
-
-// const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 
-// const store = configureStore({
-//     reducer: persistedReducer,
-//     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-//         serializableCheck: {
-//             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//         },
-//     }),
-// })
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }),
+})
 
-// export let persistor = persistStore(store)
+export let persistor = persistStore(store)
 
-// export default store
+export default store
