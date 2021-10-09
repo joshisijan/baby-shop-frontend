@@ -6,7 +6,7 @@ import ProductNotFound from './ProductNotFound/ProductNotFound'
 const HomePage = () => {
     return (
         <div>
-            <TopBannerImage />
+            <TopBannerImage className="-mt-5" />
             <NewArrivals />
             <ProductNotFound />
         </div>

@@ -2,9 +2,9 @@ import React from 'react'
 import PrimaryTextButton from '../../../Components/Button/PrimaryTextButton'
 import homeTopBanner from '../../../static/image/homeTopBanner.jpg'
 
-const TopBannerImage = () => {
+const TopBannerImage = ({className}) => {
     return (
-        <div className="px-2 lg:px-6 mt-2 grid justify-items-center">
+        <div className={`px-2 lg:px-6 mt-2 grid justify-items-center ${className}`}>
             <div className="relative overflow-hidden max-w-6xl h-full w-full aspect-w-1 aspect-h-1 md:aspect-w-5 md:aspect-h-3 lg:aspect-w-5 lg:aspect-h-2">
                 <div>
                     <img

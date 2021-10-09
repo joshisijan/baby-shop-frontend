@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:8000/'
+export const baseUrl = 'http://192.168.1.9:8000/'
 
 // for user registration
 export const registrationUrl = baseUrl + 'api/account/registration/'

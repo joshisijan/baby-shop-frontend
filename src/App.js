@@ -9,6 +9,8 @@ import './app.css';
 import ProductPage from './Containers/ProductPage/ProductPage';
 import ProtectedRoute from './Components/Route/ProtectedRoute';
 import ProfilePage from './Containers/ProfilePage/ProfilePage';
+import CategoryListPage from './Containers/CategoryListPage/CategoryListPage';
+import CategoryProductPage from './Containers/CategoryProductPage/CategoryProductPage'
 
 function App() {
   const location = useLocation();
@@ -30,6 +32,12 @@ function App() {
                 unprotectedComponent={AccountOptionPage}
                 protectedComponent={ProfilePage}
               />
+            </Route>
+            <Route path="/category" exact>
+              <CategoryListPage />
+            </Route>
+            <Route path="/category/:slug" exact>
+              <CategoryProductPage />
             </Route>
             <Route path="/cart" exact>
               <CartPage />

@@ -29,7 +29,7 @@ const MainLayout = (props) => {
                 position="top-right"
             />
             <Navbar />
-            <div className="pt-32">
+            <div style={{paddingTop: '9.5rem'}}>
                 {props.children}
             </div>
             <Footer />

@@ -11,18 +11,15 @@ import MenuLink from '../Navbar/MenuLink/MenuLink'
 import IconButton from './IconButton/IconButton';
 import { Link } from 'react-router-dom';
 import CategoryList from './CategoryList/CategoryList';
+import useBreadcrumbs from 'use-react-router-breadcrumbs'
+import Breadcrumb from './Breadcrumb/Breadcrumb';
+import { useSelector } from 'react-redux'
 
-
-const categoriesList = [
-    'Clothings',
-    'Footwear',
-    'Accessories',
-    'Strollers',
-]
 const Navbar = () => {
-
+    const breadcrumbs = useBreadcrumbs();
     const [navbarShown, setNavbarShown] = useState(true);
     const [menuShown, setMenuShown] = useState(false);
+    const categoryListState = useSelector(state => state.categoryList);
 
     useEffect(() => {
         let oldScrollY = 0;
@@ -90,24 +87,30 @@ const Navbar = () => {
                 </button>
             </div>
             {/* category list big screen */}
-            <div className="hidden md:flex flex-wrap justify-center px-6 pb-4 gap-4">
+            <div className="hidden md:flex flex-wrap justify-center px-6 gap-4">
                 <MenuLink className="flex" onClick={() => setMenuShown(true)}>
                     <MenuIcon className="w-5 h-5" /> <span>All Categories</span>
                 </MenuLink>
                 {
-                    categoriesList.map(category => {
+                    categoryListState.list.slice(0, 4).map(category => {
                         return (
-                            <MenuLink key={category}>
-                                {category}
-                            </MenuLink>
+                            <Link key={category.slug} to={`category/${category.slug}`}>
+                                <MenuLink>
+                                    {category.name}
+                                </MenuLink>
+                            </Link>
                         )
                     })
                 }
             </div>
+
+            {/* breadcrumbs */}
+            <Breadcrumb breadcrumbs={breadcrumbs} />
+
             {/* fullscreen overlay */}
             <div onClick={() => setMenuShown(false)} className={`${menuShown ? 'fixed top-0 left-0 w-screen h-screen bg-black opacity-50' : 'hidden'}`}></div>
             {/* Category Menu */}
-            <div className={`px-6 py-4 bg-white fixed top-0 left-0 h-screen w-full max-w-xs transition duration-500 transform ${menuShown ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className={`overflow-y-auto px-6 py-4 bg-white fixed top-0 left-0 h-screen w-full max-w-xs transition duration-500 transform ${menuShown ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="flex justify-end">
                     <IconButton onClick={() => setMenuShown(false)}>
                         <XIcon className="w-5 h-5" />
