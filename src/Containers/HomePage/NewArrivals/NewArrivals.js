@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react'
-import NormalLink from '../../../Components/NormalLink/NormalLink'
-
-import { ChevronDoubleRightIcon } from '@heroicons/react/outline'
 import NewArrivalsError from './NewArrivalsError/NewArrivalsError'
 import NewArrivalsList from './NewArrivalsList/NewArrivalsList'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,13 +11,12 @@ const NewArrivals = () => {
         dispatch(fetchLatestProduct());
     }, [dispatch]);
     return (
-        <div className="p-6 grid justify-items-center">
+        <div className="p-6 py-20 grid justify-items-center">
             <div className="max-w-6xl w-full">
                 <div className="flex justify-between">
                     <h1 className="text-xl font-bold">
                         New Arrivals
-                    </h1>
-                    <NormalLink>View All <ChevronDoubleRightIcon className="w-5 h-5" /></NormalLink>
+                    </h1>                    
                 </div>
                 {
                     latestProductState.isLoading ? 
