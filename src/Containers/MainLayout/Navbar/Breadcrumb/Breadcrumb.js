@@ -14,7 +14,7 @@ const Breadcrumb = ({ breadcrumbs }) => {
                         return (
                             <div key={path} className="flex items-center gap-2">
                                 <Link to={path}>
-                                    <NormalLink className="text-blue-600">
+                                    <NormalLink className="text-blue-600 px-2">
                                         {name}
                                     </NormalLink>
                                 </Link>

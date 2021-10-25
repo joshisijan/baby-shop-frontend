@@ -14,12 +14,14 @@ import registrationSlice from "./features/registration/registrationSlice"
 import loginSlice from './features/login/loginSlice'
 import userDetailSlice from "./features/userDetail/userDetailSlice"
 import categoryListSlice from "./features/categoryList/categoryListSlice"
+import latestProductSlice from "./features/latestProduct/latestProductSlice"
 
 const reducers = combineReducers({
     registration: registrationSlice,
     login: loginSlice,
     userDetail: userDetailSlice,
     categoryList: categoryListSlice,
+    latestProduct: latestProductSlice,
 });
 
 const persistConfig = {

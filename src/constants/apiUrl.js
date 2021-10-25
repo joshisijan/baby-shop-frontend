@@ -1,4 +1,4 @@
-export const baseUrl = 'http://192.168.1.9:8000/'
+export const baseUrl = 'https://chatty-firefox-6.loca.lt'
 
 // for user registration
 export const registrationUrl = baseUrl + 'api/account/registration/'
@@ -13,4 +13,7 @@ export const userUrl = baseUrl + 'api/account/user/'
 export const tokenRefreshUrl = baseUrl + 'api/account/token/refresh/'
 
 // for getting category list
-export const categoryListUrl = baseUrl + 'api/category/'
+export const categoryListUrl = baseUrl + 'api/shop/category/'
+
+// get latest product
+export const latestProductListUrl = baseUrl + 'api/shop/products/latest/';

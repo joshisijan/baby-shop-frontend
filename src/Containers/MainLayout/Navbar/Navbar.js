@@ -14,6 +14,7 @@ import CategoryList from './CategoryList/CategoryList';
 import useBreadcrumbs from 'use-react-router-breadcrumbs'
 import Breadcrumb from './Breadcrumb/Breadcrumb';
 import { useSelector } from 'react-redux'
+import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton';
 
 const Navbar = () => {
     const breadcrumbs = useBreadcrumbs();
@@ -92,7 +93,7 @@ const Navbar = () => {
                     <MenuIcon className="w-5 h-5" /> <span>All Categories</span>
                 </MenuLink>
                 {
-                    categoryListState.list.slice(0, 4).map(category => {
+                    categoryListState.list.results.slice(0, 4).map(category => {
                         return (
                             <Link key={category.slug} to={`category/${category.slug}`}>
                                 <MenuLink>
@@ -118,6 +119,11 @@ const Navbar = () => {
                 </div>
                 <div className="font-bold">Categories</div>
                 <CategoryList />
+                <div className="flex justify-center">
+                    <Link to="/category/">
+                        <SecondaryTextButton>View all categories</SecondaryTextButton>
+                    </Link>
+                </div>
             </div>
         </div>
     )

@@ -28,5 +28,4 @@ const categoryListSlice = createSlice({
     },
 });
 
-export const { categoryListLoading, categoryListLoaded, categoryListError } = categoryListSlice.actions
 export default categoryListSlice.reducer
