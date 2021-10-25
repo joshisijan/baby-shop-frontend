@@ -93,7 +93,7 @@ const Navbar = () => {
                     <MenuIcon className="w-5 h-5" /> <span>All Categories</span>
                 </MenuLink>
                 {
-                    categoryListState.list.results.slice(0, 4).map(category => {
+                    categoryListState.list.results.map(category => {
                         return (
                             <Link key={category.slug} to={`category/${category.slug}`}>
                                 <MenuLink>
