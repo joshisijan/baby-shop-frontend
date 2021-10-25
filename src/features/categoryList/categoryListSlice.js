@@ -4,7 +4,9 @@ import { fetchCategoryList } from "./categoryListAction";
 const initialState = {
     isLoading: false,
     error: false,
-    list: [],
+    data: {  
+        results: [],
+    },
 }
 
 const categoryListSlice = createSlice({  
@@ -23,7 +25,7 @@ const categoryListSlice = createSlice({
         [fetchCategoryList.fulfilled]: (state, {payload}) => {
             state.isLoading = false 
             state.error = false
-            state.list = payload
+            state.data = payload
         },
     },
 });

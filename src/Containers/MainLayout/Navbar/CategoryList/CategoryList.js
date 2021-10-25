@@ -13,7 +13,7 @@ const CategoryList = () => {
                 <CategoryListError /> :
                 <div className="py-6 flex flex-col gap-2">
                     {
-                        categoryListState.list.results.map((item) => {
+                        categoryListState.data.results.map((item) => {
                             return <CategoryListItem   
                                 key={item.slug}
                                 name={item.name}
