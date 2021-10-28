@@ -21,15 +21,7 @@ export const handleRefreshToken = async (token, dispatch, action) => {
             dispatch(action);
         }
     } catch (e) {
-        if (!e.response) {
-            toast.error('Network error');
-        } else {
-            if (e.response.status === 401) {
-                dispatch(removeUserDetail());
-                toast.error('Session expired. Login again.');
-            } else {
-                toast.error('An error occurred');
-            }
-        }
+        dispatch(removeUserDetail());
+        toast.error('Session expired. Login again.');
     }
 }

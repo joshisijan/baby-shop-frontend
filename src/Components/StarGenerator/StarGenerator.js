@@ -21,7 +21,13 @@ const StarGenerator = ({value}) => {
     return (
         <div className="flex items-center">
             {
-                stars.map(element => element)
+                stars.map((element, index) => {
+                    return (
+                    <div key={index}>
+                        {element}
+                    </div>
+                    )
+                })
             }
         </div>
     )

@@ -8,7 +8,6 @@ export const fetchLatestProduct = createAsyncThunk(
     async (_, thunkApi) => {
         try {
             const response = await axios.get(latestProductListUrl);
-            console.log(response);
             return response.data;
         } catch(e) {
             return thunkApi.rejectWithValue('An error occurred. Try again later.')

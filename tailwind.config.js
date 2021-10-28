@@ -19,11 +19,12 @@ module.exports = {
             extra: '#3f4e4f',
           },
         },
-      }
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {     
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

@@ -17,3 +17,5 @@ export const categoryListUrl = baseUrl + 'api/shop/category/'
 
 // get latest product
 export const latestProductListUrl = baseUrl + 'api/shop/products/latest/';
+
+export const productDetailUrl = baseUrl + 'api/shop/product/'; //needs product product id at end and /

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Price = ({price, discount}) => {
+const ProductPrice = ({price, discount}) => {
     return (
         <>
           {
@@ -16,4 +16,4 @@ const Price = ({price, discount}) => {
     )
 }
 
-export default Price
+export default ProductPrice
