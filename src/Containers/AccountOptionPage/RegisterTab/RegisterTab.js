@@ -141,7 +141,7 @@ const RegisterTab = () => {
                     />
                     {errors.email && <p className="text-sm text-red-600">{errors.email.message}</p>}
                 </div>
-                {/* email */}
+                {/* phone number */}
                 <div className="flex flex-col">
                     <label className="text-sm font-medium" htmlFor="phone_number">Phone number:</label>
                     <input
