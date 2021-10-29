@@ -10,18 +10,16 @@ import ProductError from './ProductError/ProductError'
 import ProductPrice from './ProductPrice/ProductPrice'
 
 const ProductPage = () => {
-    const imageList = []
-
     const { id } = useParams();
 
     const productDetailState = useSelector(state => state.productDetail);
-    const productDetailData = productDetailState.data;
+    const productDetailData = productDetailState.data.product;
+    const imageList = productDetailState.data.activeProductImage;
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchProductDetail(id));
     }, [dispatch, id]);
-
     return (
         <div>
             {

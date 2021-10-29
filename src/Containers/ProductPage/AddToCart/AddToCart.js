@@ -2,19 +2,37 @@ import React from 'react'
 import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
 import { HeartIcon } from '@heroicons/react/outline'
 import DarkOutlineTextButton from '../../../Components/Button/DarkOutlineTextButton'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeActiveColor } from '../../../features/productDetail/productDetailSlice'
 
 const AddToCart = () => {
+    const dispatch = useDispatch()
     const activeColor = "ring-2 ring-offset-1 ring-secondary-dark-extra ring-offset-white";
     const activeSize = "bg-black text-white";
+    const productDetailState = useSelector(state => state.productDetail)
+    const productInventoryData = productDetailState.data.product_inventory
+    const activeProductData = productDetailState.data.activeProductDetail
+    const handleChangeColor = (colorId) => {
+        dispatch(changeActiveColor(colorId));
+    }
     return (
         <div className="space-y-4">
             <div>
                 <span className="text-xs font-semibold">Color</span>
                 <div className="mt-1 flex gap-2 flex-wrap">
-                    <button className={`w-8 h-8 rounded-full bg-blue-600 ${activeColor}`}></button>
-                    <button className="w-8 h-8 rounded-full bg-purple-600"></button>
-                    <button className="w-8 h-8 rounded-full bg-red-600"></button>
-                    <button className="w-8 h-8 rounded-full bg-pink-600"></button>
+                    {
+                        productInventoryData.map((productColor, index) => {
+                            return (
+                                <button
+                                    key={index}
+                                    onClick={() => handleChangeColor(productColor.product_color.color.id)}
+                                    style={{ backgroundColor: `${productColor.product_color.color.color_code}` }}
+                                    className={`w-8 h-8 rounded-full transition transform hover:-translate-y-0.5 ${activeProductData === null ? '' : activeProductData.product_color.id === productColor.product_color.id ? activeColor : ''}`}
+                                >
+                                </button>
+                            )
+                        })
+                    }
                 </div>
             </div>
             <div>

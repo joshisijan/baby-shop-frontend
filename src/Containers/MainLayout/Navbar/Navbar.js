@@ -124,6 +124,8 @@ const Navbar = () => {
                         <SecondaryTextButton>View all categories</SecondaryTextButton>
                     </Link>
                 </div>
+                {/* for gap at bottom of category menu */}
+                <div className="h-40"></div>
             </div>
         </div>
     )

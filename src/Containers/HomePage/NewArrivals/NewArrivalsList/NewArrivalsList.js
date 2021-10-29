@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const NewArrivalsList = ({ productList }) => {
     return (
-        <div className="py-4 grid grid-cols-2 md:grid-cols-4">
+        <div className="py-4 grid gap-4 grid-cols-2 md:grid-cols-4">
             {
                 productList.map((product) => {
                     return (
