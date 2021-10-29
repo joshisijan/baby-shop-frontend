@@ -44,7 +44,7 @@ const ProfilePage = () => {
                                 <Tab key={tabHeader.label} className="flex-1 md:flex-initial focus:outline-none">
                                     {({ selected }) => {
                                         return (
-                                            <div className={`w-full h-full border inline-flex gap-2  items-center md:border-none px-8 py-2 transition transform ${selected ? 'font-bold' : 'hover:translate-x-0.5'}`}>
+                                            <div className={`w-full h-full border inline-flex gap-2  items-center md:border-none px-8 py-2 transition transform ${selected ? 'font-bold' : 'hover:bg-primary hover:bg-opacity-30'}`}>
                                                 {tabHeader.icon}{tabHeader.label}
                                             </div>
                                         )

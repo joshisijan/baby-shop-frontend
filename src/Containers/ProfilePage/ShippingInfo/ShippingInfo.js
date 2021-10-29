@@ -1,6 +1,7 @@
 import { Tab } from '@headlessui/react'
 import { CollectionIcon, PlusIcon } from '@heroicons/react/outline'
 import AddAddress from './AddAddress/AddAddress'
+import AddressList from './AddressList/AddressList'
 
 const ShippingInfo = () => {
     const tabHeaders = [
@@ -23,7 +24,7 @@ const ShippingInfo = () => {
                                 <Tab key={tabHeader.label} className="flex-1 focus:outline-none bg-secondary-varient bg-opacity-50">
                                     {({ selected }) => {
                                         return (
-                                            <div className={`w-full h-full px-4 py-2 font-bold inline-flex gap-2 items-center transition ${selected ? 'bg-white' : 'hover:bg-secondary-light'}`}>
+                                            <div className={`w-full h-full px-4 py-2 font-medium inline-flex gap-2 items-center transition ${selected ? 'bg-white' : 'hover:bg-secondary-light'}`}>
                                                 {tabHeader.icon}{tabHeader.label}
                                             </div>
                                         )
@@ -34,7 +35,7 @@ const ShippingInfo = () => {
                     }
                 </Tab.List>
                 <Tab.Panels>
-                    <Tab.Panel>Content 1</Tab.Panel>
+                    <Tab.Panel><AddressList /></Tab.Panel>
                     <Tab.Panel><AddAddress /></Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>

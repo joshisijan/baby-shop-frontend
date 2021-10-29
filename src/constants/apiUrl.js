@@ -19,3 +19,11 @@ export const categoryListUrl = baseUrl + '/api/shop/category/'
 export const latestProductListUrl = baseUrl + '/api/shop/products/latest/';
 
 export const productDetailUrl = baseUrl + '/api/shop/product/'; //needs product product id at end and /
+
+
+// address list
+export const addressListUrl = baseUrl + '/api/account/address/';
+
+// create new address
+
+export const createAddressUrl = baseUrl + '/api/account/address/create/';

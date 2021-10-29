@@ -4,7 +4,7 @@ import { categoryListUrl } from "../../constants/apiUrl";
 
 
 export const fetchCategoryList = createAsyncThunk(
-    'categoryList', 
+    'categoryList/fetchCategoryList', 
     async (_, thunkApi) => {
         try {
             const response = await axios.get(categoryListUrl);

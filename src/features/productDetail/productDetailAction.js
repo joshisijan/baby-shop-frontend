@@ -4,7 +4,7 @@ import { productDetailUrl } from "../../constants/apiUrl";
 
 
 export const fetchProductDetail = createAsyncThunk(
-    'productDetail', 
+    'productDetail/fetchProductDetail', 
     async (productId, thunkApi) => {
         try {
             const response = await axios.get(`${productDetailUrl}${productId}/`);

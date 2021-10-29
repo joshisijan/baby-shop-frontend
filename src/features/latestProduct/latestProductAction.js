@@ -4,7 +4,7 @@ import { latestProductListUrl } from "../../constants/apiUrl";
 
 
 export const fetchLatestProduct = createAsyncThunk(
-    'latestProductList', 
+    'latestProductList/fetchLatestProduct', 
     async (_, thunkApi) => {
         try {
             const response = await axios.get(latestProductListUrl);

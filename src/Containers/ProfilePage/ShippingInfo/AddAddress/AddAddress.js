@@ -1,20 +1,35 @@
 import { useForm } from 'react-hook-form'
 import { nameRegExp, phoneRegExp } from '../../../../constants/regExp'
 import SecondaryTextButton from '../../../../Components/Button/SecondaryTextButton'
+import { useDispatch, useSelector } from 'react-redux'
+import { addUserAddress } from '../../../../features/userAddress/userAddressAction'
+import LoadingOverlay from '../../../../Components/LoadingOverlay/LoadingOverlay'
 
 const AddAddress = () => {
+    const dispatch = useDispatch();
+    const userAddressState = useSelector(state => state.userAddress);
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors }
     } = useForm();
 
-    const onSubmit = (formData) => {
-        alert(formData);
+    const onSubmit = async(formData) => {
+        await dispatch(addUserAddress(formData));
+        if(userAddressState.error === false) {
+            reset();
+        }
     }
 
     return (
         <div className="p-2">
+            {/* loading overlay */}
+            {
+                userAddressState.isAdding ? 
+                <LoadingOverlay label="Adding new address to your shipping information..." />
+                : null
+            }
             <h1 className="font-bold">Add new address</h1>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 {/* first name */}
@@ -52,7 +67,7 @@ const AddAddress = () => {
                     />
                     {errors.last_name && <p className="text-sm text-red-600">{errors.last_name.message}</p>}
                 </div>
-                
+
                 {/* phone number */}
                 <div className="flex flex-col">
                     <label className="text-sm font-medium" htmlFor="phone_number">Phone number:</label>
