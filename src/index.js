@@ -7,12 +7,16 @@ import store from './store';
 import { persistor } from './store'
 import './index.css';
 import App from './App';
+import SimpleReactLightbox from 'simple-react-lightbox'
+
 
 ReactDOM.render(
   <Router>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <SimpleReactLightbox>
+          <App />
+        </SimpleReactLightbox>
       </PersistGate>
     </Provider>
   </Router>,
