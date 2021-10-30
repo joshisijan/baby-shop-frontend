@@ -1,6 +1,3 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { fetchtUserDetail } from '../../features/userDetail/userDetailAction';
 import { Tab } from '@headlessui/react'
 import Logout from './Logout/Logout';
 import OrderHistory from './OrderHistory/OrderHistory';
@@ -9,11 +6,6 @@ import ShippingInfo from './ShippingInfo/ShippingInfo'
 import { IdentificationIcon, LocationMarkerIcon, CalendarIcon, LogoutIcon } from '@heroicons/react/outline';
 
 const ProfilePage = () => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchtUserDetail());
-    });
 
     const tabHeaders = [ 
         {

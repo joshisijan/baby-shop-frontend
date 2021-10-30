@@ -22,6 +22,8 @@ export const handleRefreshToken = async (token, dispatch, action) => {
         }
     } catch (e) {
         dispatch(removeUserDetail());
-        toast.error('Session expired. Login again.');
+        if(token !== null) {
+            toast.error('Session expired. Login again.');
+        }
     }
 }

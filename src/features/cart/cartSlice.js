@@ -12,10 +12,10 @@ const cartSlice = createSlice({
     },  
     extraReducers: {
         [fetchCartList.fulfilled]:(state, {payload}) => {
-            if(payload === '') {
-                state.item = []
-            } else {
+            if(payload) {
                 state.item = payload
+            } else {
+                state.item = []
             }
         } 
     }
