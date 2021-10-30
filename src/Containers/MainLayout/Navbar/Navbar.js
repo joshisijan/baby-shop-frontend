@@ -20,8 +20,13 @@ const Navbar = () => {
     const breadcrumbs = useBreadcrumbs();
     const [navbarShown, setNavbarShown] = useState(true);
     const [menuShown, setMenuShown] = useState(false);
+    // category list state
     const categoryListState = useSelector(state => state.categoryList);
 
+    // cart state
+    const cartState = useSelector(state => state.cart)
+
+    // hide navbar on bottom scroll and show in top scroll
     useEffect(() => {
         let oldScrollY = 0;
         const handleScroll = () => {
@@ -40,6 +45,7 @@ const Navbar = () => {
         }
     }, []);
 
+    //  for blocking scroll on category menu 
     useEffect(() => {
         if (menuShown) {
             document.body.style.overflow = 'hidden';
@@ -75,7 +81,7 @@ const Navbar = () => {
                     </IconButton>
                 </Link>
                 <Link to="/cart">
-                    <IconButton label="Cart" counter={2}>
+                    <IconButton label="Cart" counter={cartState.item.length}>
                         <ShoppingCartIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>

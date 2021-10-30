@@ -27,3 +27,6 @@ export const addressListUrl = baseUrl + '/api/account/address/';
 // create new address
 
 export const createAddressUrl = baseUrl + '/api/account/address/create/';
+
+// cart item list
+export const cartListUrl = baseUrl + '/api/shop/cart/';

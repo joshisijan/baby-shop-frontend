@@ -12,13 +12,16 @@ const ImageContainer = ({ imageList = [] }) => {
                         showThumbnailsButton: false,
                         showDownloadButton: false,
                     },
+                    caption: {
+                        showCaption: false,
+                    },
                 }}
             >
                 <div className="flex flex-wrap">
                     {
                         imageList.map((image, index) => {
                             return (
-                                <div className={`${index !== 0 ? 'w-1/3' : 'w-full'} border rounded overflow-hidden bg-gray-200`}>
+                                <div key={index} className={`${index !== 0 ? 'w-1/3' : 'w-full'} border rounded overflow-hidden bg-gray-200`}>
                                     <a href={baseUrl + image}>
                                         <img className="w-full h-full object-cover rounded" alt="Product" src={baseUrl + image} />
                                     </a>

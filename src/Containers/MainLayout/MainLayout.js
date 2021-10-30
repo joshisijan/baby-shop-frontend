@@ -4,6 +4,7 @@ import Navbar from './Navbar/Navbar'
 import { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { fetchCategoryList } from '../../features/categoryList/categoryListAction';
+import { fetchCartList } from '../../features/cart/cartAction';
 const MainLayout = (props) => {
 
     const dispatch = useDispatch();
@@ -23,6 +24,10 @@ const MainLayout = (props) => {
         dispatch(fetchCategoryList());
     }, [dispatch]);
 
+    // fetching cart list
+    useEffect(() => {
+        dispatch(fetchCartList());
+    });
     return (
         <div>
             <Toaster

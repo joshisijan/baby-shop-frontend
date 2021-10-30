@@ -64,7 +64,6 @@ export const addUserAddress = createAsyncThunk(
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, addUserAddress);                    
                 } else {
-                    console.log(e.response);
                     toast.error('An error occurred while adding the address in your shipping information.');
                 }
             }

@@ -12,8 +12,10 @@ import ProfilePage from './Containers/ProfilePage/ProfilePage';
 import CategoryListPage from './Containers/CategoryListPage/CategoryListPage';
 import CategoryProductPage from './Containers/CategoryProductPage/CategoryProductPage'
 
+
 function App() {
   const location = useLocation();
+
   return (
 
     <TransitionGroup>

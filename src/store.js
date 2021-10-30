@@ -17,6 +17,8 @@ import categoryListSlice from "./features/categoryList/categoryListSlice"
 import latestProductSlice from "./features/latestProduct/latestProductSlice"
 import productDetailSlice from "./features/productDetail/productDetailSlice"
 import userAddressSlice from "./features/userAddress/userAddressSlice"
+import cartSlice from "./features/cart/cartSlice"
+
 
 const reducers = combineReducers({
     registration: registrationSlice,
@@ -26,6 +28,7 @@ const reducers = combineReducers({
     latestProduct: latestProductSlice,
     productDetail: productDetailSlice,
     userAddress: userAddressSlice,
+    cart: cartSlice,
 });
 
 const persistConfig = {

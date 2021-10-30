@@ -3,7 +3,7 @@ import { nameRegExp, phoneRegExp } from '../../../../constants/regExp'
 import SecondaryTextButton from '../../../../Components/Button/SecondaryTextButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUserAddress } from '../../../../features/userAddress/userAddressAction'
-import LoadingOverlay from '../../../../Components/LoadingOverlay/LoadingOverlay'
+
 
 const AddAddress = () => {
     const dispatch = useDispatch();
@@ -24,12 +24,6 @@ const AddAddress = () => {
 
     return (
         <div className="p-2">
-            {/* loading overlay */}
-            {
-                userAddressState.isAdding ?
-                    <LoadingOverlay label="Adding new address to your shipping information..." />
-                    : null
-            }
             <h1 className="font-bold">Add new address</h1>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 {/* first name */}
@@ -150,7 +144,12 @@ const AddAddress = () => {
                         <span className="text-xs font-normal">Is this address your default shipping address?</span>
                     </label>
                 </div>
-                <SecondaryTextButton>Add address</SecondaryTextButton>
+                <SecondaryTextButton 
+                    isLoading={userAddressState.isLoading}
+                    loadingText="Adding new address"
+                >
+                    Add address
+                </SecondaryTextButton>
             </form>
         </div>
     )
