@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
 import { HeartIcon } from '@heroicons/react/outline'
 import DarkOutlineTextButton from '../../../Components/Button/DarkOutlineTextButton'
@@ -7,27 +7,33 @@ import { changeActiveColor } from '../../../features/productDetail/productDetail
 
 const AddToCart = () => {
     const dispatch = useDispatch()
+    const [activeSizeIndex, setActiveSizeIndex] = useState(0)
     const activeColor = "ring-2 ring-offset-1 ring-secondary-dark-extra ring-offset-white";
     const activeSize = "bg-black text-white";
     const productDetailState = useSelector(state => state.productDetail)
-    const productInventoryData = productDetailState.data.product_inventory
+    const productVarientData = productDetailState.data.product_variant
     const activeProductData = productDetailState.data.activeProductDetail
-    const handleChangeColor = (colorId) => {
-        dispatch(changeActiveColor(colorId));
+    const handleChangeColor = (data) => {
+        dispatch(changeActiveColor(data));
     }
+
+    useEffect(() => { 
+        setActiveSizeIndex(0);
+    },[activeProductData]);
+
     return (
         <div className="space-y-4">
             <div>
                 <span className="text-xs font-semibold">Color</span>
                 <div className="mt-1 flex gap-2 flex-wrap">
                     {
-                        productInventoryData.map((productColor, index) => {
+                        Object.values(productVarientData).map((productColor, index) => {
                             return (
                                 <button
                                     key={index}
-                                    onClick={() => handleChangeColor(productColor.product_color.color.id)}
-                                    style={{ backgroundColor: `${productColor.product_color.color.color_code}` }}
-                                    className={`w-8 h-8 rounded-full transition transform hover:-translate-y-0.5 ${activeProductData === null ? '' : activeProductData.product_color.id === productColor.product_color.id ? activeColor : ''}`}
+                                    onClick={() => handleChangeColor(productColor)}
+                                    style={{ backgroundColor: `${productColor.color.code}` }}
+                                    className={`w-8 h-8 rounded-full transition transform hover:-translate-y-0.5 ${activeProductData === {} ? '' : activeProductData.color.id === productColor.color.id ? activeColor : ''}`}
                                 >
                                 </button>
                             )
@@ -38,13 +44,19 @@ const AddToCart = () => {
             <div>
                 <span className="text-xs font-semibold">Size</span>
                 <div className="mt-1 flex gap-2 flex-wrap">
-                    <DarkOutlineTextButton className={`px-6 ${activeSize}`}>XXS</DarkOutlineTextButton>
-                    <DarkOutlineTextButton className="px-6">XS</DarkOutlineTextButton>
-                    <DarkOutlineTextButton className="px-6">S</DarkOutlineTextButton>
-                    <DarkOutlineTextButton className="px-6">M</DarkOutlineTextButton>
-                    <DarkOutlineTextButton className="px-6">L</DarkOutlineTextButton>
-                    <DarkOutlineTextButton className="px-6">XL</DarkOutlineTextButton>
-                    <DarkOutlineTextButton className="px-6">XXL</DarkOutlineTextButton>
+                    {
+                        activeProductData.sizes.map((size, index) => {
+                            return (
+                                <DarkOutlineTextButton 
+                                    key={index}
+                                    onClick={() => setActiveSizeIndex(index)}
+                                    className={`px-6 ${activeSizeIndex === index ? activeSize : ''}`}
+                                >
+                                    {size.symbol}
+                                </DarkOutlineTextButton>
+                            );
+                        })
+                    }
                 </div>
             </div>
             <div className="flex items-center gap-4">

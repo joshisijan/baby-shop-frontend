@@ -45,8 +45,6 @@ export const addUserAddress = createAsyncThunk(
         // get  accessToken stored in storage
         const { accessToken } = userDetail;
         const { refreshToken } = userDetail;
-        formData.is_default_billing = false;
-        formData.is_default_shipping = false;
         try {
             let response = await axios.post(
                 createAddressUrl,

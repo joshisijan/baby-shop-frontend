@@ -14,7 +14,8 @@ const ProductPage = () => {
 
     const productDetailState = useSelector(state => state.productDetail);
     const productDetailData = productDetailState.data.product;
-    const imageList = productDetailState.data.activeProductImage;
+    const activeProductData = productDetailState.data.activeProductDetail
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const ProductPage = () => {
                                 <RatingContainer averageRating={productDetailData.average_rating} totalReview={productDetailData.total_reviews} />
                             </div>
                             {/* image continer */}
-                            <ImageContainer imageList={imageList} />
+                            <ImageContainer imageList={activeProductData.images} />
                             <div className="space-y-2">
                                 <div className="hidden py-2 gap-2 sm:flex flex-wrap justify-between text-xl font-semibold">
                                     <div className="font-medium">{productDetailData.name}</div>

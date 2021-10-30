@@ -25,11 +25,11 @@ const NewArrivals = () => {
                     </div> :
                     latestProductState.error ? 
                     <NewArrivalsError /> :
-                    latestProductState.data.results.length === 0 ?
+                    latestProductState.data.length === 0 ?
                     <div className="text-center">
                         No latest product found.
                     </div> :
-                    <NewArrivalsList productList={latestProductState.data.results} />
+                    <NewArrivalsList productList={latestProductState.data} />
                 }                
             </div>
         </div>

@@ -15,9 +15,9 @@ const AddAddress = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = async(formData) => {
+    const onSubmit = async (formData) => {
         await dispatch(addUserAddress(formData));
-        if(userAddressState.error === false) {
+        if (userAddressState.error === false) {
             reset();
         }
     }
@@ -26,9 +26,9 @@ const AddAddress = () => {
         <div className="p-2">
             {/* loading overlay */}
             {
-                userAddressState.isAdding ? 
-                <LoadingOverlay label="Adding new address to your shipping information..." />
-                : null
+                userAddressState.isAdding ?
+                    <LoadingOverlay label="Adding new address to your shipping information..." />
+                    : null
             }
             <h1 className="font-bold">Add new address</h1>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -126,6 +126,29 @@ const AddAddress = () => {
                         })}
                     />
                     {errors.region && <p className="text-sm text-red-600">{errors.region.message}</p>}
+                </div>
+                <div className="space-x-2">
+                    <input
+                        type="checkbox"
+                        id="billing"
+                        {...register("is_default_billing")}
+                    />
+                    <label className="text-sm font-medium space-x-2" htmlFor="billing">
+                        <span>Default billing</span>
+                        <span className="text-xs font-normal">Is this address your default billing address?</span>
+                    </label>
+
+                </div>
+                <div className="space-x-2">
+                    <input
+                        type="checkbox"
+                        id="shipping"
+                        {...register("is_default_shipping")}
+                    />
+                    <label className="text-sm font-medium space-x-2" htmlFor="shipping">
+                        <span>Default shipping</span>
+                        <span className="text-xs font-normal">Is this address your default shipping address?</span>
+                    </label>
                 </div>
                 <SecondaryTextButton>Add address</SecondaryTextButton>
             </form>

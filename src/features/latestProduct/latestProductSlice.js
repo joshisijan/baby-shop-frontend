@@ -4,9 +4,7 @@ import { fetchLatestProduct } from "./latestProductAction";
 const initialState = {
     isLoading: false,
     error: false,
-    data: {  
-        results: [],
-    },
+    data: [],
 }
 
 const latestProductSlice = createSlice({
