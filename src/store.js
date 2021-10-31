@@ -39,7 +39,6 @@ const persistConfig = {
     whitelist: [ 
         "userDetail",
         "categoryList",
-        "cart",
     ],
 }
 

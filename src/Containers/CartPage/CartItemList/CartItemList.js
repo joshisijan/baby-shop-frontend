@@ -1,51 +1,43 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
+import { baseUrl } from '../../../constants/apiUrl'
 import CartItem from './CartItem/CartItem'
+import FadeTransition from '../../../Components/Transition/FadeTransition'
+import { Link } from 'react-router-dom'
 
 const CartItemList = () => {
-    const cartItemList = [
-        {
-            id: 1,
-            name: 'Fury Boot',
-            image: 'http://placekitten.com/200/300',
-            color: 'Brown',
-            size: 'Large',
-            price: 3000,
-            quantity: 2,
-        },
-        {
-            id: 2,
-            name: 'Fury Jacket',
-            image: 'http://placekitten.com/200/301',
-            color: 'Blue',
-            size: 'Medium',
-            price: 5000,
-            quantity: 1,
-        },
-        {
-            id: 3,
-            name: 'Winter Gloves',
-            image: 'http://placekitten.com/200/302',
-            color: 'Gray',
-            size: 'Small',
-            price: 800,
-            quantity: 4,
-        }
-    ]
+    const cartState = useSelector(state => state.cart)
     return (
-        <div className="divide-y">
-            {cartItemList.map((cartItem) => {
-                return (
-                    <CartItem
-                        key={cartItem.id}
-                        name={cartItem.name}
-                        image={cartItem.image}
-                        color={cartItem.color}
-                        size={cartItem.size}
-                        price={cartItem.price}
-                        quantity={cartItem.quantity}
-                    />
-                )
-            })}
+        <div>
+            <FadeTransition show={cartState.isRemoving}>
+                <LoadingOverlay label="Removing from cart..." />
+            </FadeTransition>  
+
+            <FadeTransition show={cartState.isUpdating}>
+                <LoadingOverlay label="Updating cart item..." />
+            </FadeTransition>  
+
+            <div className="divide-y">
+                {cartState.data.cart_items.map((cartItem) => {
+                    return (
+                        <Link key={cartItem.id} to={`/product/${cartItem.product.id}`}>
+                            <CartItem                            
+                            id={cartItem.id}
+                            name={cartItem.product.name}
+                            image={baseUrl + cartItem.variant_image}
+                            color={cartItem.inventory.color}
+                            size={cartItem.inventory.size}
+                            price={cartItem.product.price}
+                            discount={cartItem.product.discount_percentage}
+                            stockAvailable={cartItem.inventory.available_quantity >= cartItem.quantity}
+                            availableQuantity={cartItem.inventory.available_quantity}
+                            quantity={cartItem.quantity}
+                        />
+                        </Link>
+                    )
+                })}
+            </div>
         </div>
     )
 }

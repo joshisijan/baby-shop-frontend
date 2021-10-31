@@ -18,6 +18,7 @@ export const categoryListUrl = baseUrl + '/api/shop/category/'
 // get latest product
 export const latestProductListUrl = baseUrl + '/api/shop/products/latest/';
 
+// get product detail
 export const productDetailUrl = baseUrl + '/api/shop/product/'; //needs product product id at end and /
 
 
@@ -31,6 +32,11 @@ export const createAddressUrl = baseUrl + '/api/account/address/create/';
 // cart item list
 export const cartListUrl = baseUrl + '/api/shop/cart/';
 
+// add to cart
+export const addToCarttUrl = baseUrl + '/api/shop/cart/create/';
+
+// remove cart item
+// export const removeCartItemUrl = baseUrl + '/api/shop/cart/item/<int:id>/update/';
 
 
 // search 

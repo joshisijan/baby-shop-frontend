@@ -99,7 +99,7 @@ const Navbar = () => {
                     </IconButton>
                 </Link>
                 <Link to="/cart">
-                    <IconButton label="Cart" counter={cartState.item.length}>
+                    <IconButton label="Cart" counter={cartState.data.cart_items.length}>
                         <ShoppingCartIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>

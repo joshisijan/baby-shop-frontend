@@ -8,8 +8,11 @@ const initialState = {
         product: {},
         product_variant: {},
         activeProductDetail: { 
-            sizes: [],
-            activeSize: {},
+            sizes: [ 
+                {
+                    available_quantity: 1,
+                }
+            ],
         },
     },
 }

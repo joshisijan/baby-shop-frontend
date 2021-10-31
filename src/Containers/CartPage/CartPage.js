@@ -4,6 +4,7 @@ import OrderSummary from './OrderSummary/OrderSummary'
 import { useSelector } from 'react-redux'
 import EmptyCart from './EmptyCart/EmptyCart'
 import NoLoginCart from './NoLoginCart/NoLoginCart'
+import CartLoading from './CartLoading/CartLoading'
 
 const CartPage = () => {
     const cartState = useSelector(state => state.cart)
@@ -17,17 +18,20 @@ const CartPage = () => {
                     userDetailState.accessToken === null ?
                         <NoLoginCart />
                         :
-                        cartState.item.length === 0 ?
-                            <EmptyCart />
+                        cartState.isLoading ?
+                            <CartLoading />
                             :
-                            <div className="flex flex-col md:flex-row">
-                                <div className="flex-1 p-4 border">
-                                    <CartItemList />
+                            cartState.data.cart_items.length === 0 ?
+                                <EmptyCart />
+                                :
+                                <div className="flex flex-col md:flex-row">
+                                    <div className="flex-1 p-4 border">
+                                        <CartItemList />
+                                    </div>
+                                    <div className="self-start p-4 bg-secondary bg-opacity-20 w-full md:max-w-sm border">
+                                        <OrderSummary />
+                                    </div>
                                 </div>
-                                <div className="self-start p-4 bg-secondary bg-opacity-20 w-full md:max-w-sm border">
-                                    <OrderSummary />
-                                </div>
-                            </div>
                 }
             </div>
         </div>
