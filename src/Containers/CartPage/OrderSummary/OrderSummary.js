@@ -1,7 +1,21 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import DarkTextButton from '../../../Components/Button/DarkTextButton'
 
 const OrderSummary = () => {
+    const cartState = useSelector(state => state.cart)
+    let subtotal = 0
+    const delivery = 60
+    let tax = 0
+    let total = 0
+    // calculate subtotal
+    cartState.data.cart_items.map((item) => {
+        return subtotal += item.quantity * (item.product.price - item.product.price * item.product.discount_percentage / 100 )
+        
+    });
+
+    tax = (subtotal + delivery) * 0.05
+    total = subtotal + delivery + tax
     return (
         <>
             <h2 className="font-semibold">
@@ -13,7 +27,7 @@ const OrderSummary = () => {
                         Subtotal
                     </span>
                     <span className="font-medium text-black">
-                        Rs.10000
+                        Rs. {subtotal}
                     </span>
                 </div>
                 <div className="py-1 text-sm flex flex-wrap justify-between">
@@ -21,7 +35,7 @@ const OrderSummary = () => {
                         Delivery
                     </span>
                     <span className="font-medium text-black">
-                        Rs.60
+                        Rs. {delivery}
                     </span>
                 </div>
                 <div className="py-1 text-sm flex flex-wrap justify-between">
@@ -29,7 +43,7 @@ const OrderSummary = () => {
                         Tax
                     </span>
                     <span className="font-medium text-black">
-                        Rs.182
+                        Rs. {tax}
                     </span>
                 </div>
                 <div className="py-1 flex flex-wrap justify-between">
@@ -37,7 +51,7 @@ const OrderSummary = () => {
                         Total
                     </span>
                     <span className="font-medium text-black">
-                        Rs.18200
+                        Rs. {total}
                     </span>
                 </div>
                 <div>
