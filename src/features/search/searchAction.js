@@ -31,3 +31,17 @@ export const search = createAsyncThunk(
         }
     }
 );
+
+export const getNextData = createAsyncThunk(
+    'search/getNextData',
+    async (nextLink, thunkApi) => {
+        try {
+            const response = await axios.get(
+                nextLink,
+            );
+            return response.data;
+        } catch (e) {
+            return thunkApi.rejectWithValue('An error occurred. Try again later.')
+        }
+    }
+);

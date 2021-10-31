@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { search } from "./searchAction";
-
-import searchFilterType from "../../constants/searchFilterType";
+import { getNextData, search } from "./searchAction";
 
 
 const initialState = {
     search: '',
     ordering: '',
     error: false,
+    nextIsLoading: false,
     isLoading: false,
     data: {
+        next: null,
         results: [],
     },
 }
@@ -26,16 +26,14 @@ const searchSlice = createSlice({
             state.ordering = ''
             state.error = false
             state.isLoading = false
-            state.data = {
-                results: []
-            }
+            state.data = initialState.data
         },
-        initFilter: (state) => {
-            state.ordering = searchFilterType.createdAtIncrement[0]
+        setFilter: (state, {payload}) => {
+            state.ordering = payload
         },
         resetFilter: (state) => {
             state.ordering = ''
-        }
+        },
     },  
     extraReducers: {
         [search.pending]: (state) => {
@@ -53,8 +51,24 @@ const searchSlice = createSlice({
                 state.error = true
             }
         },
+        [getNextData.pending]: (state) => {
+            state.nextIsLoading = true
+        },
+        [getNextData.fulfilled]: (state, {payload}) => {
+            state.nextIsLoading = false
+            const temp = state.data //temp data to store previous data
+            state.data = payload //setting prev data to new data
+            const tempResult = [ //temp result to get all data 
+                ...temp.results,
+                ...state.data.results
+            ]
+            state.data.results = tempResult //setting new result to temp result 
+        },
+        [getNextData.rejected]: (state, {payload}) => {
+            state.nextIsLoading = false        
+        },
     }
 });
 
 export default searchSlice.reducer
-export const { setSearchQuery, resetSearchQuery, initFilter, resetFilter } = searchSlice.actions 
+export const { setSearchQuery, resetSearchQuery, setFilter, resetFilter } = searchSlice.actions 
