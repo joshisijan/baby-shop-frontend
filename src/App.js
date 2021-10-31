@@ -11,10 +11,20 @@ import ProtectedRoute from './Components/Route/ProtectedRoute';
 import ProfilePage from './Containers/ProfilePage/ProfilePage';
 import CategoryListPage from './Containers/CategoryListPage/CategoryListPage';
 import CategoryProductPage from './Containers/CategoryProductPage/CategoryProductPage'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { resetSearchQuery } from './features/search/searchSlice';
 
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  // listen for route change
+  useEffect(() => { 
+    // hide search
+    dispatch(resetSearchQuery());
+  }, [location.pathname]);
 
   return (
 

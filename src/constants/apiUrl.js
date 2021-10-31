@@ -30,3 +30,13 @@ export const createAddressUrl = baseUrl + '/api/account/address/create/';
 
 // cart item list
 export const cartListUrl = baseUrl + '/api/shop/cart/';
+
+
+
+// search 
+// params:
+// // search: query text
+// // ordering: (add - 'minus' for descending)
+// // // ordering values are price, average_rating, created_at
+// // // // can be attached at end of url like /?search=red+apple&ordering=price
+export const searchUrl = baseUrl + '/api/shop/product/search/';

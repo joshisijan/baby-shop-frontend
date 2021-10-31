@@ -10,11 +10,11 @@ const ImageContainer = ({ imageList = [] }) => {
                     buttons: {
                         showAutoplayButton: false,
                         showThumbnailsButton: false,
-                        showDownloadButton: false,
+                        showDownloadButton: false,                    
                     },
                     caption: {
-                        showCaption: false,
-                    },
+                        showCaption: false,                    
+                    },                    
                 }}
             >
                 <div className="flex flex-wrap">

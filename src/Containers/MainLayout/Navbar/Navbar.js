@@ -15,16 +15,23 @@ import useBreadcrumbs from 'use-react-router-breadcrumbs'
 import Breadcrumb from './Breadcrumb/Breadcrumb';
 import { useSelector } from 'react-redux'
 import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton';
+import SearchSmall from './SearchSmall/SearchSmall';
+import SearchLarge from './SearchLarge/SearchLarge';
+import SearchResult from './SearchResult/SearchResult';
 
 const Navbar = () => {
     const breadcrumbs = useBreadcrumbs();
     const [navbarShown, setNavbarShown] = useState(true);
     const [menuShown, setMenuShown] = useState(false);
+
     // category list state
     const categoryListState = useSelector(state => state.categoryList);
 
     // cart state
     const cartState = useSelector(state => state.cart)
+    
+    // search state 
+    const searchState = useSelector(state => state.search) 
 
     // hide navbar on bottom scroll and show in top scroll
     useEffect(() => {
@@ -56,20 +63,32 @@ const Navbar = () => {
             document.body.style.overflow = 'auto';
         }
     }, [menuShown]);
+
+    // to know if seraching
+    const isSearching = searchState.search !== '' || searchState.ordering !== '';
+
+    // for blocking scroll on search
+    useEffect(() => {
+        if (isSearching) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        }
+    });    
+
+
     return (
-        <div className={`z-10 bg-white shadow-sm transition transform fixed ${navbarShown ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
+        <div className={`${isSearching ? 'h-screen' : ''} z-10 bg-white shadow-sm transition transform fixed ${navbarShown ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
             <div className="p-2 lg:px-6 lg:py-2 space-x-2 flex items-center w-full max-w-6xl">
                 <IconButton className="md:hidden" onClick={() => setMenuShown(true)}>
                     <MenuIcon className="w-5 h-5" />
                 </IconButton>
                 <h1 className="font-bold text-2xl">LogoOfApp</h1>
                 <div className="md:hidden flex-1"></div>
-                <div className="hidden md:block flex-1 relative">
-                    <input className="w-full" type="text" placeholder="Search" />
-                    <button className="bg-primary text-gray-600 p-2 absolute right-1 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
-                        <SearchIcon className="w-5 h-5" />
-                    </button>
-                </div>
+                <SearchLarge />
                 <Link to="/">
                     <IconButton label="Home">
                         <HomeIcon className="w-5 h-5" />
@@ -87,12 +106,7 @@ const Navbar = () => {
                 </Link>
             </div>
             {/* search bar for smaller devices */}
-            <div className="relative px-4 py-2 w-full md:hidden">
-                <input className="w-full pr-12" type="text" placeholder="Search" />
-                <button className="bg-primary text-gray-600 p-2 absolute right-5 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
-                    <SearchIcon className="w-5 h-5" />
-                </button>
-            </div>
+            <SearchSmall />
             {/* category list big screen */}
             <div className="hidden md:flex flex-wrap justify-center px-6 gap-4">
                 <MenuLink className="flex" onClick={() => setMenuShown(true)}>
@@ -133,6 +147,7 @@ const Navbar = () => {
                 {/* for gap at bottom of category menu */}
                 <div className="h-40"></div>
             </div>
+            <SearchResult className={`${isSearching ? 'block' : 'hidden'}`} />
         </div>
     )
 }

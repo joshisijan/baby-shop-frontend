@@ -18,6 +18,7 @@ import latestProductSlice from "./features/latestProduct/latestProductSlice"
 import productDetailSlice from "./features/productDetail/productDetailSlice"
 import userAddressSlice from "./features/userAddress/userAddressSlice"
 import cartSlice from "./features/cart/cartSlice"
+import searchSlice from "./features/search/searchSlice"
 
 
 const reducers = combineReducers({
@@ -29,6 +30,7 @@ const reducers = combineReducers({
     productDetail: productDetailSlice,
     userAddress: userAddressSlice,
     cart: cartSlice,
+    search: searchSlice,
 });
 
 const persistConfig = {
