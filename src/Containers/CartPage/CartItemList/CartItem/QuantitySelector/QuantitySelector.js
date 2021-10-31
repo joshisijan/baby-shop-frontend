@@ -62,7 +62,7 @@ const QuantitySelector = ({ id, quantity = 1, price, discount, availableQuantity
                     </DarkTextButton>
                 </FadeTransition>
             </div>
-            <div className="py-2 text-sm font-medium">
+            <div className="py-2 text-xs sm:text-sm font-medium">
                 <span className="flex gap-2 items-center flex-wrap">
                     <span>Total price:</span>
                     <span className={`${quantity !== cartQuantity ? 'line-through' : ''}`}>Rs. {quantity * (price - price * discount / 100)}</span>
