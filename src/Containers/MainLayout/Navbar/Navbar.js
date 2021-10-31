@@ -87,7 +87,7 @@ const Navbar = () => {
                 </IconButton>
                 <h1 className="font-bold text-2xl">LogoOfApp</h1>
                 <div className="md:hidden flex-1"></div>
-                <SearchLarge />
+                <SearchLarge navbarShown={navbarShown} />
                 <Link to="/">
                     <IconButton label="Home">
                         <HomeIcon className="w-5 h-5" />
@@ -105,7 +105,7 @@ const Navbar = () => {
                 </Link>
             </div>
             {/* search bar for smaller devices */}
-            <SearchSmall />
+            <SearchSmall navbarShown={navbarShown} />
             {/* category list big screen */}
             <div className="hidden md:flex flex-wrap justify-center px-6 gap-4">
                 <MenuLink className="flex" onClick={() => setMenuShown(true)}>
