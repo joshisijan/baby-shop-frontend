@@ -30,6 +30,12 @@ const searchSlice = createSlice({
                 results: []
             }
         },
+        initFilter: (state) => {
+            state.ordering = searchFilterType.createdAtIncrement[0]
+        },
+        resetFilter: (state) => {
+            state.ordering = ''
+        }
     },  
     extraReducers: {
         [search.pending]: (state) => {
@@ -51,4 +57,4 @@ const searchSlice = createSlice({
 });
 
 export default searchSlice.reducer
-export const { setSearchQuery, resetSearchQuery } = searchSlice.actions 
+export const { setSearchQuery, resetSearchQuery, initFilter, resetFilter } = searchSlice.actions 
