@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
     MenuIcon,
-    SearchIcon,
     UserIcon,
     ShoppingCartIcon,
     HomeIcon,
@@ -147,7 +146,13 @@ const Navbar = () => {
                 {/* for gap at bottom of category menu */}
                 <div className="h-40"></div>
             </div>
-            <SearchResult className={`${isSearching ? 'block' : 'hidden'}`} />
+            {/* search result */}
+            {
+                isSearching ? 
+                <SearchResult />
+                :
+                null
+            }
         </div>
     )
 }

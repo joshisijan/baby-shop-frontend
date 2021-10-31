@@ -1,8 +1,12 @@
 import { XIcon } from '@heroicons/react/outline'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PrimaryTextButton from '../../../../Components/Button/PrimaryTextButton'
 import { resetSearchQuery } from '../../../../features/search/searchSlice'
+import { search } from '../../../../features/search/searchAction'
+import SearchLoading from './SearchLoading/SearchLoading'
+import SearchList from './SearchList/SearchList'
+import SearchError from './SearchError/SearchError'
 
 const SearchResult = ({ className }) => {
     const dispatch = useDispatch()
@@ -11,6 +15,18 @@ const SearchResult = ({ className }) => {
     const handleReset = () => {
         dispatch(resetSearchQuery());
     }
+
+    // to know if seraching
+    const isSearching = searchState.search !== '' || searchState.ordering !== '';
+
+    // calling search on every change
+    useEffect(() => {
+        const searchQuery = {
+            search: searchState.search,
+            ordering: searchState.ordering
+        }
+        dispatch(search(searchQuery));
+    }, [searchState.search, searchState.ordering, dispatch, isSearching]);
 
     return (
         <div className={`overflow-y-auto p-4 max-w-6xl bg-white border-t h-full w-full ${className}`}>
@@ -23,20 +39,15 @@ const SearchResult = ({ className }) => {
             <h1 className="font-medium text-center">
                 Search result for <span className="text-red-600">{searchState.search}</span>:
             </h1>
-            <div>
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-                <h1 className="text-9xl">Hello</h1><br />
-            </div>
+            {
+                searchState.error ?
+                    <SearchError />
+                    :
+                    searchState.isLoading ?
+                        <SearchLoading />
+                        :
+                        <SearchList />
+            }
             <div className="h-20"></div>
         </div>
     )

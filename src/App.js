@@ -24,7 +24,7 @@ function App() {
   useEffect(() => { 
     // hide search
     dispatch(resetSearchQuery());
-  }, [location.pathname]);
+  }, [dispatch, location.pathname]);
 
   return (
 

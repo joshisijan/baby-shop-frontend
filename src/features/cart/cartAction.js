@@ -12,6 +12,7 @@ export const fetchCartList = createAsyncThunk(
         // get  accessToken stored in storage
         const { accessToken } = userDetail;
         const { refreshToken } = userDetail;
+        if(accessToken === null) return;
         try {
             let response = await axios.get(
                 cartListUrl,
