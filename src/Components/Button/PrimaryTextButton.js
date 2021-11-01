@@ -1,10 +1,10 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
-const PrimaryTextButton = ({ isLoading = false, loadingText = 'Loading...', children, className, ...rest }) => {
+const PrimaryTextButton = ({ isLoading = false, disabled=false, loadingText = 'Loading...', children, className, ...rest }) => {
     return (
         <button
             {...rest}
-            disabled={isLoading}
+            disabled={isLoading || disabled}
             className={`relative transition bg-primary-dark text-gray-800 hover:bg-primary focus:outline-none focus:ring focus:ring-primary-varient px-4 py-2 ${className}`}
         >
             {

@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import DarkTextButton from '../../../Components/Button/DarkTextButton'
-import { showDialog } from '../../../features/alertDialog/alertDialogSlice'
+import { verifyCheckout } from '../../../features/checkout/checkoutAction'
 
 const OrderSummary = () => {
-    const cartState = useSelector(state => state.cart)
     const dispatch = useDispatch()
+    const cartState = useSelector(state => state.cart)
+    const checkoutState = useSelector(state => state.checkout)
     let subtotal = 0
     const delivery = 60
-    let tax = 0
     let total = 0
     // calculate subtotal
     cartState.data.cart_items.map((item) => {
@@ -16,17 +16,10 @@ const OrderSummary = () => {
         
     });
 
-    tax = (subtotal + delivery) * 0.05
-    total = subtotal + delivery + tax
+    total = subtotal + delivery
 
     const handleCheckout = () => {
-        dispatch(showDialog({   
-            header: 'Checkout',
-            description: 'Sint deserunt velit nisi aute ullamco magna nostrud excepteur. Incididunt commodo dolore in pariatur pariatur commodo magna qui in cillum tempor aute in nostrud. Proident ipsum aliquip id laboris fugiat incididunt. Cillum esse nulla fugiat sit id nostrud. Minim ea irure voluptate velit adipisicing esse. Pariatur nostrud cupidatat enim in sunt do veniam cupidatat nisi ex est pariatur. Tempor adipisicing velit ullamco commodo sit nulla ea duis deserunt in exercitation proident aute ea.',
-            onYes: () => {
-                alert('hello')
-            }
-        }));
+        dispatch(verifyCheckout());
     }
 
     return (
@@ -51,14 +44,6 @@ const OrderSummary = () => {
                         Rs. {delivery}
                     </span>
                 </div>
-                <div className="py-1 text-sm flex flex-wrap justify-between">
-                    <span className="text-gray-600">
-                        Tax
-                    </span>
-                    <span className="font-medium text-black">
-                        Rs. {tax}
-                    </span>
-                </div>
                 <div className="py-1 flex flex-wrap justify-between">
                     <span className="text-gray-600">
                         Total
@@ -68,7 +53,7 @@ const OrderSummary = () => {
                     </span>
                 </div>
                 <div>
-                    <DarkTextButton onClick={handleCheckout} className="w-full">Checkout</DarkTextButton>
+                    <DarkTextButton isLoading={checkoutState.isVerifying} loadingText="Verifying..." onClick={handleCheckout} className="w-full">Checkout</DarkTextButton>
                 </div>
             </div>
         </>

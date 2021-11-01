@@ -46,3 +46,9 @@ export const addToCarttUrl = baseUrl + '/api/shop/cart/create/';
 // // // ordering values are price, average_rating, created_at
 // // // // can be attached at end of url like /?search=red+apple&ordering=price
 export const searchUrl = baseUrl + '/api/shop/product/search/';
+
+
+
+// watchlist
+// verify
+export const checkoutVerifyUrl = baseUrl + '/api/shop/checkout/';
