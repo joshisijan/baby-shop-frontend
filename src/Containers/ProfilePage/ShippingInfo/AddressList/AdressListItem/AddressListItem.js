@@ -8,32 +8,34 @@ const AddressListItem = ({ address }) => {
     return (
         <div className="p-4 border">
             <table>
-                <tr>
-                    <td className="pr-4">
-                        <UserIcon className="w-3.5 h-3.5" />
-                    </td>
-                    <td>
-                        {address.first_name} {address.last_name}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <PhoneIcon className="w-3.5 h-3.5" />
-                    </td>
-                    <td>
-                        {address.phone_number}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <LocationMarkerIcon className="w-3.5 h-3.5" />
-                    </td>
-                    <td className="space-x-2">
-                        <span>{address.region}</span> |
-                        <span>{address.city}</span> |
-                        <span>{address.province}</span>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td className="pr-4">
+                            <UserIcon className="w-3.5 h-3.5" />
+                        </td>
+                        <td>
+                            {address.first_name} {address.last_name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <PhoneIcon className="w-3.5 h-3.5" />
+                        </td>
+                        <td>
+                            {address.phone_number}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <LocationMarkerIcon className="w-3.5 h-3.5" />
+                        </td>
+                        <td className="space-x-2">
+                            <span>{address.region}</span> |
+                            <span>{address.city}</span> |
+                            <span>{address.province}</span>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div className="space-x-2">
                 {

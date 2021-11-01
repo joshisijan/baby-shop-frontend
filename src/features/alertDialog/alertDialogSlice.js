@@ -5,9 +5,7 @@ const initialState = {
     isOpen: false,
     header: '',
     description: '',
-    onYes: () => {
-        
-    }
+    onYes: null,
 }
 
 const alertDialogSlice = createSlice({  
@@ -24,9 +22,7 @@ const alertDialogSlice = createSlice({
             state.isOpen = false
             state.header = ''
             state.description = ''
-            state.onYes = () => {
-
-            }
+            state.onYes = null
         }
     }, 
 });
