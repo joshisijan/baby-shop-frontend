@@ -29,7 +29,7 @@ export const fetchUserAddress = createAsyncThunk(
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchUserAddress);                    
                 } else {
-                    toast.error('An error occurred');
+                    toast.error('An error occurred getting address on your shipping information.');
                 }
             }
         }

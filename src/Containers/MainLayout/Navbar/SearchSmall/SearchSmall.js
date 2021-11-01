@@ -1,7 +1,6 @@
 import { Menu } from '@headlessui/react';
 import { AdjustmentsIcon, XIcon } from '@heroicons/react/solid';
 import { useDispatch, useSelector } from 'react-redux'
-import FadeTransition from '../../../../Components/Transition/FadeTransition'
 import searchFilterType from '../../../../constants/searchFilterType';
 import { setSearchQuery, resetSearchQuery, setFilter } from '../../../../features/search/searchSlice';
 
@@ -34,7 +33,8 @@ const SearchSmall = ({navbarShown}) => {
                         <Menu.Button className={`bg-primary text-gray-600 p-2 absolute ${isSearching ? 'right-16' : 'right-5'} top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
                             <AdjustmentsIcon className="w-5 h-5" />
                         </Menu.Button>
-                        <FadeTransition show={open && navbarShown}>
+                        {
+                            open && navbarShown ? 
                             <Menu.Items static className="rounded-2xl shadow-lg z-10 divide-y divide-gray-700 border-t absolute right-4 top-full bg-primary-varient flex flex-col items-end">
                                 {
                                     Object.values(searchFilterType).map((value, index) => {
@@ -46,7 +46,8 @@ const SearchSmall = ({navbarShown}) => {
                                     })                                    
                                 }
                             </Menu.Items>
-                        </FadeTransition>
+                            : null
+                        }
                     </>
                 )}
             </Menu>

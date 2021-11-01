@@ -33,7 +33,7 @@ const reducers = combineReducers({
     search: searchSlice,
 });
 
-const persistConfig = {
+const persistConfig = { 
     key: 'root',
     storage,
     whitelist: [ 
