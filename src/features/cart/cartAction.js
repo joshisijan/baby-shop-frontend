@@ -3,6 +3,7 @@ import axios from "axios";
 import { addToCarttUrl, baseUrl, cartListUrl } from "../../constants/apiUrl";
 import toast from "react-hot-toast";
 import {handleRefreshToken} from '../../services/refreshToken'
+import { fetchProductDetail } from "../productDetail/productDetailAction";
 
 export const fetchCartList = createAsyncThunk(
     'cart/fetchCartList',
@@ -121,14 +122,15 @@ export const addCartItem = createAsyncThunk(
         try {
             let response = await axios.post(
                 addToCarttUrl,
-                data,
+                data.data,
                 {
                   headers: {
                     'Authorization': `Bearer ${accessToken}`,
                  },
                 }
             );
-            thunkApi.dispatch(fetchCartList());
+            thunkApi.dispatch(fetchCartList()); // update cart in add to cart
+            thunkApi.dispatch(fetchProductDetail(data.productId)) //update product detail in add to cart
             toast.success('Successfully added item to cart.');
             return response.data;
         } catch (e) {            

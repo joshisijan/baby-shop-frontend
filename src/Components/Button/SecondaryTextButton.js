@@ -1,10 +1,10 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
-const SecondaryTextButton = ({ isLoading = false, loadingText = 'Loading...', children, className, ...rest }) => {
+const SecondaryTextButton = ({ isLoading = false, disabled = false, loadingText = 'Loading...', children, className, ...rest }) => {
     return (
         <button
             {...rest}
-            disabled={isLoading}
+            disabled={isLoading || disabled}
             className={`relative transition bg-secondary-dark text-gray-800 hover:bg-secondary focus:outline-none focus:ring focus:ring-secondary-varient px-4 py-2 ${className}`}
         >
             {

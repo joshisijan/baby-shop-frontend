@@ -6,6 +6,7 @@ const initialState = {
     isRemoving: false,
     isLoading: false,
     isUpdating: false,
+    isLoaded: false,
     data: {
         cart_items: [],
     },
@@ -18,13 +19,16 @@ const cartSlice = createSlice({
     },  
     extraReducers: {
         [fetchCartList.pending]: (state, {payload}) => {
-            state.isLoading = true
+            if(!state.isLoaded) {
+                state.isLoading = true
+            }
         },
         [fetchCartList.rejected]: (state, {payload}) => {
             state.isLoading = false
         },
         [fetchCartList.fulfilled]:(state, {payload}) => {
             state.isLoading = false
+            state.isLoaded = true
             if(payload) {
                 state.data = payload
             } else {

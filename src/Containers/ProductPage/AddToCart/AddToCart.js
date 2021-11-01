@@ -14,7 +14,7 @@ const AddToCart = () => {
 
     const [activeSizeIndex, setActiveSizeIndex] = useState(0)
     const [quantity, setQuantity] = useState(1);
-    
+
     // class name for style 
     const activeColor = "ring-2 ring-offset-1 ring-secondary-dark-extra ring-offset-white";
     const activeSize = "bg-black text-white";
@@ -24,6 +24,7 @@ const AddToCart = () => {
     const productDetailState = useSelector(state => state.productDetail)
     const productVarientData = productDetailState.data.product_variant
     const activeProductData = productDetailState.data.activeProductDetail
+    const canAddInCart = activeProductData.sizes[activeSizeIndex].max_qty_for_cart > 0;
 
     const handleChangeColor = (data) => {
         dispatch(changeActiveColor(data));
@@ -31,8 +32,11 @@ const AddToCart = () => {
 
     const handleAddToCart = () => {
         dispatch(addCartItem({
-            inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
-            quantity,
+            data: {
+                inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
+                quantity,   
+            },
+            productId: productDetailState.data.product.id,
         }));
     }
 
@@ -88,11 +92,18 @@ const AddToCart = () => {
 
             <div className="space-y-1">
                 <span className="text-xs font-semibold">Quantity</span>
-                <ProductQuantitySelector
-                    quantity={quantity}
-                    setQuantity={setQuantity}
-                    availableQuantity={activeProductData.sizes[activeSizeIndex].available_quantity}
-                />
+                {
+                    activeProductData.sizes[activeSizeIndex].max_qty_for_cart > 0 ?
+                        <ProductQuantitySelector
+                            quantity={quantity}
+                            setQuantity={setQuantity}
+                            availableQuantity={activeProductData.sizes[activeSizeIndex].max_qty_for_cart}
+                        />
+                        :
+                        <div className="text-red-600 font-medium">
+                            Maximum quantity already in cart.
+                        </div>
+                }
                 <div className="text-right">
                     <span className="text-sm font-medium">
                         Available quantity: &nbsp;
@@ -100,11 +111,36 @@ const AddToCart = () => {
                             {activeProductData.sizes[activeSizeIndex].available_quantity}
                         </span></span>
                 </div>
+                {
+                    productDetailState.auth ?
+                        <div className="text-right">
+                            <span className="text-sm font-medium">
+                                Already in cart: &nbsp;
+                                <span className="text-red-600">
+                                    {
+                                        activeProductData.sizes[activeSizeIndex].available_quantity - activeProductData.sizes[activeSizeIndex].max_qty_for_cart
+                                    }
+                                </span></span>
+                        </div>
+                        : null
+                }
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 relative">
+                {/* overlay */}
+                {
+                    !productDetailState.auth ?
+                        <div className="absolute inset-0 bg-primary z-10 text-red-700 flex items-center justify-center">
+                            Login to add to cart and watchlist
+                        </div>
+                        : null
+                }
                 <div className="flex-1">
-                    <SecondaryTextButton onClick={handleAddToCart} className="w-full">
+                    <SecondaryTextButton
+                        disabled={!canAddInCart}
+                        onClick={handleAddToCart}
+                        className={`w-full ${!canAddInCart ? 'cursor-not-allowed' : ''}`}
+                    >
                         Add to cart
                     </SecondaryTextButton>
                 </div>

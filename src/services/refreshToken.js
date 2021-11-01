@@ -27,3 +27,25 @@ export const handleRefreshToken = async (token, dispatch, action) => {
         }
     }
 }
+
+export const handleRefreshTokenNoError = async (token, dispatch, action) => {
+    // here action is previous action
+    // dispatch is from thunk api
+    // token is refresh token
+    try {
+        let response = await axios.post(
+            tokenRefreshUrl,
+            {
+                refresh: token,
+            }
+        );
+        if (response.status === 200) {
+            // update access token
+            dispatch(updateAccessToken(response.data.access));
+            // dispatch previous action
+            dispatch(action);
+        }
+    } catch (e) {
+        dispatch(removeUserDetail());
+    }
+}
