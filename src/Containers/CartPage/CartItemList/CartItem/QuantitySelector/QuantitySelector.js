@@ -8,10 +8,11 @@ import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import DarkTextButton from '../../../../../Components/Button/DarkTextButton'
 import FadeTransition from '../../../../../Components/Transition/FadeTransition'
+import { hideDialog, showDialog } from '../../../../../features/alertDialog/alertDialogSlice'
 import { updateCartItem } from '../../../../../features/cart/cartAction'
 
 
-const QuantitySelector = ({ id, quantity = 1, price, discount, availableQuantity }) => {
+const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQuantity }) => {
     const dispatch = useDispatch()
     const [cartQuantity, setCartQuantity] = useState(quantity)
 
@@ -33,7 +34,14 @@ const QuantitySelector = ({ id, quantity = 1, price, discount, availableQuantity
     }
 
     const handleUpdate = () => {
-        dispatch(updateCartItem({ id, quantity: cartQuantity }));
+        dispatch(showDialog({
+            header: 'Update cart item',
+            description: `Update product ${name}'s quantiy from ${quantity} to ${cartQuantity}?`,
+            onYes: () => {
+                dispatch(hideDialog())
+                dispatch(updateCartItem({ id, quantity: cartQuantity }));
+            }
+        }));
     }
 
     return (

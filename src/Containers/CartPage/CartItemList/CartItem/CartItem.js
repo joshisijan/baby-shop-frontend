@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { removeCartitem } from '../../../../features/cart/cartAction'
 import QuantitySelector from './QuantitySelector/QuantitySelector'
 import { Link } from 'react-router-dom'
+import { hideDialog, showDialog } from '../../../../features/alertDialog/alertDialogSlice'
 
 const CartItem = ({
     id,
@@ -23,7 +24,14 @@ const CartItem = ({
 }) => {
     const dispatch = useDispatch()
     const handleRemove = () => {
-        dispatch(removeCartitem(id))
+        dispatch(showDialog({
+            header: 'Remove from cart',
+            description: `Remove product ${name} with quantiy ${quantity} from your cart?`,
+            onYes: () => {
+                dispatch(hideDialog())
+                dispatch(removeCartitem(id))
+            }
+        }));
     }
 
     return (
@@ -54,7 +62,7 @@ const CartItem = ({
                                     </span>
                             }
                         </span>
-                        <QuantitySelector id={id} price={price} discount={discount} quantity={quantity} availableQuantity={availableQuantity} />
+                        <QuantitySelector id={id} name={name} price={price} discount={discount} quantity={quantity} availableQuantity={availableQuantity} />
                     </div>
                     <div className="flex flex-col justify-between items-end">
                         <button onClick={handleRemove} className="transition text-black hover:text-gray-900 focus:outline-none focus:ring focus:ring-primary-varient">
