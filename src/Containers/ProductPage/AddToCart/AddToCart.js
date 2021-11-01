@@ -3,7 +3,7 @@ import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
 import { HeartIcon } from '@heroicons/react/outline'
 import DarkOutlineTextButton from '../../../Components/Button/DarkOutlineTextButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeActiveColor } from '../../../features/productDetail/productDetailSlice'
+import { changeActiveColor, setActiveSizeIndex } from '../../../features/productDetail/productDetailSlice'
 import ProductQuantitySelector from '../ProductQuantitySelector/ProductQuantitySelector'
 import FadeTransition from '../../../Components/Transition/FadeTransition'
 import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
@@ -12,7 +12,6 @@ import { addCartItem } from '../../../features/cart/cartAction'
 const AddToCart = () => {
     const dispatch = useDispatch()
 
-    const [activeSizeIndex, setActiveSizeIndex] = useState(0)
     const [quantity, setQuantity] = useState(1);
 
     // class name for style 
@@ -24,7 +23,8 @@ const AddToCart = () => {
     const productDetailState = useSelector(state => state.productDetail)
     const productVarientData = productDetailState.data.product_variant
     const activeProductData = productDetailState.data.activeProductDetail
-    const canAddInCart = activeProductData.sizes[activeSizeIndex].max_qty_for_cart > 0;
+    const activeSizeIndex = productDetailState.activeSizeIndex
+    let canAddInCart = activeProductData.sizes[activeSizeIndex].max_qty_for_cart > 0;
 
     const handleChangeColor = (data) => {
         dispatch(changeActiveColor(data));
@@ -39,10 +39,6 @@ const AddToCart = () => {
             productId: productDetailState.data.product.id,
         }));
     }
-
-    useEffect(() => {
-        setActiveSizeIndex(0);
-    }, [activeProductData]);
 
     useEffect(() => {
         setQuantity(1);
@@ -79,7 +75,7 @@ const AddToCart = () => {
                             return (
                                 <DarkOutlineTextButton
                                     key={index}
-                                    onClick={() => setActiveSizeIndex(index)}
+                                    onClick={() => dispatch(setActiveSizeIndex(index))}
                                     className={`px-6 ${activeSizeIndex === index ? activeSize : ''}`}
                                 >
                                     {size.symbol}

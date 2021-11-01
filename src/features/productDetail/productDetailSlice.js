@@ -6,6 +6,7 @@ const initialState = {
     isLoaded: false,
     error: false,
     auth: false,
+    activeSizeIndex: 0,
     data: {
         product: {
             id: 1,
@@ -26,10 +27,14 @@ const productDetailSlice = createSlice({
     name: 'productDetail',
     initialState,
     reducers: {
+        setActiveSizeIndex: (state, {payload}) => {
+            state.activeSizeIndex = payload
+        },
         changeActiveColor: (state, { payload }) => {
             // setting active product detail
+            state.activeSizeIndex = 0
             state.data.activeProductDetail = payload            
-        }
+        },
     },
     extraReducers: {
         [fetchProductDetail.pending]: (state) => {
@@ -53,4 +58,4 @@ const productDetailSlice = createSlice({
 });
 
 export default productDetailSlice.reducer
-export const { changeActiveColor } = productDetailSlice.actions
+export const { changeActiveColor, setActiveSizeIndex } = productDetailSlice.actions
