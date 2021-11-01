@@ -1,9 +1,11 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import DarkTextButton from '../../../Components/Button/DarkTextButton'
+import { showDialog } from '../../../features/alertDialog/alertDialogSlice'
 
 const OrderSummary = () => {
     const cartState = useSelector(state => state.cart)
+    const dispatch = useDispatch()
     let subtotal = 0
     const delivery = 60
     let tax = 0
@@ -16,6 +18,13 @@ const OrderSummary = () => {
 
     tax = (subtotal + delivery) * 0.05
     total = subtotal + delivery + tax
+
+    const handleCheckout = () => {
+        dispatch(showDialog({   
+            header: 'Checkout',
+        }));
+    }
+
     return (
         <>
             <h2 className="font-semibold">
@@ -55,7 +64,7 @@ const OrderSummary = () => {
                     </span>
                 </div>
                 <div>
-                    <DarkTextButton className="w-full">Checkout</DarkTextButton>
+                    <DarkTextButton onClick={handleCheckout} className="w-full">Checkout</DarkTextButton>
                 </div>
             </div>
         </>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategoryList } from '../../features/categoryList/categoryListAction';
 import { fetchCartList } from '../../features/cart/cartAction';
 import { fetchtUserDetail } from '../../features/userDetail/userDetailAction';
+import AlertDialog from '../../Components/AlertDialog/AlertDialog'
 const MainLayout = (props) => {
 
     const dispatch = useDispatch();
@@ -25,23 +26,26 @@ const MainLayout = (props) => {
     // for getting container
     useEffect(() => {
         dispatch(fetchCategoryList());
-        if(userDetailState.accessToken !== null) {
+        if (userDetailState.accessToken !== null) {
             dispatch(fetchtUserDetail());
         }
         dispatch(fetchCartList());
     }, [dispatch, userDetailState.accessToken]);
 
     return (
-        <div>
-            <Toaster
-                position="top-right"
-            />
-            <Navbar />
-            <div style={{paddingTop: '10rem'}}>
-                {props.children}
+        <>
+            <AlertDialog />
+            <div>
+                <Toaster
+                    position="top-right"
+                />
+                <Navbar />
+                <div style={{ paddingTop: '10rem' }}>
+                    {props.children}
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </>
     )
 }
 
