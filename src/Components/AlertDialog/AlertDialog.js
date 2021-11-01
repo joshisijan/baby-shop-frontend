@@ -54,6 +54,9 @@ export default function AlertDialog() {
                         leaveTo="opacity-0 scale-95"
                     >
                         <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                            <div className="flex justify-center">
+                                <BellIcon className="w-7 h-7" />
+                            </div>
                             <Dialog.Title
                                 as="h3"
                                 className="text-lg font-medium leading-6 text-gray-900"
@@ -61,13 +64,13 @@ export default function AlertDialog() {
                                 {alertDialogState.header}
                             </Dialog.Title>
                             <div className="mt-2">
-                                <p className="text-sm text-gray-500">
+                                <p className="text-sm text-gray-700">
                                     {alertDialogState.description}
                                 </p>
                             </div>
 
                             <div className="mt-4 flex gap-4 flex-wrap justify-end">
-                                <DarkTextButton className="px-4">
+                                <DarkTextButton onClick={alertDialogState.onYes} className="px-4">
                                     Yes
                                 </DarkTextButton>
                                 <DarkOutlineTextButton onClick={closeModal} className="px-4">

@@ -22,6 +22,10 @@ const OrderSummary = () => {
     const handleCheckout = () => {
         dispatch(showDialog({   
             header: 'Checkout',
+            description: 'Sint deserunt velit nisi aute ullamco magna nostrud excepteur. Incididunt commodo dolore in pariatur pariatur commodo magna qui in cillum tempor aute in nostrud. Proident ipsum aliquip id laboris fugiat incididunt. Cillum esse nulla fugiat sit id nostrud. Minim ea irure voluptate velit adipisicing esse. Pariatur nostrud cupidatat enim in sunt do veniam cupidatat nisi ex est pariatur. Tempor adipisicing velit ullamco commodo sit nulla ea duis deserunt in exercitation proident aute ea.',
+            onYes: () => {
+                alert('haha')
+            }
         }));
     }
 

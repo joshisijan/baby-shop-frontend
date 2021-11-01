@@ -6,7 +6,7 @@ const initialState = {
     header: '',
     description: '',
     onYes: () => {
-        alert('haha');
+        
     }
 }
 
@@ -17,6 +17,8 @@ const alertDialogSlice = createSlice({
         showDialog: (state, {payload}) => {
             state.isOpen = true
             state.header = payload.header
+            state.description = payload.description
+            state.onYes = payload.onYes
         },
         hideDialog: (state) => {
             state.isOpen = false
