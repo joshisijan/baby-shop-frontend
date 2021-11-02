@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { resetSearchQuery } from './features/search/searchSlice';
 import PaymentPage from './Containers/PaymentPage/PaymentPage';
+import PageNotFoundPage from './Containers/PageNotFoundPage/PageNotFoundPage';
 
 
 function App() {
@@ -76,7 +77,7 @@ function App() {
               <AboutPage />
             </Route>
             <Route>
-              404 not found
+              <PageNotFoundPage />
             </Route>
           </Switch>
         </MainLayout>

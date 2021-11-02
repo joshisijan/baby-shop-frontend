@@ -33,7 +33,7 @@ const SearchLarge = ({ navbarShown }) => {
             <Menu>
                 {({ open }) => (
                     <>
-                        <Menu.Button className={`bg-primary text-gray-600 p-2 absolute ${isSearching ? 'right-16 -mx-5' : '-mx-3.5 right-5'} top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
+                        <Menu.Button className={`rounded-lg bg-primary text-gray-600 p-2 absolute ${isSearching ? 'right-16 -mx-5' : '-mx-3.5 right-5'} top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
                             <AdjustmentsIcon className="w-5 h-5" />
                         </Menu.Button>
                         {
@@ -61,7 +61,7 @@ const SearchLarge = ({ navbarShown }) => {
                     </>
                 )}
             </Menu>
-            <button onClick={handleReset} className={`${isSearching ? 'block' : 'hidden'} bg-primary text-gray-600 p-2 absolute right-1 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
+            <button onClick={handleReset} className={`${isSearching ? 'block' : 'hidden'} rounded-lg bg-primary text-gray-600 p-2 absolute right-1 top-1/2 transform -translate-y-1/2 hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
                 <XIcon className="w-5 h-5" />
             </button>
         </div>

@@ -18,6 +18,8 @@ const PaymentOptionPage = () => {
     const handlePayment = () => {
         if(selectedPaymentOption === null) {
             return setError('Select one of the payement option to continue');
+        } else {
+            alert('Feature comming soon')
         }
     }
     

@@ -76,7 +76,7 @@ const Navbar = () => {
         return () => {
             document.body.style.overflow = 'auto';
         }
-    });    
+    }, [isSearching]);    
 
 
     return (
@@ -128,9 +128,9 @@ const Navbar = () => {
             <Breadcrumb breadcrumbs={breadcrumbs} />
 
             {/* fullscreen overlay */}
-            <div onClick={() => setMenuShown(false)} className={`${menuShown ? 'fixed top-0 left-0 w-screen h-screen bg-black opacity-50' : 'hidden'}`}></div>
+            <div onClick={() => setMenuShown(false)} className={`${menuShown ? 'fixed top-0 left-0 w-screen h-screen bg-black opacity-50 z-30' : 'hidden'}`}></div>
             {/* Category Menu */}
-            <div className={`overflow-y-auto px-6 py-4 bg-white fixed top-0 left-0 h-screen w-full max-w-xs transition duration-500 transform ${menuShown ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className={`z-30 overflow-y-auto px-6 py-4 bg-white fixed top-0 left-0 h-screen w-full max-w-xs transition duration-500 transform ${menuShown ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="flex justify-end">
                     <IconButton onClick={() => setMenuShown(false)}>
                         <XIcon className="w-5 h-5" />

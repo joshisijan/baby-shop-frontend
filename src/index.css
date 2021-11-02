@@ -18,10 +18,10 @@
     [multiple],
     textarea,
     select {
-        @apply border-gray-400 focus:border-gray-600 focus:outline-none focus:ring focus:ring-primary-varient;
+        @apply rounded-lg border-gray-400 focus:border-gray-600 focus:outline-none focus:ring focus:ring-primary-varient;
     }
 
     [type="checkbox"] {
-        @apply border-gray-400 focus:border-gray-600 focus:outline-none focus:ring focus:ring-primary-varient;
+        @apply rounded-lg border-gray-400 focus:border-gray-600 focus:outline-none focus:ring focus:ring-primary-varient;
     }
 }
