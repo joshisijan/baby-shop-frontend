@@ -85,7 +85,7 @@ const LoginTab = () => {
                     />
                     {errors.password && <p className="text-sm text-red-600">{errors.password.message}</p>}
                 </div>
-                <SecondaryTextButton type="submit">Login</SecondaryTextButton>
+                <SecondaryTextButton isLoading={loginState.isLoading} loadingText="Logging in..." type="submit">Login</SecondaryTextButton>
             </form>
         </div>
     )

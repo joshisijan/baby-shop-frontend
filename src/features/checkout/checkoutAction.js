@@ -1,11 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import toast from "react-hot-toast";
-import { checkoutVerifyUrl } from "../../constants/apiUrl";
+import { checkoutUrl } from "../../constants/apiUrl";
 import {handleRefreshToken} from '../../services/refreshToken'
 
-export const verifyCheckout = createAsyncThunk(
-    'checkout/verifyCheckout',
+export const checkout = createAsyncThunk(
+    'checkout/checkout',
     async (_, thunkApi) => {
         // get userDetail state
         const {userDetail} = thunkApi.getState();
@@ -15,7 +14,7 @@ export const verifyCheckout = createAsyncThunk(
         if(accessToken === null) return;
         try {
             let response = await axios.get(
-                checkoutVerifyUrl,
+                checkoutUrl,
                 {
                   headers: {
                     'Authorization': `Bearer ${accessToken}`,
@@ -24,16 +23,12 @@ export const verifyCheckout = createAsyncThunk(
             );
             return response.data;
         } catch (e) {
-            if (!e.response) {
-                toast.error('Network error');
-            } else {
-                console.log(e.response)
+            if (e.response) {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, verifyCheckout);                    
-                } else {
-                    toast.error('An error occurred while verifying checkout.');
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkout);                    
                 }
             }
+            return thunkApi.rejectWithValue('error');
         }
     }
 );

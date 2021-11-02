@@ -2,9 +2,9 @@ import { Menu } from '@headlessui/react';
 import { AdjustmentsIcon, XIcon } from '@heroicons/react/solid';
 import { useDispatch, useSelector } from 'react-redux'
 import searchFilterType from '../../../../constants/searchFilterType';
-import { setSearchQuery, resetSearchQuery, setFilter } from '../../../../features/search/searchSlice';
+import { setSearchQuery, resetSearchQuery, setFilter, resetFilter } from '../../../../features/search/searchSlice';
 
-const SearchSmall = ({navbarShown}) => {
+const SearchSmall = ({ navbarShown }) => {
     const searchState = useSelector(state => state.search);
     const dispatch = useDispatch()
 
@@ -18,6 +18,10 @@ const SearchSmall = ({navbarShown}) => {
 
     const handleFilter = (filterValue) => {
         dispatch(setFilter(filterValue));
+    }
+
+    const handleResetFilter = () => {
+        dispatch(resetFilter());
     }
 
 
@@ -34,19 +38,26 @@ const SearchSmall = ({navbarShown}) => {
                             <AdjustmentsIcon className="w-5 h-5" />
                         </Menu.Button>
                         {
-                            open && navbarShown ? 
-                            <Menu.Items static className="rounded-2xl shadow-lg z-10 divide-y divide-gray-700 border-t absolute right-4 top-full bg-primary-varient flex flex-col items-end">
-                                {
-                                    Object.values(searchFilterType).map((value, index) => {
-                                        return (
-                                            <Menu.Item key={index} as="button" onClick={() => handleFilter(value[0])} className={`${searchState.ordering === value[0] ? 'bg-primary-light' : ''} rounded-2xl py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
-                                                {value[1]}
-                                            </Menu.Item>
-                                        )
-                                    })                                    
-                                }
-                            </Menu.Items>
-                            : null
+                            open && navbarShown ?
+                                <Menu.Items static className="rounded-2xl shadow-lg z-10 divide-y divide-gray-700 border-t absolute right-4 top-full bg-primary-varient flex flex-col items-end">
+                                    {
+                                        searchState.ordering !== '' ? 
+                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-primary-light rounded-2xl py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                                            <XIcon className="w-5 h-5" /> Clear filter
+                                        </Menu.Item>
+                                        : null
+                                    }
+                                    {
+                                        Object.values(searchFilterType).map((value, index) => {
+                                            return (
+                                                <Menu.Item key={index} as="button" onClick={() => handleFilter(value[0])} className={`${searchState.ordering === value[0] ? 'bg-primary-light' : ''} rounded-2xl py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
+                                                    {value[1]}
+                                                </Menu.Item>
+                                            )
+                                        })
+                                    }
+                                </Menu.Items>
+                                : null
                         }
                     </>
                 )}

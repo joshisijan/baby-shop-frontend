@@ -8,7 +8,7 @@ export const fetchtUserDetail = createAsyncThunk(
     'userDetail/fetchtUserDetail',
     async (_, thunkApi) => {
         // get userDetail state
-        const {userDetail} = thunkApi.getState();
+        const { userDetail } = thunkApi.getState();
         // get  accessToken stored in storage
         const { accessToken } = userDetail;
         const { refreshToken } = userDetail;
@@ -16,22 +16,21 @@ export const fetchtUserDetail = createAsyncThunk(
             let response = await axios.get(
                 userUrl,
                 {
-                  headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                 } 
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                    }
                 }
             );
             return response.data;
         } catch (e) {
             if (!e.response) {
-                toast.error('Network error');
-            } else {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchtUserDetail);                    
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchtUserDetail);
                 } else {
                     toast.error('An error occurred');
                 }
             }
+            return thunkApi.rejectWithValue('error');
         }
     }
 )

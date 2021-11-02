@@ -18,12 +18,12 @@ const cartSlice = createSlice({
     reducers: {
     },  
     extraReducers: {
-        [fetchCartList.pending]: (state, {payload}) => {
+        [fetchCartList.pending]: (state) => {
             if(!state.isLoaded) {
                 state.isLoading = true
             }
         },
-        [fetchCartList.rejected]: (state, {payload}) => {
+        [fetchCartList.rejected]: (state) => {
             state.isLoading = false
         },
         [fetchCartList.fulfilled]:(state, {payload}) => {

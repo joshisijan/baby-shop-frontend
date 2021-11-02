@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setSearchQuery, resetSearchQuery, setFilter } from '../../../../features/search/searchSlice';
+import { setSearchQuery, resetSearchQuery, setFilter, resetFilter } from '../../../../features/search/searchSlice';
 import { XIcon, AdjustmentsIcon } from '@heroicons/react/solid';
 import { Menu } from '@headlessui/react';
 import searchFilterType from '../../../../constants/searchFilterType';
@@ -20,6 +20,10 @@ const SearchLarge = ({ navbarShown }) => {
         dispatch(setFilter(filterValue));
     }
 
+    const handleResetFilter = () => {
+        dispatch(resetFilter());
+    }
+
     // to know if seraching
     const isSearching = searchState.search !== '' || searchState.ordering !== '';
 
@@ -35,6 +39,13 @@ const SearchLarge = ({ navbarShown }) => {
                         {
                             open && navbarShown ?
                                 <Menu.Items static className="rounded-2xl shadow-lg z-10 divide-y divide-gray-400 absolute right-0 top-full bg-primary-varient flex flex-col items-end">
+                                    {
+                                        searchState.ordering !== '' ? 
+                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-primary-light rounded-2xl py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                                            <XIcon className="w-5 h-5" /> Clear filter
+                                        </Menu.Item>
+                                        : null
+                                    }
                                     {
                                         Object.values(searchFilterType).map((value, index) => {
                                             return (

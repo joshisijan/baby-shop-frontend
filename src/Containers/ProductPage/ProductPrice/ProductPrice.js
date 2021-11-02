@@ -1,15 +1,16 @@
-import React from 'react'
+import currencyFormatter from '../../../services/currencyFormatter'
 
 const ProductPrice = ({price, discount}) => {
+    const actualPrice = price - price * (discount / 100);
     return (
         <>
           {
               discount === 0 ? 
               <div>
-                  Rs. {price}
+                  { currencyFormatter(price) }
               </div> : 
               <div className="space-x-0.5">
-                    <span className="text-red-600">Rs. { price - price * (discount / 100) }</span><span className="line-through">{price}</span>
+                    <span className="text-red-600">{ currencyFormatter(actualPrice) }</span><span className="line-through">{ currencyFormatter(price) }</span>
               </div>
           }  
         </>

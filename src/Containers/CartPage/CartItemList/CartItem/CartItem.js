@@ -2,11 +2,15 @@ import {
     XIcon,
     CheckIcon
 } from '@heroicons/react/solid'
+import {
+    TrashIcon,
+} from '@heroicons/react/outline'
 import { useDispatch } from 'react-redux'
 import { removeCartitem } from '../../../../features/cart/cartAction'
 import QuantitySelector from './QuantitySelector/QuantitySelector'
 import { Link } from 'react-router-dom'
 import { hideDialog, showDialog } from '../../../../features/alertDialog/alertDialogSlice'
+import currencyFormatter from '../../../../services/currencyFormatter'
 
 const CartItem = ({
     id,
@@ -22,6 +26,7 @@ const CartItem = ({
     availableQuantity,
     ...rest
 }) => {
+    const discountPrice = price - price * (discount / 100);
     const dispatch = useDispatch()
     const handleRemove = () => {
         dispatch(showDialog({
@@ -50,15 +55,14 @@ const CartItem = ({
                             <span className="text-xs pr-2">{color}</span>
                             <span className="text-xs pl-2">{size}</span>
                         </div>
-                        <span className="font-semibold">
-                            Rs. &nbsp;
+                        <span className="font-semibold text-sm sm:text-base">
                             {
                                 discount === 0 ?
                                     price
                                     :
                                     <span className="space-x-1">
-                                        <span className="text-red-600">{price - price * (discount / 100)}</span>
-                                        <span className="line-through">{price}</span>
+                                        <span className="text-red-600">{currencyFormatter(discountPrice)}</span>
+                                        <span className="line-through">{currencyFormatter(price)}</span>
                                     </span>
                             }
                         </span>
@@ -66,7 +70,7 @@ const CartItem = ({
                     </div>
                     <div className="flex flex-col justify-between items-end">
                         <button onClick={handleRemove} className="transition text-black hover:text-gray-900 focus:outline-none focus:ring focus:ring-primary-varient">
-                            <XIcon className="w-5 h-5" />
+                            <TrashIcon className="w-5 h-5" />
                         </button>
 
                     </div>

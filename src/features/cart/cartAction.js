@@ -25,15 +25,14 @@ export const fetchCartList = createAsyncThunk(
             );
             return response.data;
         } catch (e) {
-            if (!e.response) {
-                toast.error('Network error');
-            } else {
+            if (e.response)  {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchCartList);                    
                 } else {
                     toast.error('An error occurred while fetching cart item.');
                 }
             }
+            return thunkApi.rejectWithValue('error');
         }
     }
 );

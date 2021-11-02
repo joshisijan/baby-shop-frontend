@@ -1,25 +1,35 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import DarkTextButton from '../../../Components/Button/DarkTextButton'
-import { verifyCheckout } from '../../../features/checkout/checkoutAction'
-
+import currencyFormatter from '../../../services/currencyFormatter'
+import { useHistory } from 'react-router-dom'
+import toast from 'react-hot-toast'
 const OrderSummary = () => {
-    const dispatch = useDispatch()
+    const history = useHistory()
     const cartState = useSelector(state => state.cart)
-    const checkoutState = useSelector(state => state.checkout)
     let subtotal = 0
-    const delivery = 60
+    let discount = 0
     let total = 0
     // calculate subtotal
     cartState.data.cart_items.map((item) => {
-        return subtotal += item.quantity * (item.product.price - item.product.price * item.product.discount_percentage / 100 )
-        
+        return subtotal += item.quantity * item.product.price
     });
 
-    total = subtotal + delivery
+    // calculate discount 
+    cartState.data.cart_items.map((item) => {
+        return discount += item.quantity * (item.product.price * item.product.discount_percentage / 100)
+    });
 
-    const handleCheckout = () => {
-        dispatch(verifyCheckout());
+    total = subtotal - discount
+
+    const handleCanCheckout = () => {
+        const canCheckout = cartState.data.can_checkout.status;
+        if(canCheckout) {
+            history.push('/cart/checkout'); //goto checkout
+        } else {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            toast.error('Some of the product in your cart is out of stock. Either update your cart or remove that item from cart.');
+        }
     }
 
     return (
@@ -27,33 +37,40 @@ const OrderSummary = () => {
             <h2 className="font-semibold">
                 Order Summary
             </h2>
+            <p className="text-xs">
+                Total price here doesnot include delivery charge.
+            </p>
             <div className="mt-6 divide-y">
                 <div className="py-1 text-sm flex flex-wrap justify-between">
                     <span className="text-gray-600">
                         Subtotal
                     </span>
                     <span className="font-medium text-black">
-                        Rs. {subtotal}
+                        {currencyFormatter(subtotal)}
                     </span>
                 </div>
-                <div className="py-1 text-sm flex flex-wrap justify-between">
-                    <span className="text-gray-600">
-                        Delivery
-                    </span>
-                    <span className="font-medium text-black">
-                        Rs. {delivery}
-                    </span>
-                </div>
+                {
+                    discount > 0 ?
+                        <div className="py-1 text-sm flex flex-wrap justify-between">
+                            <span className="text-gray-600">
+                                Discount
+                            </span>
+                            <span className="font-medium text-red-600">
+                                - {currencyFormatter(discount)}
+                            </span>
+                        </div>
+                        : null
+                }
                 <div className="py-1 flex flex-wrap justify-between">
                     <span className="text-gray-600">
                         Total
                     </span>
                     <span className="font-medium text-black">
-                        Rs. {total}
+                        {currencyFormatter(total)}
                     </span>
                 </div>
                 <div>
-                    <DarkTextButton isLoading={checkoutState.isVerifying} loadingText="Verifying..." onClick={handleCheckout} className="w-full">Checkout</DarkTextButton>
+                    <DarkTextButton onClick={handleCanCheckout} className="w-full">Checkout</DarkTextButton>
                 </div>
             </div>
         </>

@@ -2,6 +2,7 @@ import {
     PlusIcon,
     MinusSmIcon,
     ArrowRightIcon,
+    XIcon,
 } from '@heroicons/react/solid'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -10,7 +11,7 @@ import DarkTextButton from '../../../../../Components/Button/DarkTextButton'
 import FadeTransition from '../../../../../Components/Transition/FadeTransition'
 import { hideDialog, showDialog } from '../../../../../features/alertDialog/alertDialogSlice'
 import { updateCartItem } from '../../../../../features/cart/cartAction'
-
+import currencyFormatter from '../../../../../services/currencyFormatter'
 
 const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQuantity }) => {
     const dispatch = useDispatch()
@@ -44,6 +45,13 @@ const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQu
         }));
     }
 
+    const handleReset = () => {
+        setCartQuantity(quantity);
+    }
+
+    const totalPrice = quantity * (price - price * discount / 100);
+    const updatedPrice = cartQuantity * (price - price * discount / 100);
+
     return (
         <div>
             <div className="flex">
@@ -65,15 +73,20 @@ const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQu
                     <MinusSmIcon className="w-3.5 h-3.5" />
                 </DarkTextButton>
                 <FadeTransition show={quantity !== cartQuantity}>
-                    <DarkTextButton onClick={handleUpdate} className="ml-2 text-sm">
-                        Update
-                    </DarkTextButton>
+                    <div className="flex">
+                        <DarkTextButton onClick={handleUpdate} className="ml-2 text-sm">
+                            Update
+                        </DarkTextButton>
+                        <DarkTextButton onClick={handleReset} className="ml-2 text-sm">
+                            <XIcon className="w-5 h-5" />
+                        </DarkTextButton>
+                    </div>
                 </FadeTransition>
             </div>
             <div className="py-2 text-xs sm:text-sm font-medium">
                 <span className="flex gap-2 items-center flex-wrap">
                     <span>Total price:</span>
-                    <span className={`${quantity !== cartQuantity ? 'line-through' : ''}`}>Rs. {quantity * (price - price * discount / 100)}</span>
+                    <span className={`${quantity !== cartQuantity ? 'line-through' : ''}`}>{currencyFormatter(totalPrice)}</span>
                     {
                         quantity !== cartQuantity ?
                             <ArrowRightIcon className="w-3.5 h-3.5" />
@@ -81,7 +94,7 @@ const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQu
                     }
                     {
                         quantity !== cartQuantity ?
-                            <span className="text-red-600">Rs. {cartQuantity * (price - price * discount / 100)}</span>
+                            <span className="text-red-600">{currencyFormatter(updatedPrice)}</span>
                             : null
                     }
                 </span>

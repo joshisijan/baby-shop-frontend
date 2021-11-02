@@ -190,7 +190,7 @@ const RegisterTab = () => {
                     />
                     {errors.password2 && <p className="text-sm text-red-600">{errors.password2.message}</p>}
                 </div>
-                <SecondaryTextButton type="submit">Create account</SecondaryTextButton>
+                <SecondaryTextButton isLoading={registrationState.isLoading} loadingText="Registration..." type="submit">Create account</SecondaryTextButton>
             </form>
         </div>
     )

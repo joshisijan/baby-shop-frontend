@@ -8,9 +8,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import './app.css';
 import ProductPage from './Containers/ProductPage/ProductPage';
 import ProtectedRoute from './Components/Route/ProtectedRoute';
+import RedirectProtectedRoute from './Components/Route/RedirectProtectedRoute';
 import ProfilePage from './Containers/ProfilePage/ProfilePage';
 import CategoryListPage from './Containers/CategoryListPage/CategoryListPage';
 import CategoryProductPage from './Containers/CategoryProductPage/CategoryProductPage'
+import CheckoutPage from './Containers/CheckoutPage/CheckoutPage'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { resetSearchQuery } from './features/search/searchSlice';
@@ -56,6 +58,12 @@ function App() {
             </Route>
             <Route path="/product/:id" exact>
               <ProductPage />
+            </Route>
+            <Route path="/cart/checkout" exact>
+              <RedirectProtectedRoute 
+                redirect="/"
+                component={CheckoutPage}
+              />
             </Route>
             <Route path="/about" exact>
               <AboutPage />

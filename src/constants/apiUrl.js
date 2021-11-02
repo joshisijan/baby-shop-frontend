@@ -49,6 +49,5 @@ export const searchUrl = baseUrl + '/api/shop/product/search/';
 
 
 
-// watchlist
-// verify
-export const checkoutVerifyUrl = baseUrl + '/api/shop/checkout/';
+// checkout
+export const checkoutUrl = baseUrl + '/api/shop/checkout/';
