@@ -55,6 +55,7 @@ export const addUserAddress = createAsyncThunk(
                  } 
                 }
             );
+            console.log(response.data)
             toast.success('Successfully added the address in your shipping information.');
             return response.data;
         } catch (e) {

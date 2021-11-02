@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkout, checkoutAddressPatch } from "./checkoutAction";
+import { checkout, checkoutAddressPatch, checkoutAddShippingAddress } from "./checkoutAction";
 
 const initialState = {
     isLoading: false,
     isUpdating: false,
+    isSelectingShipping: false,
+    isSelectingBilling: false,
     error: false,
     data: {
         order: {
@@ -42,6 +44,12 @@ const checkoutSlice = createSlice({
     name: 'checkout',
     initialState,
     reducers: {
+        setIsSelectingShipping: (state, {payload}) => {
+            state.isSelectingShipping = payload
+        },
+        setIsSelectingBilling: (state, {payload}) => {
+            state.isSelectingBilling = payload
+        },
     },    
     extraReducers: {
         [checkout.pending]: (state) => {
@@ -55,16 +63,35 @@ const checkoutSlice = createSlice({
             state.isLoading = false
             state.data = payload
         },
+        // to patch
         [checkoutAddressPatch.pending]: (state) => {
+            state.isSelectingShipping = false 
+            state.isSelectingBilling = false
             state.isUpdating = true
         },
         [checkoutAddressPatch.rejected]: (state) => {
             state.isUpdating = false
         },
-        [checkoutAddressPatch.fulfilled]: (state) => {
+        [checkoutAddressPatch.fulfilled]: (state, {payload}) => {
+            state.isUpdating = false
+            state.data = payload
+        },
+        // to add
+        [checkoutAddShippingAddress.pending]: (state) => {
+            state.isSelectingShipping = false 
+            state.isSelectingBilling = false
+            state.isUpdating = true
+        },
+        [checkoutAddShippingAddress.rejected]: (state) => {
+            state.isUpdating = false
+        },
+        [checkoutAddShippingAddress.fulfilled]: (state, {payload}) => {
             state.isUpdating = false
         },
     },
 });
 
+
+
 export default checkoutSlice.reducer
+export const { setIsSelectingShipping, setIsSelectingBilling } = checkoutSlice.actions

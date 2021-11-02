@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { checkoutAddressUpdateUrl, checkoutUrl } from "../../constants/apiUrl";
+import { checkoutAddressUpdateUrl, checkoutUrl, createAddressUrl } from "../../constants/apiUrl";
 import {handleRefreshToken} from '../../services/refreshToken'
 
 export const checkout = createAsyncThunk(
@@ -53,6 +53,7 @@ export const checkoutAddressPatch = createAsyncThunk(
                  } 
                 }
             );
+            toast.success('Successfully changed address in your shipping information.')
             return response.data;
         } catch (e) {
             if (e.response) {
@@ -65,3 +66,44 @@ export const checkoutAddressPatch = createAsyncThunk(
         }
     }
 );
+
+
+export const checkoutAddShippingAddress = createAsyncThunk(
+    'userAddress/addUserAddress',
+    async (data, thunkApi) => {
+        // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        try {
+            let response = await axios.post(
+                createAddressUrl,
+                data.formData,
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            thunkApi.dispatch(checkoutAddressPatch({
+                orderId: data.orderId,
+                formData: {
+                    shipping_address: response.data.id,
+                    billing_address: data.billingId,
+                }
+            }))
+            return response.data;
+        } catch (e) {
+            if (!e.response) {
+                toast.error('Network error');
+            } else {
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddShippingAddress(data));                    
+                } else {
+                    toast.error('An error occurred while adding the address in your shipping information.');
+                }
+            }
+        }
+    }
+)

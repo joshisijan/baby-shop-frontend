@@ -9,6 +9,7 @@ const CheckoutVerify = () => {
     const checkoutState = useSelector(state => state.checkout)
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
+            {/* overlay on updating */}
             <FadeTransition show={checkoutState.isUpdating}>
                 <LoadingOverlay label="Updating address..." />
             </FadeTransition>
@@ -18,8 +19,8 @@ const CheckoutVerify = () => {
                 <div className="flex gap-4 flex-col md:flex-row">
                     <div className="flex-1">
                         <CheckoutShippingInfo
-                            billingAddress={checkoutState.data.order.shipping_address}
-                            shippingAddress={checkoutState.data.order.billing_address}
+                            shippingAddress={checkoutState.data.order.shipping_address}
+                            billingAddress={checkoutState.data.order.billing_address}
                         />
                     </div>
                     <div className="self-start w-full md:max-w-md border">
