@@ -12,8 +12,7 @@ const PaymentPage = () => {
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
             <div className="w-full max-w-6xl">
-                <h1 className="text-xl font-bold">Payment</h1>
-                <h2 className="mb-4 text-sm">Select one of the payement option and continue to payment.</h2>
+                <h1 className="mb-4 text-xl font-bold">Payment</h1>                
                 <div className="grid gap-4 sm:grid-cols-2">
                     <div className="p-4 border">
                         <PaymentOptionPage />
