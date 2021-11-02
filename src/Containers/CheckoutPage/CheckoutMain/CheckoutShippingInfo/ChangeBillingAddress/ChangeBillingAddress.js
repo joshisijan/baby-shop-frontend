@@ -4,7 +4,7 @@ import { LocationMarkerIcon } from "@heroicons/react/outline"
 import ShippingInfo from "./ShippingInfo/ShippingInfo"
 import DarkTextButton from "../../../../../Components/Button/DarkTextButton"
 
-export default function ChangeShippingAddress({shown, setShown}) {
+export default function ChangeBillingAddress({shown, setShown}) {
 
     const closeModal = () => {
         setShown(false);
@@ -54,7 +54,7 @@ export default function ChangeShippingAddress({shown, setShown}) {
                                 as="h3"
                                 className="text-lg font-medium leading-6 text-gray-900"
                             >
-                                Select new shipping address
+                                Select new billing address
                             </Dialog.Title>
                             <div>
                                 <p className="text-xs">

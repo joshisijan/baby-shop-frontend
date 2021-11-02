@@ -1,20 +1,21 @@
+import { CreditCardIcon } from "@heroicons/react/outline"
+import { Link } from "react-router-dom"
 import DarkTextButton from "../../../../Components/Button/DarkTextButton"
 import currencyFormatter from "../../../../services/currencyFormatter"
 
-const CheckoutSummary = ({priceWithoutDiscount, totalDiscount}) => {
+const CheckoutSummary = ({ priceWithoutDiscount, totalDiscount }) => {
     const discount = totalDiscount
     const subtotal = priceWithoutDiscount
     const total = priceWithoutDiscount - totalDiscount
 
-    const handleConfirmOrder = () => {
-
-    }
-
     return (
         <>
             <h2 className="font-semibold">
-                Order Summary                
+                Order Summary
             </h2>
+            <p className="text-xs">
+                Total price here doesnot include delivery charge.
+            </p>
             <div className="mt-2 divide-y">
                 <div className="py-1 text-sm flex flex-wrap justify-between">
                     <span className="text-gray-600">
@@ -45,7 +46,14 @@ const CheckoutSummary = ({priceWithoutDiscount, totalDiscount}) => {
                     </span>
                 </div>
                 <div>
-                    <DarkTextButton onClick={handleConfirmOrder} className="w-full">Confirm order</DarkTextButton>
+                    <Link to="/cart/payment">
+                        <DarkTextButton className="w-full flex gap-2 justify-center items-center">
+                            <CreditCardIcon className="w-5 h-5" />
+                            <div className="py-1">
+                                Continue to payment
+                            </div>
+                        </DarkTextButton>
+                    </Link>
                 </div>
             </div>
         </>

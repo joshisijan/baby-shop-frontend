@@ -53,7 +53,7 @@ export const checkoutAddressPatch = createAsyncThunk(
                  } 
                 }
             );
-            toast.success('Successfully changed address in your shipping information.')
+            toast.success('Successfully changed address.')
             return response.data;
         } catch (e) {
             if (e.response) {
@@ -61,7 +61,7 @@ export const checkoutAddressPatch = createAsyncThunk(
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, checkout);                    
                 }
             }
-            toast.error('An error occurred updating address in your shipping information.');
+            toast.error('An error occurred updating address.');
             return thunkApi.rejectWithValue('error');
         }
     }
@@ -101,7 +101,47 @@ export const checkoutAddShippingAddress = createAsyncThunk(
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddShippingAddress(data));                    
                 } else {
-                    toast.error('An error occurred while adding the address in your shipping information.');
+                    toast.error('An error occurred while adding address.');
+                }
+            }
+        }
+    }
+)
+
+export const checkoutAddBillingAddress = createAsyncThunk(
+    'userAddress/addUserAddress',
+    async (data, thunkApi) => {
+        // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        try {
+            let response = await axios.post(
+                createAddressUrl,
+                data.formData,
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            thunkApi.dispatch(checkoutAddressPatch({
+                orderId: data.orderId,
+                formData: {
+                    billing_address: response.data.id,
+                    shipping_address: data.shippingId,
+                }
+            }))
+            return response.data;
+        } catch (e) {
+            if (!e.response) {
+                toast.error('Network error');
+            } else {
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddShippingAddress(data));                    
+                } else {
+                    toast.error('An error occurred while adding address.');
                 }
             }
         }

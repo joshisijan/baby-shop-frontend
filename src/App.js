@@ -16,6 +16,7 @@ import CheckoutPage from './Containers/CheckoutPage/CheckoutPage'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { resetSearchQuery } from './features/search/searchSlice';
+import PaymentPage from './Containers/PaymentPage/PaymentPage';
 
 
 function App() {
@@ -53,16 +54,22 @@ function App() {
             <Route path="/category/:slug" exact>
               <CategoryProductPage />
             </Route>
-            <Route path="/cart" exact>
-              <CartPage />
-            </Route>
             <Route path="/product/:id" exact>
               <ProductPage />
             </Route>
+            <Route path="/cart" exact>
+              <CartPage />
+            </Route>            
             <Route path="/cart/checkout" exact>
               <RedirectProtectedRoute 
                 redirect="/"
                 component={CheckoutPage}
+              />
+            </Route>
+            <Route path="/cart/payment" exact>
+              <RedirectProtectedRoute 
+                redirect="/"
+                component={PaymentPage}
               />
             </Route>
             <Route path="/about" exact>

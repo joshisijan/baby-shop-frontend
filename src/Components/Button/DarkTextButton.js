@@ -5,7 +5,7 @@ const DarkTextButton = ({ isLoading = false, disabled = false, loadingText = 'Lo
         <button
             {...rest}
             disabled={isLoading || disabled}
-            className={`px-3 py-1.5 transition text-white bg-black hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-600 ${className}`}
+            className={`px-3 py-1.5 rounded- rounded-lg transition text-white bg-black hover:bg-gray-900 focus:outline-none focus:ring focus:ring-gray-600 ${className}`}
         >
             {
             isLoading ?

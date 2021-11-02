@@ -4,6 +4,7 @@ import { checkout, checkoutAddressPatch, checkoutAddShippingAddress } from "./ch
 const initialState = {
     isLoading: false,
     isUpdating: false,
+    isInitialized: false,
     isSelectingShipping: false,
     isSelectingBilling: false,
     error: false,
@@ -52,6 +53,7 @@ const checkoutSlice = createSlice({
         },
     },    
     extraReducers: {
+        // to init
         [checkout.pending]: (state) => {
             state.isLoading = true
         },
@@ -61,6 +63,7 @@ const checkoutSlice = createSlice({
         },
         [checkout.fulfilled]: (state, {payload}) => {
             state.isLoading = false
+            state.isInitialized = true
             state.data = payload
         },
         // to patch

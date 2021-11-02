@@ -1,37 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import DarkTextButton from '../../../Components/Button/DarkTextButton'
 import currencyFormatter from '../../../services/currencyFormatter'
-import { useHistory } from 'react-router-dom'
-import toast from 'react-hot-toast'
-import { CheckIcon } from '@heroicons/react/solid'
 const OrderSummary = () => {
-    const history = useHistory()
-    const cartState = useSelector(state => state.cart)
-    let subtotal = 0
-    let discount = 0
-    let total = 0
-    // calculate subtotal
-    cartState.data.cart_items.map((item) => {
-        return subtotal += item.quantity * item.product.price
-    });
+    const checkoutState = useSelector(state => state.checkout)
 
-    // calculate discount 
-    cartState.data.cart_items.map((item) => {
-        return discount += item.quantity * (item.product.price * item.product.discount_percentage / 100)
-    });
-
-    total = subtotal - discount
-
-    const handleCanCheckout = () => {
-        const canCheckout = cartState.data.can_checkout.status;
-        if (canCheckout) {
-            history.push('/cart/checkout'); //goto checkout
-        } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            toast.error('Some of the product in your cart is out of stock. Either update your cart or remove that item from cart.');
-        }
-    }
+    let subtotal = checkoutState.data.order.total_price_without_discount
+    let discount = checkoutState.data.order.total_discount
+    const delivery = 60
+    let total = subtotal - discount + delivery
 
     return (
         <>
@@ -62,21 +38,21 @@ const OrderSummary = () => {
                         </div>
                         : null
                 }
-                <div className="py-1 flex flex-wrap justify-between">
+                <div className="py-1 text-sm flex flex-wrap justify-between">
                     <span className="text-gray-600">
+                        Delivery
+                    </span>
+                    <span className="font-medium text-black">
+                        {currencyFormatter(delivery)}
+                    </span>
+                </div>
+                <div className="py-1 flex flex-wrap justify-between">
+                    <span className="text-gray-900 font-medium">
                         Total
                     </span>
                     <span className="font-medium text-black">
                         {currencyFormatter(total)}
                     </span>
-                </div>
-                <div>
-                    <DarkTextButton onClick={handleCanCheckout} className="w-full flex gap-2 justify-center items-center">
-                        <CheckIcon className="w-5 h-5" />
-                        <div className="py-1">
-                            Checkout
-                        </div>
-                    </DarkTextButton>
                 </div>
             </div>
         </>

@@ -6,47 +6,49 @@ import {
 
 const AddressDetail = ({ address, shipping = false, billing = false }) => {
     return (
-        <div className="p-4 border flex flex-col justify-between">
-            <table>
-                <tbody>
-                    <tr>
-                        <td className="pr-4">
-                            <UserIcon className="w-3.5 h-3.5" />
-                        </td>
-                        <td>
-                            {address.first_name} {address.last_name}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <PhoneIcon className="w-3.5 h-3.5" />
-                        </td>
-                        <td>
-                            {address.phone_number}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <LocationMarkerIcon className="w-3.5 h-3.5" />
-                        </td>
-                        <td className="space-x-2">
-                            <span>{address.region}</span> |
-                            <span>{address.city}</span> |
-                            <span>{address.province}</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            {
-                shipping ?
-                    <span className="px-2 py-1 self-start text-xs rounded-2xl border border-green-600 bg-green-100">
-                        Default shipping
-                    </span>
-                    :
-                    <span className="px-2 py-1 self-start text-xs rounded-2xl border border-green-600 bg-green-100">
-                        Default billing
-                    </span>
-            }
+        <div className="shadow border flex flex-col">
+            <div className="px-4 py-2 font-medium flex flex-wrap">
+                <div className="py-1 px-2 rounded-2xl border border-secondary bg-secondary bg-opacity-50">
+                    {
+                        shipping ?
+                            'Shipping address'
+                            :
+                            'Billing address'
+                    }
+                </div>
+            </div>
+            <div className="px-4 pb-4">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td className="pr-4">
+                                <UserIcon className="w-3.5 h-3.5" />
+                            </td>
+                            <td>
+                                {address.first_name} {address.last_name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <PhoneIcon className="w-3.5 h-3.5" />
+                            </td>
+                            <td>
+                                {address.phone_number}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <LocationMarkerIcon className="w-3.5 h-3.5" />
+                            </td>
+                            <td className="space-x-2">
+                                <span>{address.region}</span> |
+                                <span>{address.city}</span> |
+                                <span>{address.province}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
