@@ -70,3 +70,39 @@ export const addUserAddress = createAsyncThunk(
         }
     }
 )
+
+
+export const updateUserAddress = createAsyncThunk(
+    'userAddress/updateUserAddress',
+    async (data, thunkApi) => {
+    // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        try {
+            let response = await axios.patch(
+                addressListUrl + data.id + '/',
+                data.formData,
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            toast.success('Successfully updated address from your shipping information.');
+            return response.data;
+        } catch (e) {
+            if (!e.response) {
+                toast.error('Network error');
+            } else {
+                console.log(e.response)
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, addUserAddress);                    
+                } else {
+                    toast.error('An error occurred while updating the address in your shipping information.');
+                }
+            }
+        }
+    }
+)

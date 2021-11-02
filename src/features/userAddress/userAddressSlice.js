@@ -3,6 +3,7 @@ import { addUserAddress, fetchUserAddress } from "./userAddressAction";
 
 const initialState = {
     isLoading: false,
+    isUpdating: false,
     isAdding: false,
     error: false,
     data: [],

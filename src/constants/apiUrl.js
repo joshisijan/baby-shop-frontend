@@ -51,3 +51,6 @@ export const searchUrl = baseUrl + '/api/shop/product/search/';
 
 // checkout
 export const checkoutUrl = baseUrl + '/api/shop/checkout/';
+
+// checkoutAddressUpdate
+export const checkoutAddressUpdateUrl = baseUrl + '/api/shop/checkout/'; //needs id at last 

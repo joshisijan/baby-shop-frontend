@@ -8,6 +8,8 @@ const CheckoutItem = ({ item }) => {
     const image = baseUrl + item.thumbnail
     const price = item.price
     const quantity = item.quantity
+    const size = item.size  
+    const color = item.color
     const discount = item.discount_percentage
     const discountPrice = item.discounted_price
     return (
@@ -21,8 +23,8 @@ const CheckoutItem = ({ item }) => {
                     <div className="flex-1 flex gap-1 flex-col">
                         <Link to={`/product/${productId}/`} className="self-start line-clamp-2 text-sm font-semibold">{name}</Link>
                         <div className="divide-x divide-gray-600">
-                            <span className="text-xs pr-2">{'color'}</span>
-                            <span className="text-xs pl-2">{'size'}</span>
+                            <span className="text-xs pr-2">{color}</span>
+                            <span className="text-xs pl-2">{size}</span>
                         </div>
                         <span className="font-semibold text-sm sm:text-base">
                             {

@@ -29,7 +29,7 @@ const AddressList = () => {
                         }
                         {
                             userAddressState.data.map((address) => {
-                                if (!address.is_default_billing || !address.is_default_shipping) {
+                                if (!address.is_default_billing && !address.is_default_shipping) {
                                     return (
                                         <AddressListItem key={address.id} address={address} />
                                     )
