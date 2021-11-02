@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 import currencyFormatter from '../../../../services/currencyFormatter'
 import { baseUrl } from '../../../../constants/apiUrl'
 
-const CheckoutItem = ({item}) => {
+const CheckoutItem = ({ item }) => {
     const productId = item.id
     const name = item.product_name
     const image = baseUrl + item.thumbnail
-    const price = item.price 
+    const price = item.price
+    const quantity = item.quantity
     const discount = item.discount_percentage
     const discountPrice = item.discounted_price
     return (
@@ -34,6 +35,9 @@ const CheckoutItem = ({item}) => {
                                     </span>
                             }
                         </span>
+                        <div className="text-sm font-medium">
+                            Quantity: {quantity}
+                        </div>
                     </div>
                 </div>
             </div>
