@@ -12,8 +12,10 @@ const OrderPage = () => {
     const orderState = useSelector(state => state.order)
 
     useEffect(() => {
-        dispatch(fetchOrderList())
-    }, [dispatch])
+        if(userDetailState.accessToken !== null) {
+            dispatch(fetchOrderList())
+        }
+    }, [dispatch, userDetailState.accessToken])
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
@@ -28,6 +30,11 @@ const OrderPage = () => {
                             :
                             orderState.error ? 
                                 <OrderError />
+                                :
+                                orderState.data.length === 0 ?
+                                <div className="pb-10 pt-6 flex justify-center font-medium">
+                                    You have no orders
+                                </div>
                                 :
                                 <OrderMain />
                 }

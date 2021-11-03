@@ -23,10 +23,8 @@ const loginSlice = createSlice({
             state.isLoading = true
         },
         [login.rejected]: (state, { payload }) => {
-            if (payload !== undefined) {
-                state.isLoading = false
-                state.error = payload
-            }
+            state.isLoading = false
+            state.error = payload
         },
         [login.fulfilled]: (state) => {
             state.isLoading = false

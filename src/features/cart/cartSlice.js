@@ -16,6 +16,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        resetCartState: (state) => initialState
     },  
     extraReducers: {
         [fetchCartList.pending]: (state) => {
@@ -69,3 +70,5 @@ const cartSlice = createSlice({
 });
 
 export default cartSlice.reducer
+
+export const { resetCartState } = cartSlice.actions

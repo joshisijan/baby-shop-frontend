@@ -16,6 +16,7 @@ const MainLayout = (props) => {
     const categoryListState = useSelector(state => state.categoryList)
     const cartState = useSelector(state => state.cart)
 
+    // scroll to top on every route change
     useEffect(() => {
         scrollToTop();
     });
@@ -35,10 +36,10 @@ const MainLayout = (props) => {
 
     // fetching cart only if not loaded
     useEffect(() => {
-        if(!cartState.isLoaded) {
+        if(!cartState.isLoaded && userDetailState.accessToken !== null) {
             dispatch(fetchCartList());
         }
-    }, [dispatch, cartState.isLoaded]);
+    }, [dispatch, cartState.isLoaded, userDetailState.accessToken]);
 
     // fetch user detail
     useEffect(() => {

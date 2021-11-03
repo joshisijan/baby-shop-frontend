@@ -3,6 +3,7 @@ import { fetchLatestProduct, fetchNextLatestProduct } from "./latestProductActio
 
 const initialState = {
     isLoading: false,
+    isLoaded: false,
     isLoadingNext: false,
     error: false,
     data: {
@@ -20,7 +21,9 @@ const latestProductSlice = createSlice({
     extraReducers: {
         // fetch list
         [fetchLatestProduct.pending]: (state) => {
-            state.isLoading = true
+            if(!state.isLoaded) {
+                state.isLoading = true
+            }
         },
         [fetchLatestProduct.rejected]: (state) => {
             state.isLoading = false 
@@ -28,6 +31,7 @@ const latestProductSlice = createSlice({
         },
         [fetchLatestProduct.fulfilled]: (state, {payload}) => {
             state.isLoading = false 
+            state.isLoaded = true
             state.error = false
             state.data = payload
         },
