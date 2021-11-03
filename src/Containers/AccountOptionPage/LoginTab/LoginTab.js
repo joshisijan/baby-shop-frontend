@@ -23,16 +23,10 @@ const LoginTab = () => {
         dispatch(login({ formData, history }));
     }
 
-    // scroll to top
-    const gotoTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
     // generate error list from response map of array within object
     const authErrorGenerator = (errorObject) => {
-        gotoTop();
         return (
-            <div className="mt-6 px-6">
+            <div className="px-6 py-4 border border-red-600 bg-red-50 rounded-lg">
                 <div className="font-bold text-red-600 text-xs">
                     Following error occurred:
                 </div>
@@ -55,9 +49,6 @@ const LoginTab = () => {
             <p className="text-xs">
                 {appDetail.appShortDescription}
             </p>
-            <FadeTransition show={loginState.error !== null}>
-                {loginState.error !== null ? authErrorGenerator(loginState.error) : null}
-            </FadeTransition>
             <form className="mt-6 flex flex-col gap-2" noValidate={true} onSubmit={handleSubmit(onSubmit)}>
                 {/* email */}
                 <div className="flex flex-col">
@@ -85,6 +76,9 @@ const LoginTab = () => {
                     />
                     {errors.password && <p className="text-sm text-red-600">{errors.password.message}</p>}
                 </div>
+                <FadeTransition show={loginState.error !== null}>
+                    {loginState.error !== null ? authErrorGenerator(loginState.error) : null}
+                </FadeTransition>
                 <SecondaryTextButton isLoading={loginState.isLoading} loadingText="Logging in..." type="submit">Login</SecondaryTextButton>
             </form>
         </div>

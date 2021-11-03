@@ -11,17 +11,27 @@ const AddressListItem = ({ address }) => {
     const checkoutState = useSelector(state => state.checkout)
 
     const handleAddressUpdate = () => {
-        dispatch(checkoutAddressPatch({  
-            orderId: checkoutState.data.order.id,
-            formData: {
-                shipping_address: address.id,
-                billing_address: checkoutState.data.order.billing_address.id,
-            },
-        }))
+        if(checkoutState.data.order.billing_address === null || checkoutState.data.order.shipping_address === null) {
+            dispatch(checkoutAddressPatch({  
+                orderId: checkoutState.data.order.id,
+                formData: {
+                    shipping_address: address.id,
+                    billing_address: address.id,
+                },
+            }))
+        } else {
+            dispatch(checkoutAddressPatch({  
+                orderId: checkoutState.data.order.id,
+                formData: {
+                    shipping_address: address.id,
+                    billing_address: checkoutState.data.order.billing_address.id,
+                },
+            }))
+        }
     }
 
     return (
-        <button onClick={handleAddressUpdate} className="p-4 border">
+        <button onClick={handleAddressUpdate} className="p-4 border w-full rounded-2xl">
             <table>
                 <tbody>
                     <tr>

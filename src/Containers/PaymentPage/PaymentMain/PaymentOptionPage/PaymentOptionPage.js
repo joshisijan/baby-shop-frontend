@@ -4,39 +4,40 @@ import { CheckIcon } from '@heroicons/react/solid'
 import { esewaPaymentUrl, khaltiPaymentUrl } from '../../../../constants/apiUrl'
 import { useSelector } from 'react-redux'
 
+const paymentOption = {
+    esewa: "esewa",
+    khalti: "khalti",
+    cod: "cod",
+}
+
 const PaymentOptionPage = () => {
     const [selectedPaymentOption, setSelectedPaymentOption] = useState(null)
     const [error, setError] = useState(null)
     const checkoutState = useSelector(state => state.checkout)
     const orderId = checkoutState.data.order.id
-    const paymentOption = {
-        esewa: "esewa",
-        khalti: "khalti",
-        cod: "cod",
-    }
     const handlePayementSelection = (option) => {
-        if(error !== null) setError(null)
+        if (error !== null) setError(null)
         setSelectedPaymentOption(option);
     }
 
     const handlePayment = () => {
-        if(selectedPaymentOption === null) {
+        if (selectedPaymentOption === null) {
             return setError('Select one of the payement option to continue');
         } else {
-            if(selectedPaymentOption === paymentOption.esewa) {
+            if (selectedPaymentOption === paymentOption.esewa) {
                 window.location.href = esewaPaymentUrl + `${orderId}/`;
-            } else if(selectedPaymentOption === paymentOption.khalti) {
+            } else if (selectedPaymentOption === paymentOption.khalti) {
                 window.location.href = khaltiPaymentUrl + `${orderId}/`
             }
         }
     }
-    
+
     return (
         <>
             <div className="flex gap-4 flex-col">
-                <button onClick={() => handlePayementSelection(paymentOption.esewa)} className="p-4 border border-gray-500 flex items-center gap-4">
+                <button onClick={() => handlePayementSelection(paymentOption.esewa)} className="p-4 rounded-3xl border border-gray-500 flex items-center gap-4">
                     <div>
-                        <input readOnly={true} type="radio" checked={selectedPaymentOption === paymentOption.esewa ? true : false} />
+                        <input readOnly={true} disabled={true} type="radio" checked={selectedPaymentOption === paymentOption.esewa ? true : false} />
                     </div>
                     <div className="flex-1 flex flex-col items-start">
                         <h1 className="font-bold">E-Sewa</h1>
@@ -45,9 +46,9 @@ const PaymentOptionPage = () => {
                         </p>
                     </div>
                 </button>
-                <button onClick={() => handlePayementSelection(paymentOption.khalti)} className="p-4 border border-gray-500 flex items-center gap-4">
+                <button onClick={() => handlePayementSelection(paymentOption.khalti)} className="p-4 rounded-3xl border border-gray-500 flex items-center gap-4">
                     <div>
-                        <input readOnly={true} type="radio" checked={selectedPaymentOption === paymentOption.khalti ? true : false} />
+                        <input readOnly={true} disabled={true} type="radio" checked={selectedPaymentOption === paymentOption.khalti ? true : false} />
                     </div>
                     <div className="flex-1 flex flex-col items-start">
                         <h1 className="font-bold">Khalti</h1>
@@ -56,9 +57,9 @@ const PaymentOptionPage = () => {
                         </p>
                     </div>
                 </button>
-                <button onClick={() => handlePayementSelection(paymentOption.cod)} className="p-4 border border-gray-500 flex items-center gap-4">
+                <button onClick={() => handlePayementSelection(paymentOption.cod)} className="p-4 rounded-3xl border border-gray-500 flex items-center gap-4">
                     <div>
-                        <input readOnly={true} type="radio" checked={selectedPaymentOption === paymentOption.cod ? true : false} />
+                        <input readOnly={true} disabled={true} type="radio" checked={selectedPaymentOption === paymentOption.cod ? true : false} />
                     </div>
                     <div className="flex-1 flex flex-col items-start">
                         <h1 className="font-bold">Cash on delivery</h1>
@@ -68,11 +69,11 @@ const PaymentOptionPage = () => {
                     </div>
                 </button>
                 {
-                    error !== null ? 
-                    <div className="p-4 text-red-600 font-medium border border-red-600"> 
-                        {error}
-                    </div>
-                    : null
+                    error !== null ?
+                        <div className="p-4 text-red-600 font-medium border border-red-600">
+                            {error}
+                        </div>
+                        : null
                 }
                 <DarkTextButton onClick={handlePayment} className="w-full flex gap-2 justify-center items-center">
                     <CheckIcon className="w-5 h-5" />

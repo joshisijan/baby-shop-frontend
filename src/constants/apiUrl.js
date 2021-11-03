@@ -60,6 +60,10 @@ export const esewaPaymentUrl = baseUrl + '/payment/esewa/'; //needs orderId
 
 export const khaltiPaymentUrl = baseUrl + '/payment/khalti/'; //needs orderId
 
+// order
+
+// order list
+export const orderListUrl = baseUrl + '/api/shop/order/';
 
 // order detail
 export const orderDetailUrl = baseUrl + '/api/shop/order/'; //needs orderId

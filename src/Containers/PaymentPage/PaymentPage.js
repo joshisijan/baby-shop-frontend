@@ -10,15 +10,14 @@ import PaymentError from './PaymentError/PaymentError'
 const PaymentPage = () => {
     const dispatch = useDispatch()
     const checkoutState = useSelector(state => state.checkout)
-    const checkoutInitialized = checkoutState.isInitialized
     const checkoutUpdating = checkoutState.isUpdating
-    const shippingId = checkoutState.data.order.shipping_address.id
-    const billingId = checkoutState.data.order.billing_address.id
+    const shippingId = checkoutState.data.order.shipping_address === null ? null : checkoutState.data.order.shipping_address.id
+    const billingId = checkoutState.data.order.billing_address === null ? null : checkoutState.data.order.billing_address.id
     const orderId = checkoutState.data.order.id
 
     useEffect(() => {
-        if (checkoutInitialized) {
-        return dispatch(checkoutAddressPatchForPayment({
+        if(shippingId !== null && billingId !== null && orderId !== null) {
+            dispatch(checkoutAddressPatchForPayment({
                 orderId,
                 formData: {
                     shipping_address: shippingId,
@@ -26,9 +25,9 @@ const PaymentPage = () => {
                 }
             }))
         }
-    }, [checkoutInitialized, orderId, shippingId, billingId, dispatch]);
+    }, [orderId, shippingId, billingId, dispatch]);
 
-    if (!checkoutInitialized) {
+    if(shippingId === null || billingId === null || orderId === null) {
         return <Redirect to="/cart/checkout" />
     }
 

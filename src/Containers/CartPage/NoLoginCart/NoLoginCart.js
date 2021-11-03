@@ -1,4 +1,3 @@
-import React from 'react'
 import { ShoppingCartIcon } from '@heroicons/react/outline'
 
 const NoLoginCart = () => {

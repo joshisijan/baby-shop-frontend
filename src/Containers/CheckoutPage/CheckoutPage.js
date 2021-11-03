@@ -8,13 +8,10 @@ import { checkout } from '../../features/checkout/checkoutAction'
 const CheckoutPage = () => {
     const dispatch = useDispatch()
     const checkoutState = useSelector(state => state.checkout)
-    const checkoutInitialized = checkoutState.isInitialized
 
     useEffect(() => {
-        if(!checkoutInitialized) {
-            dispatch(checkout());
-        }
-    }, [dispatch, checkoutInitialized])
+        dispatch(checkout());
+    }, [dispatch])
 
     return (
         <div>

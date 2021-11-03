@@ -21,6 +21,7 @@ import cartSlice from "./features/cart/cartSlice"
 import searchSlice from "./features/search/searchSlice"
 import alertDialogSlice from "./features/alertDialog/alertDialogSlice"
 import checkoutSlice from "./features/checkout/checkoutSlice"
+import orderSlice from "./features/order/orderSlice"
 
 
 const reducers = combineReducers({
@@ -35,6 +36,7 @@ const reducers = combineReducers({
     search: searchSlice,
     alertDialog: alertDialogSlice,
     checkout: checkoutSlice,
+    order: orderSlice,
 });
 
 const persistConfig = { 

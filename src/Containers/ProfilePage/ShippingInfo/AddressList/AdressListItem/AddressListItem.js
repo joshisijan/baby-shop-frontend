@@ -6,7 +6,7 @@ import {
 
 const AddressListItem = ({ address }) => {
     return (
-        <div className="p-4 border">
+        <div className="p-4 border rounded-2xl">
             <table>
                 <tbody>
                     <tr>

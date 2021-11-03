@@ -4,7 +4,9 @@ import {
     UserIcon,
     ShoppingCartIcon,
     HomeIcon,
+    CheckCircleIcon,
     XIcon,
+    HeartIcon,
 } from '@heroicons/react/outline'
 import MenuLink from '../Navbar/MenuLink/MenuLink'
 import IconButton from './IconButton/IconButton';
@@ -28,9 +30,9 @@ const Navbar = () => {
 
     // cart state
     const cartState = useSelector(state => state.cart)
-    
+
     // search state 
-    const searchState = useSelector(state => state.search) 
+    const searchState = useSelector(state => state.search)
 
     // hide navbar on bottom scroll and show in top scroll
     useEffect(() => {
@@ -76,16 +78,16 @@ const Navbar = () => {
         return () => {
             document.body.style.overflow = 'auto';
         }
-    }, [isSearching]);    
+    }, [isSearching]);
 
 
     return (
         <div className={`${isSearching ? 'h-screen' : ''} z-20 bg-white shadow-sm transition transform fixed ${navbarShown ? 'translate-y-0' : '-translate-y-full'} inset-x-0 top-0 flex flex-col items-center`}>
-            <div className="p-2 lg:px-6 lg:py-2 space-x-2 flex items-center w-full max-w-6xl">
+            <div className="p-2 lg:px-6 lg:py-2 space-x-2 flex flex-wrap justify-end items-center w-full max-w-6xl">
                 <IconButton className="md:hidden" onClick={() => setMenuShown(true)}>
                     <MenuIcon className="w-5 h-5" />
                 </IconButton>
-                <h1 className="font-bold text-2xl">LogoOfApp</h1>
+                <h1 className="hidden md:inline font-bold text-2xl">LogoOfApp</h1>
                 <div className="md:hidden flex-1"></div>
                 <SearchLarge navbarShown={navbarShown} />
                 <Link to="/">
@@ -96,6 +98,16 @@ const Navbar = () => {
                 <Link to="/account">
                     <IconButton label="Account">
                         <UserIcon className="w-5 h-5" />
+                    </IconButton>
+                </Link>
+                <Link to="/order">
+                    <IconButton label="My Orders">
+                        <CheckCircleIcon className="w-5 h-5" />
+                    </IconButton>
+                </Link>
+                <Link to="/wishlist">
+                    <IconButton label="Wishlist">
+                        <HeartIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>
                 <Link to="/cart">
@@ -148,10 +160,10 @@ const Navbar = () => {
             </div>
             {/* search result */}
             {
-                isSearching ? 
-                <SearchResult />
-                :
-                null
+                isSearching ?
+                    <SearchResult />
+                    :
+                    null
             }
         </div>
     )

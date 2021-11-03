@@ -29,8 +29,6 @@ export const fetchCartList = createAsyncThunk(
             if (e.response)  {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchCartList);                    
-                } else {
-                    toast.error('An error occurred while fetching cart item.');
                 }
             }
             return thunkApi.rejectWithValue('error');

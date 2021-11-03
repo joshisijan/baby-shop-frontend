@@ -5,7 +5,7 @@ import appDetail from '../../../constants/appDetail'
 import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
 import { emailRegExp, nameRegExp, passwordRegExp, phoneRegExp, usernameRegExp } from '../../../constants/regExp'
 import { registration } from '../../../features/registration/registrationAction'
-import { useHistory } from 'react-router-dom' 
+import { useHistory } from 'react-router-dom'
 import FadeTransition from '../../../Components/Transition/FadeTransition'
 const RegisterTab = () => {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const RegisterTab = () => {
         register,
         handleSubmit,
         control,
-        formState: { errors }        
+        formState: { errors }
     } = useForm();
 
     const curentPassword = useWatch({
@@ -25,16 +25,12 @@ const RegisterTab = () => {
     });
 
     const onSubmit = (formData) => {
-        dispatch(registration({formData, history}));
+        dispatch(registration({ formData, history }));
     }
 
-    const gotoTop = () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
     const authErrorGenerator = (errorObject) => {
-        gotoTop();
         return (
-            <div className="mt-6 px-6">
+            <div className="py-4 px-6 bg-red-50 border border-red-600 rounded-lg">
                 <div className="font-bold text-red-600 text-xs">
                     Following error occurred:
                 </div>
@@ -54,14 +50,11 @@ const RegisterTab = () => {
 
     return (
         <div>
-            {/* loading indicator */} 
+            {/* loading indicator */}
             <h1 className="font-semibold">Welcome to {appDetail.appName}!</h1>
             <p className="text-xs">
                 {appDetail.appShortDescription}
             </p>
-            <FadeTransition show={registrationState.error !== null}>  
-                {registrationState.error !== null ? authErrorGenerator(registrationState.error) : null}
-            </FadeTransition>
             <form noValidate={true} className="mt-6 flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-2 grid-cols-2">
                     {/* first name */}
@@ -190,6 +183,9 @@ const RegisterTab = () => {
                     />
                     {errors.password2 && <p className="text-sm text-red-600">{errors.password2.message}</p>}
                 </div>
+                <FadeTransition show={registrationState.error !== null}>
+                    {registrationState.error !== null ? authErrorGenerator(registrationState.error) : null}
+                </FadeTransition>
                 <SecondaryTextButton isLoading={registrationState.isLoading} loadingText="Registration..." type="submit">Create account</SecondaryTextButton>
             </form>
         </div>

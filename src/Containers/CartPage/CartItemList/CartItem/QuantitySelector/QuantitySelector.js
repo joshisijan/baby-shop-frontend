@@ -54,30 +54,32 @@ const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQu
 
     return (
         <div>
-            <div className="flex">
-                <DarkTextButton
-                    disabled={cartQuantity >= availableQuantity}
-                    className={cartQuantity >= availableQuantity ? 'cursor-not-allowed' : ''}
-                    onClick={increase}
-                >
-                    <PlusIcon className="w-3.5 h-3.5" />
-                </DarkTextButton>
-                <div className="py-1 px-4 text-sm bg-secondary-varient bg-opacity-20 flex items-center font-medium">
-                    {cartQuantity}
+            <div className="flex gap-2 flex-wrap">
+                <div className="flex">
+                    <DarkTextButton
+                        disabled={cartQuantity >= availableQuantity}
+                        className={cartQuantity >= availableQuantity ? 'cursor-not-allowed' : ''}
+                        onClick={increase}
+                    >
+                        <PlusIcon className="w-3.5 h-3.5" />
+                    </DarkTextButton>
+                    <div className="py-1 px-4 text-sm bg-secondary-varient bg-opacity-20 flex items-center font-medium">
+                        {cartQuantity}
+                    </div>
+                    <DarkTextButton
+                        disabled={cartQuantity <= 1}
+                        className={cartQuantity <= 1 ? 'cursor-not-allowed' : ''}
+                        onClick={decrease}
+                    >
+                        <MinusSmIcon className="w-3.5 h-3.5" />
+                    </DarkTextButton>
                 </div>
-                <DarkTextButton
-                    disabled={cartQuantity <= 1}
-                    className={cartQuantity <= 1 ? 'cursor-not-allowed' : ''}
-                    onClick={decrease}
-                >
-                    <MinusSmIcon className="w-3.5 h-3.5" />
-                </DarkTextButton>
                 <FadeTransition show={quantity !== cartQuantity}>
-                    <div className="flex">
-                        <DarkTextButton onClick={handleUpdate} className="ml-2 text-sm">
+                    <div className="flex gap-2">
+                        <DarkTextButton onClick={handleUpdate} className="text-sm">
                             Update
                         </DarkTextButton>
-                        <DarkTextButton onClick={handleReset} className="ml-2 text-sm">
+                        <DarkTextButton onClick={handleReset} className="text-sm">
                             <XIcon className="w-5 h-5" />
                         </DarkTextButton>
                     </div>

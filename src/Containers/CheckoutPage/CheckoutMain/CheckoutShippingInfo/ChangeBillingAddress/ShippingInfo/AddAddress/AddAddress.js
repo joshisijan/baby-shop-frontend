@@ -15,11 +15,19 @@ const AddAddress = () => {
     } = useForm();
 
     const onSubmit = async (formData) => {
-        dispatch(checkoutAddBillingAddress({
-            formData,
-            shippingId: checkoutState.data.order.shipping_address.id,
-            orderId: checkoutState.data.order.id
-        }));
+        if(checkoutState.data.order.shipping_address === null || checkoutState.data.order.billing_address === null) { 
+            dispatch(checkoutAddBillingAddress({
+                formData,
+                shippingId: null,
+                orderId: checkoutState.data.order.id
+            }));
+        } else {
+            dispatch(checkoutAddBillingAddress({
+                formData,
+                shippingId: checkoutState.data.order.shipping_address.id,
+                orderId: checkoutState.data.order.id
+            }));
+        }
     }
 
     return (

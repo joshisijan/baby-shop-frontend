@@ -122,7 +122,7 @@ export const checkoutAddShippingAddress = createAsyncThunk(
                 orderId: data.orderId,
                 formData: {
                     shipping_address: response.data.id,
-                    billing_address: data.billingId,
+                    billing_address: data.billingId === null ? response.data.id : data.billingId,
                 }
             }))
             return response.data;
@@ -162,7 +162,7 @@ export const checkoutAddBillingAddress = createAsyncThunk(
                 orderId: data.orderId,
                 formData: {
                     billing_address: response.data.id,
-                    shipping_address: data.shippingId,
+                    shipping_address: data.shippingId === null ? response.data.id : data.shippingId,
                 }
             }))
             return response.data;

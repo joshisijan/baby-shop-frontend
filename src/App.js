@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { resetSearchQuery } from './features/search/searchSlice';
 import PaymentPage from './Containers/PaymentPage/PaymentPage';
 import PageNotFoundPage from './Containers/PageNotFoundPage/PageNotFoundPage';
-
+import OrderPage from './Containers/OrderPage/OrderPage';
 
 function App() {
   const location = useLocation();
@@ -72,6 +72,9 @@ function App() {
                 redirect="/"
                 component={PaymentPage}
               />
+            </Route>
+            <Route path="/order" exact>
+              <OrderPage />
             </Route>
             <Route path="/about" exact>
               <AboutPage />
