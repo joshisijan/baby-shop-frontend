@@ -54,3 +54,12 @@ export const checkoutUrl = baseUrl + '/api/shop/checkout/';
 
 // checkoutAddressUpdate
 export const checkoutAddressUpdateUrl = baseUrl + '/api/shop/checkout/'; //needs id at last 
+
+// payment
+export const esewaPaymentUrl = baseUrl + '/payment/esewa/'; //needs orderId
+
+export const khaltiPaymentUrl = baseUrl + '/payment/khalti/'; //needs orderId
+
+
+// order detail
+export const orderDetailUrl = baseUrl + '/api/shop/order/'; //needs orderId

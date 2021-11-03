@@ -1,7 +1,6 @@
 import React from 'react'
 import Price from './Price/Price'
 import { Link } from 'react-router-dom'
-import { baseUrl } from '../../../../constants/apiUrl'
 
 const NewArrivalsList = ({ productList }) => {
     return (
@@ -11,7 +10,7 @@ const NewArrivalsList = ({ productList }) => {
                     return (
                         <Link key={product.id} to={`product/${product.id}`} className="space-y-2 flex flex-col items-center">
                             <div className="aspect-w-1 aspect-h-1 w-full h-full">
-                                <img className="object-cover" src={baseUrl + product.thumbnail} alt={product.name} />
+                                <img className="object-cover" src={product.thumbnail} alt={product.name} />
                             </div>
                             <div className="font-medium">
                                 {product.name}

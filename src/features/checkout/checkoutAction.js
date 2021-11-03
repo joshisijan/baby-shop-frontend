@@ -58,10 +58,42 @@ export const checkoutAddressPatch = createAsyncThunk(
         } catch (e) {
             if (e.response) {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkout);                    
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddressPatch(data));                    
                 }
             }
             toast.error('An error occurred updating address.');
+            return thunkApi.rejectWithValue('error');
+        }
+    }
+);
+
+// when going to payment option page
+export const checkoutAddressPatchForPayment = createAsyncThunk(
+    'checkout/checkoutAddressPatchForPayment',
+    async (data, thunkApi) => {
+        // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        if(accessToken === null) return;
+        try {
+            let response = await axios.patch(
+                checkoutAddressUpdateUrl + data.orderId + '/',
+                data.formData,
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            return response.data;
+        } catch (e) {
+            if (e.response) {
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddressPatchForPayment(data));                    
+                }
+            }
             return thunkApi.rejectWithValue('error');
         }
     }
@@ -139,7 +171,7 @@ export const checkoutAddBillingAddress = createAsyncThunk(
                 toast.error('Network error');
             } else {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddShippingAddress(data));                    
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, checkoutAddBillingAddress(data));                    
                 } else {
                     toast.error('An error occurred while adding address.');
                 }

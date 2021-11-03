@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import currencyFormatter from '../../../services/currencyFormatter'
+import currencyFormatter from '../../../../services/currencyFormatter'
 const OrderSummary = () => {
     const checkoutState = useSelector(state => state.checkout)
 
     let subtotal = checkoutState.data.order.total_price_without_discount
     let discount = checkoutState.data.order.total_discount
-    const delivery = 60
+    const delivery = checkoutState.data.order.shipping_fee
     let total = subtotal - discount + delivery
 
     return (

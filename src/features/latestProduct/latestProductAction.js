@@ -16,3 +16,16 @@ export const fetchLatestProduct = createAsyncThunk(
 );
 
 
+export const fetchNextLatestProduct = createAsyncThunk(
+    'latestProductList/fetchNextLatestProduct', 
+    async (data, thunkApi) => {
+        try {
+            const response = await axios.get(data);
+            return response.data;
+        } catch(e) {
+            return thunkApi.rejectWithValue('An error occurred. Try again later.')
+        }
+    }
+);
+
+

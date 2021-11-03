@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
-import DarkTextButton from '../../../Components/Button/DarkTextButton'
+import DarkTextButton from '../../../../Components/Button/DarkTextButton'
 import { CheckIcon } from '@heroicons/react/solid'
+import { esewaPaymentUrl, khaltiPaymentUrl } from '../../../../constants/apiUrl'
+import { useSelector } from 'react-redux'
 
 const PaymentOptionPage = () => {
     const [selectedPaymentOption, setSelectedPaymentOption] = useState(null)
     const [error, setError] = useState(null)
+    const checkoutState = useSelector(state => state.checkout)
+    const orderId = checkoutState.data.order.id
     const paymentOption = {
         esewa: "esewa",
         khalti: "khalti",
@@ -19,7 +23,11 @@ const PaymentOptionPage = () => {
         if(selectedPaymentOption === null) {
             return setError('Select one of the payement option to continue');
         } else {
-            alert('Feature comming soon')
+            if(selectedPaymentOption === paymentOption.esewa) {
+                window.location.href = esewaPaymentUrl + `${orderId}/`;
+            } else if(selectedPaymentOption === paymentOption.khalti) {
+                window.location.href = khaltiPaymentUrl + `${orderId}/`
+            }
         }
     }
     

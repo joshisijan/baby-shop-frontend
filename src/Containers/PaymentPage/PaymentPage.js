@@ -1,26 +1,50 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import OrderSummary from './OrderSummary/OrderSummary'
-import PaymentOptionPage from './PaymentOptionPage/PaymentOptionPage'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router'
+import { checkoutAddressPatchForPayment } from '../../features/checkout/checkoutAction'
+import PaymentLoading from './PaymentLoading/PaymentLoading'
+import PaymentMain from './PaymentMain/PaymentMain'
+import PaymentError from './PaymentError/PaymentError'
+
 
 const PaymentPage = () => {
+    const dispatch = useDispatch()
     const checkoutState = useSelector(state => state.checkout)
-    if(!checkoutState.isInitialized) {
+    const checkoutInitialized = checkoutState.isInitialized
+    const checkoutUpdating = checkoutState.isUpdating
+    const shippingId = checkoutState.data.order.shipping_address.id
+    const billingId = checkoutState.data.order.billing_address.id
+    const orderId = checkoutState.data.order.id
+
+    useEffect(() => {
+        if (checkoutInitialized) {
+        return dispatch(checkoutAddressPatchForPayment({
+                orderId,
+                formData: {
+                    shipping_address: shippingId,
+                    billing_address: billingId,
+                }
+            }))
+        }
+    }, [checkoutInitialized, orderId, shippingId, billingId, dispatch]);
+
+    if (!checkoutInitialized) {
         return <Redirect to="/cart/checkout" />
     }
+
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
             <div className="w-full max-w-6xl">
-                <h1 className="mb-4 text-xl font-bold">Payment</h1>                
-                <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="p-4 border">
-                        <PaymentOptionPage />
-                    </div>
-                    <div className="p-4 self-start bg-secondary bg-opacity-20 w-full border">
-                        <OrderSummary />
-                    </div>
-                </div>
+                <h1 className="mb-4 text-xl font-bold">Payment</h1>
+                {
+                    checkoutUpdating ?
+                        <PaymentLoading />
+                        :
+                        checkoutState.error ?
+                            <PaymentError />
+                            :
+                            <PaymentMain />
+                }
             </div>
         </div>
     )

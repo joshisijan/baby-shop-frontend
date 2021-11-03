@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkout, checkoutAddressPatch, checkoutAddShippingAddress } from "./checkoutAction";
+import { checkout, checkoutAddressPatch, checkoutAddressPatchForPayment, checkoutAddShippingAddress } from "./checkoutAction";
 
 const initialState = {
     isLoading: false,
@@ -10,6 +10,7 @@ const initialState = {
     error: false,
     data: {
         order: {
+            id: 1,
             total_price_without_discount: 0,
             total_discount: 0,
             billing_address: {
@@ -90,6 +91,17 @@ const checkoutSlice = createSlice({
         },
         [checkoutAddShippingAddress.fulfilled]: (state, {payload}) => {
             state.isUpdating = false
+        },
+        // to patch for payment
+        [checkoutAddressPatchForPayment.pending]: (state) => {
+            state.isUpdating = true
+        },
+        [checkoutAddressPatchForPayment.rejected]: (state) => {
+            state.isUpdating = false
+        },
+        [checkoutAddressPatchForPayment.fulfilled]: (state, {payload}) => {
+            state.isUpdating = false
+            state.data = payload
         },
     },
 });
