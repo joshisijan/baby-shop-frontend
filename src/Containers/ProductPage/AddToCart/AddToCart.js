@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
 import { HeartIcon } from '@heroicons/react/outline'
 import DarkOutlineTextButton from '../../../Components/Button/DarkOutlineTextButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeActiveColor, setActiveSizeIndex } from '../../../features/productDetail/productDetailSlice'
+import { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } from '../../../features/productDetail/productDetailSlice'
 import ProductQuantitySelector from '../ProductQuantitySelector/ProductQuantitySelector'
 import FadeTransition from '../../../Components/Transition/FadeTransition'
 import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
@@ -11,9 +11,6 @@ import { addCartItem } from '../../../features/cart/cartAction'
 
 const AddToCart = () => {
     const dispatch = useDispatch()
-
-    const [quantity, setQuantity] = useState(1);
-
     // class name for style 
     const activeColor = "ring-2 ring-offset-1 ring-secondary-dark-extra ring-offset-white";
     const activeSize = "bg-black text-white";
@@ -24,6 +21,7 @@ const AddToCart = () => {
     const productVarientData = productDetailState.data.product_variant
     const activeProductData = productDetailState.data.activeProductDetail
     const activeSizeIndex = productDetailState.activeSizeIndex
+    const quantity = productDetailState.selectedQuantity
     let canAddInCart = activeProductData.sizes[activeSizeIndex].max_qty_for_cart > 0;
 
     const handleChangeColor = (data) => {
@@ -40,9 +38,9 @@ const AddToCart = () => {
         }));
     }
 
-    useEffect(() => {
-        setQuantity(1);
-    }, [activeSizeIndex]);
+    const setQuantity = (value) => {
+        dispatch(setSelectedQuantity(value))
+    }
 
     return (
         <div className="space-y-4">
@@ -75,10 +73,13 @@ const AddToCart = () => {
                             return (
                                 <DarkOutlineTextButton
                                     key={index}
+                                    disabled={size.symbol === null}
                                     onClick={() => dispatch(setActiveSizeIndex(index))}
                                     className={`px-6 ${activeSizeIndex === index ? activeSize : ''}`}
                                 >
-                                    {size.symbol}
+                                    {
+                                        size.symbol ?? 'free size'
+                                    }
                                 </DarkOutlineTextButton>
                             );
                         })

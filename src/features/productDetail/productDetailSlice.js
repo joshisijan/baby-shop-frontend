@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { set } from "react-hook-form";
 import { fetchProductDetail } from "./productDetailAction";
 
 const initialState = {
@@ -7,6 +8,7 @@ const initialState = {
     error: false,
     auth: false,
     activeSizeIndex: 0,
+    selectedQuantity: 1,
     data: {
         product: {
             id: 1,
@@ -33,8 +35,12 @@ const productDetailSlice = createSlice({
         changeActiveColor: (state, { payload }) => {
             // setting active product detail
             state.activeSizeIndex = 0
+            state.selectedQuantity = 1
             state.data.activeProductDetail = payload            
         },
+        setSelectedQuantity: (state, {payload}) => {
+            state.selectedQuantity = payload
+        }
     },
     extraReducers: {
         [fetchProductDetail.pending]: (state) => {
@@ -58,4 +64,4 @@ const productDetailSlice = createSlice({
 });
 
 export default productDetailSlice.reducer
-export const { changeActiveColor, setActiveSizeIndex } = productDetailSlice.actions
+export const { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } = productDetailSlice.actions

@@ -7,9 +7,6 @@ const PaymentMain = () => {
             <div className="p-4 border">
                 <PaymentOptionPage />
             </div>
-            <div>
-
-            </div>
             <div className="p-4 self-start bg-secondary bg-opacity-20 w-full border">
                 <OrderSummary />
             </div>

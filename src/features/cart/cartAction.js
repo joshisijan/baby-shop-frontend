@@ -4,6 +4,7 @@ import { addToCarttUrl, baseUrl, cartListUrl } from "../../constants/apiUrl";
 import toast from "react-hot-toast";
 import {handleRefreshToken} from '../../services/refreshToken'
 import { fetchProductDetail } from "../productDetail/productDetailAction";
+import { setSelectedQuantity } from "../productDetail/productDetailSlice";
 
 export const fetchCartList = createAsyncThunk(
     'cart/fetchCartList',
@@ -128,6 +129,7 @@ export const addCartItem = createAsyncThunk(
                  },
                 }
             );
+            thunkApi.dispatch(setSelectedQuantity(1));
             thunkApi.dispatch(fetchCartList()); // update cart in add to cart
             thunkApi.dispatch(fetchProductDetail(data.productId)) //update product detail in add to cart
             toast.success('Successfully added item to cart.');
