@@ -128,7 +128,7 @@ const AddToCart = () => {
                 {
                     !productDetailState.auth ?
                         <div className="absolute inset-0 bg-primary z-10 text-red-700 flex items-center justify-center">
-                            Login to add to cart and watchlist
+                            Login to add to cart and wishlist
                         </div>
                         : null
                 }

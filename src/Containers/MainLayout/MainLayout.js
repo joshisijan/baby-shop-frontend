@@ -13,6 +13,8 @@ const MainLayout = (props) => {
     const dispatch = useDispatch();
 
     const userDetailState = useSelector(state => state.userDetail)
+    const categoryListState = useSelector(state => state.categoryList)
+    const cartState = useSelector(state => state.cart)
 
     useEffect(() => {
         scrollToTop();
@@ -24,14 +26,26 @@ const MainLayout = (props) => {
         }
     }
 
-    // for getting container
+    // fetching category only if not loaded
     useEffect(() => {
-        dispatch(fetchCategoryList());
-        if (userDetailState.accessToken !== null) {
+        if(!categoryListState.isLoaded) {
+            dispatch(fetchCategoryList());
+        }
+    }, [dispatch, categoryListState.isLoaded]);
+
+    // fetching cart only if not loaded
+    useEffect(() => {
+        if(!cartState.isLoaded) {
+            dispatch(fetchCartList());
+        }
+    }, [dispatch, cartState.isLoaded]);
+
+    // fetch user detail
+    useEffect(() => {
+        if (userDetailState.accessToken !== null && !userDetailState.isLoaded) {
             dispatch(fetchtUserDetail());
         }
-        dispatch(fetchCartList());
-    }, [dispatch, userDetailState.accessToken]);
+    }, [dispatch, userDetailState.accessToken, userDetailState.isLoaded]);
 
     return (
         <>

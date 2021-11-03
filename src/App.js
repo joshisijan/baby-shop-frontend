@@ -14,21 +14,26 @@ import CategoryListPage from './Containers/CategoryListPage/CategoryListPage';
 import CategoryProductPage from './Containers/CategoryProductPage/CategoryProductPage'
 import CheckoutPage from './Containers/CheckoutPage/CheckoutPage'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetSearchQuery } from './features/search/searchSlice';
 import PaymentPage from './Containers/PaymentPage/PaymentPage';
 import PageNotFoundPage from './Containers/PageNotFoundPage/PageNotFoundPage';
 import OrderPage from './Containers/OrderPage/OrderPage';
+import WishlistPage from './Containers/WishlistPage/WishlistPage'
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  const searchState = useSelector(state => state.search)
+
   // listen for route change
   useEffect(() => { 
     // hide search
-    dispatch(resetSearchQuery());
-  }, [dispatch, location.pathname]);
+    if(searchState.search !== '' || searchState.ordering !== '') {
+      dispatch(resetSearchQuery());
+    }
+  }, [dispatch, location.pathname, searchState.search, searchState.ordering]);
 
   return (
 
@@ -75,6 +80,9 @@ function App() {
             </Route>
             <Route path="/order" exact>
               <OrderPage />
+            </Route>
+            <Route path="/wishlist" exact>
+              <WishlistPage />
             </Route>
             <Route path="/about" exact>
               <AboutPage />

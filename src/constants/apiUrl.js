@@ -67,3 +67,9 @@ export const orderListUrl = baseUrl + '/api/shop/order/';
 
 // order detail
 export const orderDetailUrl = baseUrl + '/api/shop/order/'; //needs orderId
+
+
+// wishlist
+
+// wishlist list
+export const wishlistListUrl = baseUrl + '/api/shop/wishlist/'

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchOrderList } from "./orderAction";
+import { fetchWishlistList } from "./wishlistAction";
 
 
 const initialState = {
@@ -9,21 +9,21 @@ const initialState = {
     data: [],
 }
 
-const orderSlice = createSlice({
-    name: 'order',
+const wishlistSlice = createSlice({
+    name: 'wishlist',
     initialState: initialState,
     reducers: {},
     extraReducers: {  
-        [fetchOrderList.pending]: (state) => {
+        [fetchWishlistList.pending]: (state) => {
             if(!state.isLoaded) {
                 state.isLoading = true
             }
         },
-        [fetchOrderList.error]: (state) => {
+        [fetchWishlistList.error]: (state) => {
             state.isLoading = false 
             state.error = true
         },
-        [fetchOrderList.fulfilled]: (state, {payload}) => {
+        [fetchWishlistList.fulfilled]: (state, {payload}) => {
             state.isLoading = false
             state.isLoaded = true
             state.data = payload
@@ -32,4 +32,4 @@ const orderSlice = createSlice({
 });
 
 
-export default orderSlice.reducer
+export default wishlistSlice.reducer

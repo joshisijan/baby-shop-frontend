@@ -3,6 +3,7 @@ import { fetchCategoryList } from "./categoryListAction";
 
 const initialState = {
     isLoading: false,
+    isLoaded: false,
     error: false,
     data: {  
         results: [],
@@ -16,7 +17,9 @@ const categoryListSlice = createSlice({
     },    
     extraReducers: {
         [fetchCategoryList.pending]: (state) => {
-            state.isLoading = true
+            if(!state.isLoaded) {
+                state.isLoading = true
+            }
         },
         [fetchCategoryList.rejected]: (state) => {
             state.isLoading = false 
@@ -24,6 +27,7 @@ const categoryListSlice = createSlice({
         },
         [fetchCategoryList.fulfilled]: (state, {payload}) => {
             state.isLoading = false 
+            state.isLoaded = true
             state.error = false
             state.data = payload
         },
