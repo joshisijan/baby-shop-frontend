@@ -1,6 +1,7 @@
 import React from 'react'
 import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
 import { HeartIcon } from '@heroicons/react/outline'
+import { HeartIcon as FilledHeartIcon } from '@heroicons/react/solid'
 import DarkOutlineTextButton from '../../../Components/Button/DarkOutlineTextButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } from '../../../features/productDetail/productDetailSlice'
@@ -9,7 +10,7 @@ import FadeTransition from '../../../Components/Transition/FadeTransition'
 import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
 import { addCartItem } from '../../../features/cart/cartAction'
 import CircularProgressIndicator from '../../../Components/CircularProgressIndicator/CircularProgressIndicator'
-import { addToWishlist } from '../../../features/wishlist/wishlistAction'
+import { addToWishlist, removeFromWishlist } from '../../../features/wishlist/wishlistAction'
 
 const AddToCart = () => {
     const dispatch = useDispatch()
@@ -25,7 +26,9 @@ const AddToCart = () => {
     const activeProductData = productDetailState.data.activeProductDetail
     const activeSizeIndex = productDetailState.activeSizeIndex
     const quantity = productDetailState.selectedQuantity
+    const isInWatchlist = activeProductData.sizes[activeSizeIndex].in_wishlist
     let canAddInCart = activeProductData.sizes[activeSizeIndex].max_qty_for_cart > 0;
+
 
     const handleChangeColor = (data) => {
         dispatch(changeActiveColor(data));
@@ -41,9 +44,19 @@ const AddToCart = () => {
         }));
     }
 
-    const handleWishlistClick = () => {
+    const handleWishlistAdd = () => {
         dispatch(addToWishlist({
-            inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
+            formData: {
+                inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
+            },
+            productId: productDetailState.data.product.id,
+        }));
+    }
+
+    const handleWishlistRemove = () => {
+        dispatch(removeFromWishlist({
+            inventoryId: activeProductData.sizes[activeSizeIndex].inventory_id,
+            productId: productDetailState.data.product.id,
         }));
     }
 
@@ -151,14 +164,19 @@ const AddToCart = () => {
                     </SecondaryTextButton>
                 </div>
                 {
-                    wishlistState.isAdding ?
+                    wishlistState.isAdding || wishlistState.isRemoving ?
                         <div className="w-5 h-5">
                             <CircularProgressIndicator />
                         </div>
                         :
-                        <button onClick={handleWishlistClick}>
-                            <HeartIcon className="w-6 h-6 cursor-pointer transition text-gray-600 hover:text-secondary-dark-extra" />
-                        </button>
+                        isInWatchlist ?
+                            <button onClick={handleWishlistRemove}>
+                                <FilledHeartIcon className="w-6 h-6 text-red-500" />
+                            </button>
+                            :
+                            <button onClick={handleWishlistAdd}>
+                                <HeartIcon className="w-6 h-6 cursor-pointer transition text-gray-600 hover:text-secondary-dark-extra" />
+                            </button>
                 }
             </div>
         </div>

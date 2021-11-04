@@ -21,6 +21,12 @@ export const fetchOrderList = createAsyncThunk(
                  } 
                 }
             );
+            if(response.status === 204) {
+                return {
+                    next: null,
+                    results: []
+                }
+            }
             return response.data;
         } catch (e) {
             if (e.response)  {

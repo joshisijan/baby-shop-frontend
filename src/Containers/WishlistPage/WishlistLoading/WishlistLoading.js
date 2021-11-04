@@ -17,7 +17,7 @@ const WishlistLoading = () => {
                 />
             </div>
             <span className="font-bold">
-                Loading your orders...
+                Loading your wishlist...
             </span>
         </div>
     )

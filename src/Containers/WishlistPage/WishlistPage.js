@@ -6,6 +6,8 @@ import NoLoginWishlist from './NoLoginWishlist/NoLoginWishlist'
 import WishlistError from './WishlistError/WishlistError'
 import WishlistLoading from './WishlistLoading/WishlistLoading'
 import WishlistMain from './WishlistMain/WishlistMain'
+import WishlistMenu from './WishlistMain/WishlistMenu/WishlistMenu'
+
 
 const WishlistPage = () => {
     const dispatch = useDispatch()
@@ -13,7 +15,7 @@ const WishlistPage = () => {
     const wishlistState = useSelector(state => state.wishlist)
 
     useEffect(() => {
-        if(userDetailState.accessToken !== null) {
+        if (userDetailState.accessToken !== null) {
             dispatch(fetchWishlistList())
         }
     }, [dispatch, userDetailState.accessToken])
@@ -21,12 +23,21 @@ const WishlistPage = () => {
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
             <div className="w-full max-w-6xl">
-                <h1 className="mb-4 text-xl font-bold">My wishlist</h1>
+                <h1 className="mb-4 flex justify-between items-center relative">
+                    <span className="text-xl font-bold">My wishlist</span>
+                    {
+                        wishlistState.data !== null ?
+                            wishlistState.data.count > 0 ?
+                                <WishlistMenu />
+                            : null
+                        : null
+                    }
+                </h1>
                 {
                     userDetailState.accessToken === null ?
                         <NoLoginWishlist />
                         :
-                        wishlistState.isLoading ?
+                        wishlistState.isLoading || wishlistState.data === null ?
                             <WishlistLoading />
                             :
                             wishlistState.error ?

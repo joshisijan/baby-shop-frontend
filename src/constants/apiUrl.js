@@ -73,3 +73,5 @@ export const orderDetailUrl = baseUrl + '/api/shop/order/'; //needs orderId
 
 // wishlist list
 export const wishlistListUrl = baseUrl + '/api/shop/wishlist/'
+
+export const wishlistRemoveUrl = baseUrl + '/api/shop/wishlist/'; //id/update/

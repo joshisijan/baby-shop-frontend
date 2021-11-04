@@ -1,44 +1,87 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToWishlist, fetchWishlistList } from "./wishlistAction";
+import { addToWishlist, fetchWishlistList, getNextData, removeAllWishlist, removeFromWishlist } from "./wishlistAction";
 
 
 const initialState = {
     isLoaded: false,
     isLoading: false,
+    isLoadingNext: false,
     isAdding: false,
+    isRemoving: false,
+    isRemovingAll: false,
     error: false,
-    data: [],
+    data: null,
 }
 
 const wishlistSlice = createSlice({
     name: 'wishlist',
     initialState: initialState,
     reducers: {},
-    extraReducers: {  
+    extraReducers: {
         // fetch
         [fetchWishlistList.pending]: (state) => {
-            if(!state.isLoaded) {
+            if (!state.isLoaded) {
                 state.isLoading = true
             }
         },
-        [fetchWishlistList.error]: (state) => {
-            state.isLoading = false 
+        [fetchWishlistList.rejected]: (state) => {
+            state.isLoading = false
+            if (!state.isLoaded) {
+                state.data = {}
+            }
             state.error = true
         },
-        [fetchWishlistList.fulfilled]: (state, {payload}) => {
+        [fetchWishlistList.fulfilled]: (state, { payload }) => {
             state.isLoading = false
             state.isLoaded = true
             state.data = payload
+        },
+        // next
+        [getNextData.pending]: (state) => {
+            state.isLoadingNext = true
+        },
+        [getNextData.rejected]: (state) => {
+            state.isLoadingNext = false
+        },
+        [getNextData.fulfilled]: (state, { payload }) => {
+            state.isLoadingNext = false
+            const temp = state.data //temp data to store previous data
+            state.data = payload //setting prev data to new data
+            const tempResult = [ //temp result to get all data 
+                ...temp.results,
+                ...state.data.results
+            ]
+            state.data.results = tempResult //setting new result to temp result
         },
         // add
         [addToWishlist.pending]: (state) => {
             state.isAdding = true
         },
-        [addToWishlist.error]: (state) => {
+        [addToWishlist.rejected]: (state) => {
             state.isAdding = false
         },
         [addToWishlist.fulfilled]: (state) => {
             state.isAdding = false
+        },
+        // remove
+        [removeFromWishlist.pending]: (state) => {
+            state.isRemoving = true
+        },
+        [removeFromWishlist.rejected]: (state) => {
+            state.isRemoving = false
+        },
+        [removeFromWishlist.fulfilled]: (state) => {
+            state.isRemoving = false
+        },
+        // remove all
+        [removeAllWishlist.pending]: (state) => {
+            state.isRemovingAll = true
+        },
+        [removeAllWishlist.rejected]: (state) => {
+            state.isRemovingAll = false
+        },
+        [removeAllWishlist.fulfilled]: (state) => {
+            state.isRemovingAll = false
         },
     }
 });

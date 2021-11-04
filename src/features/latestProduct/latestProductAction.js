@@ -8,6 +8,12 @@ export const fetchLatestProduct = createAsyncThunk(
     async (_, thunkApi) => {
         try {
             const response = await axios.get(latestProductListUrl);
+            if(response.status === 204) {
+                return {
+                    next: null,
+                    results: []
+                }
+            }
             return response.data;
         } catch(e) {
             return thunkApi.rejectWithValue('An error occurred. Try again later.')
