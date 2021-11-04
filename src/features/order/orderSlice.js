@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import orderStatusType from "../../constants/orderStatusType";
 import { fetchOrderList } from "./orderAction";
 
 

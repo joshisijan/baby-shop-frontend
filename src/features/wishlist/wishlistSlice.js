@@ -5,6 +5,7 @@ import { fetchWishlistList } from "./wishlistAction";
 const initialState = {
     isLoaded: false,
     isLoading: false,
+    isAdding: false,
     error: false,
     data: [],
 }

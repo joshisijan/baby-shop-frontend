@@ -76,6 +76,13 @@ const LoginTab = () => {
                     />
                     {errors.password && <p className="text-sm text-red-600">{errors.password.message}</p>}
                 </div>
+                <FadeTransition show={ Object.keys(errors).length > 0 }>{/* show when error occur on front side */}
+                    <div className="py-4 px-6 bg-red-50 border border-red-600 rounded-lg">
+                        <div className="font-bold text-red-600 text-xs">
+                            Fix all upper errors first to login.
+                        </div>
+                    </div>
+                </FadeTransition>
                 <FadeTransition show={loginState.error !== null}>
                     {loginState.error !== null ? authErrorGenerator(loginState.error) : null}
                 </FadeTransition>

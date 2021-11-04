@@ -30,6 +30,7 @@ const productDetailSlice = createSlice({
     reducers: {
         setActiveSizeIndex: (state, {payload}) => {
             state.activeSizeIndex = payload
+            state.selectedQuantity = 1
         },
         changeActiveColor: (state, { payload }) => {
             // setting active product detail

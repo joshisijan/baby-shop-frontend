@@ -32,3 +32,34 @@ export const fetchWishlistList = createAsyncThunk(
         }
     }
 );
+
+
+export const addToWishlist = createAsyncThunk(
+    'wishlist/addToWishlist',
+    async (data, thunkApi) => {
+        // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        if(accessToken === null) return;
+        try {
+            let response = await axios.get(
+                wishlistListUrl,
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            return response.data;
+        } catch (e) {
+            if (e.response)  {
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, addToWishlist(data));                    
+                }
+            }
+            return thunkApi.rejectWithValue('error');
+        }
+    }
+);

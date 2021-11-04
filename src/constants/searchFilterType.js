@@ -7,8 +7,8 @@
 const searchFilterType = {
     priceIncrement: ['price', 'Price low to high'],
     priceDecrement: ['-price', 'Price high to low'],
-    averageRatingIncrement: ['average_rating', 'Average rating low to high'],
-    averageRatingDecrement: ['-average_rating', 'Average rating high to low'],
+    averageRatingIncrement: ['average_rating', 'Rating low to high'],
+    averageRatingDecrement: ['-average_rating', 'Rating high to low'],
     createdAtIncrement: ['created_at', 'Oldest first'],
     createdAtDecrement: ['-created_at', 'Newest first'],
 }

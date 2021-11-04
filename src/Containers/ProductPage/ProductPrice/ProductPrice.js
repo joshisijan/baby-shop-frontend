@@ -10,7 +10,7 @@ const ProductPrice = ({price, discount}) => {
                   { currencyFormatter(price) }
               </div> : 
               <div className="space-x-0.5">
-                    <span className="text-red-600">{ currencyFormatter(actualPrice) }</span><span className="line-through">{ currencyFormatter(price) }</span>
+                    <span className="text-red-600">{ currencyFormatter(actualPrice) }</span><span className="line-through text-base">{ currencyFormatter(price) }</span>
               </div>
           }  
         </>

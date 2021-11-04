@@ -8,6 +8,7 @@ import ProductQuantitySelector from '../ProductQuantitySelector/ProductQuantityS
 import FadeTransition from '../../../Components/Transition/FadeTransition'
 import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
 import { addCartItem } from '../../../features/cart/cartAction'
+import CircularProgressIndicator from '../../../Components/CircularProgressIndicator/CircularProgressIndicator'
 
 const AddToCart = () => {
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ const AddToCart = () => {
     const activeSize = "bg-black text-white";
 
     // states
+    const wishlistState = useSelector(state => state.wishlist)
     const cartState = useSelector(state => state.cart)
     const productDetailState = useSelector(state => state.productDetail)
     const productVarientData = productDetailState.data.product_variant
@@ -32,10 +34,14 @@ const AddToCart = () => {
         dispatch(addCartItem({
             data: {
                 inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
-                quantity,   
+                quantity,
             },
             productId: productDetailState.data.product.id,
         }));
+    }
+
+    const handleWishlistClick = () => {
+        alert('wishlist')
     }
 
     const setQuantity = (value) => {
@@ -141,7 +147,16 @@ const AddToCart = () => {
                         Add to cart
                     </SecondaryTextButton>
                 </div>
-                <HeartIcon className="w-5 h-5 cursor-pointer transition text-gray-600 hover:text-secondary-dark-extra" />
+                {
+                    wishlistState.isAdding ?
+                        <div className="w-5 h-5">
+                            <CircularProgressIndicator />
+                        </div>
+                        :
+                        <button onClick={handleWishlistClick}>
+                            <HeartIcon className="w-6 h-6 cursor-pointer transition text-gray-600 hover:text-secondary-dark-extra" />
+                        </button>
+                }
             </div>
         </div>
     )
