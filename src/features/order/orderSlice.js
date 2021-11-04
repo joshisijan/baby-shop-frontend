@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import orderStatusType from "../../constants/orderStatusType";
 import { fetchOrderList } from "./orderAction";
 
 
@@ -6,13 +7,18 @@ const initialState = {
     isLoaded: false,
     isLoading: false,
     error: false,
+    selectedFilter: orderStatusType.all,
     data: [],
 }
 
 const orderSlice = createSlice({
     name: 'order',
     initialState: initialState,
-    reducers: {},
+    reducers: {  
+        setSelectedFilter: (state, {payload}) => {
+            state.selectedFilter = payload
+        },
+    },
     extraReducers: {  
         [fetchOrderList.pending]: (state) => {
             if(!state.isLoaded) {
@@ -33,3 +39,5 @@ const orderSlice = createSlice({
 
 
 export default orderSlice.reducer
+
+export const { setSelectedFilter } = orderSlice.actions

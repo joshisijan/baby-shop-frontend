@@ -38,10 +38,10 @@ const SearchLarge = ({ navbarShown }) => {
                         </Menu.Button>
                         {
                             open && navbarShown ?
-                                <Menu.Items static className="rounded-2xl shadow-lg z-10 divide-y divide-gray-400 absolute right-0 top-full bg-primary-varient flex flex-col items-end">
+                                <Menu.Items static className="rounded-lg z-10 absolute right-0 top-full flex flex-col gap-0.5 items-end">
                                     {
                                         searchState.ordering !== '' ? 
-                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-primary-light rounded-2xl py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-primary-light rounded-lg py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
                                             <XIcon className="w-5 h-5" /> Clear filter
                                         </Menu.Item>
                                         : null
@@ -49,7 +49,7 @@ const SearchLarge = ({ navbarShown }) => {
                                     {
                                         Object.values(searchFilterType).map((value, index) => {
                                             return (
-                                                <Menu.Item key={index} as="button" onClick={() => handleFilter(value[0])} className={`${searchState.ordering === value[0] ? 'bg-primary-light' : ''} rounded-2xl py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
+                                                <Menu.Item key={index} as="button" onClick={() => handleFilter(value[0])} className={`${searchState.ordering === value[0] ? 'bg-primary-light' : 'bg-primary-varient'} rounded-lg py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient`}>
                                                     {value[1]}
                                                 </Menu.Item>
                                             )
