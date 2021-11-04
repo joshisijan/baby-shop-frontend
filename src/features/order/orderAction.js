@@ -32,3 +32,34 @@ export const fetchOrderList = createAsyncThunk(
         }
     }
 );
+
+
+export const getNextData = createAsyncThunk(
+    'order/getNextData',
+    async (nextLink, thunkApi) => {
+        // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        if(accessToken === null) return;
+        try {
+            let response = await axios.get(
+                nextLink,
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            return response.data;
+        } catch (e) {
+            if (e.response)  {
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, getNextData(nextLink));                    
+                }
+            }
+            return thunkApi.rejectWithValue('error');
+        }
+    }
+);
