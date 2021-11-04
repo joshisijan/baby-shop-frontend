@@ -38,13 +38,13 @@ const SearchLarge = ({ navbarShown }) => {
                         </Menu.Button>
                         {
                             open && navbarShown ?
-                                <Menu.Items static className="rounded-lg z-10 absolute right-0 top-full flex flex-col gap-0.5 items-end">
+                                <Menu.Items static className="mt-1.5 rounded-lg z-10 absolute right-0 top-full flex flex-col gap-0.5 items-end">
                                     {
-                                        searchState.ordering !== '' ? 
-                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-primary-light rounded-lg py-2 px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
-                                            <XIcon className="w-5 h-5" /> Clear filter
-                                        </Menu.Item>
-                                        : null
+                                        searchState.ordering !== '' ?
+                                            <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-red-50 border border-red-600 text-red-600 rounded-lg px-4 py-1.5 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                                                <XIcon className="w-5 h-5" /> Clear filter
+                                            </Menu.Item>
+                                            : null
                                     }
                                     {
                                         Object.values(searchFilterType).map((value, index) => {

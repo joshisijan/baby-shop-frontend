@@ -22,11 +22,9 @@ const searchSlice = createSlice({
             state.search = payload
         },
         resetSearchQuery: (state) => {
-            state.search = ''
-            state.ordering = ''
-            state.error = false
-            state.isLoading = false
-            state.data = initialState.data
+            if(state.search !== '' || state.ordering !== '') {
+                return initialState
+            }
         },
         setFilter: (state, {payload}) => {
             state.ordering = payload

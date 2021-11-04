@@ -7,8 +7,9 @@ const initialState = {
     isLoaded: false,
     isLoading: false,
     error: false,
-    selectedFilter: orderStatusType.all,
+    selectedFilter: null,
     data: [],
+    filteredData: [],
 }
 
 const orderSlice = createSlice({
@@ -17,7 +18,19 @@ const orderSlice = createSlice({
     reducers: {  
         setSelectedFilter: (state, {payload}) => {
             state.selectedFilter = payload
+            const tempFilteredData = []
+            state.data.map((data) => {
+                if(data.status === payload.label) {
+                    return tempFilteredData.push(data)
+                }
+                return null
+            })
+            state.filteredData = tempFilteredData
         },
+        resetSelectedFilter: (state) => {
+            state.selectedFilter = null
+            state.filteredData = []
+        }
     },
     extraReducers: {  
         [fetchOrderList.pending]: (state) => {
@@ -40,4 +53,4 @@ const orderSlice = createSlice({
 
 export default orderSlice.reducer
 
-export const { setSelectedFilter } = orderSlice.actions
+export const { setSelectedFilter, resetSelectedFilter } = orderSlice.actions

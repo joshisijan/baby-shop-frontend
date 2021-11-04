@@ -39,10 +39,10 @@ const SearchSmall = ({ navbarShown }) => {
                         </Menu.Button>
                         {
                             open && navbarShown ?
-                                <Menu.Items static className="-mt-2 rounded-lg z-10 absolute right-4 top-full flex gap-0.5 flex-col items-end">
+                                <Menu.Items static className="-mt-0.5 rounded-lg z-10 absolute right-4 top-full flex gap-0.5 flex-col items-end">
                                     {
                                         searchState.ordering !== '' ? 
-                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-primary-light rounded-2xl px-4 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
+                                        <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-red-50 border border-red-600 text-red-600 rounded-lg px-4 py-1.5 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
                                             <XIcon className="w-5 h-5" /> Clear filter
                                         </Menu.Item>
                                         : null

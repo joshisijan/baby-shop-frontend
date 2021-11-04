@@ -23,6 +23,7 @@ import alertDialogSlice from "./features/alertDialog/alertDialogSlice"
 import checkoutSlice from "./features/checkout/checkoutSlice"
 import orderSlice from "./features/order/orderSlice"
 import wishlistSlice from "./features/wishlist/wishlistSlice"
+import verifyPaymentSlice from "./features/verifyPayment/verifyPaymentSlice"
 
 
 const reducers = combineReducers({
@@ -39,6 +40,7 @@ const reducers = combineReducers({
     checkout: checkoutSlice,
     order: orderSlice,
     wishlist: wishlistSlice,
+    verifyPayment: verifyPaymentSlice,
 });
 
 const persistConfig = { 
@@ -47,6 +49,7 @@ const persistConfig = {
     whitelist: [ 
         "userDetail",
         "categoryList",
+        "verifyPayment",
     ],
 }
 

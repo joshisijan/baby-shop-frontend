@@ -14,7 +14,7 @@ import CategoryListPage from './Containers/CategoryListPage/CategoryListPage';
 import CategoryProductPage from './Containers/CategoryProductPage/CategoryProductPage'
 import CheckoutPage from './Containers/CheckoutPage/CheckoutPage'
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { resetSearchQuery } from './features/search/searchSlice';
 import PaymentPage from './Containers/PaymentPage/PaymentPage';
 import PageNotFoundPage from './Containers/PageNotFoundPage/PageNotFoundPage';
@@ -25,15 +25,12 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const searchState = useSelector(state => state.search)
 
-  // listen for route change
+  // listen route change
   useEffect(() => { 
     // hide search
-    if(searchState.search !== '' || searchState.ordering !== '') {
-      dispatch(resetSearchQuery());
-    }
-  }, [dispatch, location.pathname, searchState.search, searchState.ordering]);
+    dispatch(resetSearchQuery());
+  }, [dispatch, location.pathname]);
 
   return (
 

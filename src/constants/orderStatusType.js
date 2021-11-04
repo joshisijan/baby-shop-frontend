@@ -1,31 +1,23 @@
 const orderStatusType = {
-    all: {
-        label: 'All orders',
-        color: 'text-blue-600',
-    },
-    completed: {
-        label: 'Completed',
-        color: 'text-blue-600',
-    }, 
-    canceled: {
-        label: 'Canceled',
-        color: 'text-gray-600',
-    },
-    pendingDelivery: {
-        label: 'Pending delivery',
-        color: 'text-red-600',
+    startedPreparing: {
+        label: 'Started Preparing',
+        color: 'bg-green-500',
     },
     paymentPending: {
         label: 'Pending Payment',
-        color: 'text-gray-600',
+        color: 'bg-gray-400',
     },
-    processing: {
-        label: 'Processing',
-        color: 'text-green-600',
+    pendingDelivery: {
+        label: 'Pending delivery',
+        color: 'bg-red-500',
     },
-    refunded: {
-        label: 'Refunded',
-        color: 'text-gray-600',
+    completed: {
+        label: 'Completed',
+        color: 'bg-blue-500',
+    }, 
+    canceled: {
+        label: 'Canceled',
+        color: 'bg-black',
     },
 }
 

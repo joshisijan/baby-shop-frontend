@@ -16,7 +16,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        resetCartState: (state) => initialState
+        resetCartState: () => initialState
     },  
     extraReducers: {
         [fetchCartList.pending]: (state) => {
