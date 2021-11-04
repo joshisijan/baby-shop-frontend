@@ -25,16 +25,11 @@ const OrderPage = () => {
                     userDetailState.accessToken === null ?
                         <NoLoginOrder />
                         :
-                        orderState.isLoading ?
+                        orderState.isLoading || orderState.data === null ?
                             <OrderLoading />
                             :
                             orderState.error ? 
                                 <OrderError />
-                                :
-                                orderState.data.length === 0 ?
-                                <div className="pb-10 pt-6 flex justify-center font-medium">
-                                    You have no orders
-                                </div>
                                 :
                                 <OrderMain />
                 }

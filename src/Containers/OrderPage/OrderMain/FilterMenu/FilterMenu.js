@@ -4,7 +4,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import { Menu } from '@headlessui/react'
 import orderStatusType from '../../../../constants/orderStatusType'
-import PrimaryTextButton from '../../../../Components/Button/PrimaryTextButton'
 import { resetSelectedFilter, setSelectedFilter } from '../../../../features/order/orderSlice'
 
 const FilterMenu = () => {
@@ -21,18 +20,18 @@ const FilterMenu = () => {
                 <Menu.Button>
                     {
                         orderState.selectedFilter === null ?
-                            <PrimaryTextButton className="flex gap-2 items-center">
+                            <div className="flex gap-2 items-center rounded-lg relative transition bg-primary-dark text-gray-800 hover:bg-primary focus:outline-none focus:ring focus:ring-primary-varient px-4 py-2">
                                 <span>All orders</span>
                                 <AdjustmentsIcon className="w-5 h-5" />
-                            </PrimaryTextButton>
+                            </div>
                             :
-                            <PrimaryTextButton className="flex gap-2 items-center">
+                            <div className="flex gap-2 items-center rounded-lg relative transition bg-primary-dark text-gray-800 hover:bg-primary focus:outline-none focus:ring focus:ring-primary-varient px-4 py-2">
                                 <span className="flex gap-2 items-center">
                                     <div className={`w-2.5 h-2.5 rounded-full ${orderState.selectedFilter.color}`}></div>
                                     {orderState.selectedFilter.label}
                                 </span>
                                 <AdjustmentsIcon className="w-5 h-5" />
-                            </PrimaryTextButton>
+                            </div>
                     }
                 </Menu.Button>
                 <Menu.Items className="mt-1 rounded-lg z-10 absolute right-0 top-full flex gap-2 flex-col items-stretch border p-2 bg-white">

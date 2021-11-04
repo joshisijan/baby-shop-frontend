@@ -3,48 +3,36 @@ import { fetchOrderList } from "./orderAction";
 
 
 const initialState = {
-    isLoaded: false,
     isLoading: false,
     error: false,
     selectedFilter: null,
-    data: [],
-    filteredData: [],
+    data: null,
 }
 
 const orderSlice = createSlice({
     name: 'order',
     initialState: initialState,
-    reducers: {  
-        setSelectedFilter: (state, {payload}) => {
+    reducers: {
+        setSelectedFilter: (state, { payload }) => {
             state.selectedFilter = payload
-            const tempFilteredData = []
-            state.data.map((data) => {
-                if(data.status === payload.label) {
-                    return tempFilteredData.push(data)
-                }
-                return null
-            })
-            state.filteredData = tempFilteredData
         },
         resetSelectedFilter: (state) => {
             state.selectedFilter = null
-            state.filteredData = []
         }
     },
-    extraReducers: {  
+    extraReducers: {
         // fetch list
         [fetchOrderList.pending]: (state) => {
-            if(!state.isLoaded) {
-                state.isLoading = true
-            }
+            state.isLoading = true
+            state.data = null
         },
         [fetchOrderList.error]: (state) => {
-            state.isLoading = false 
+            state.isLoading = false
+            state.data = {}
             state.error = true
         },
-        [fetchOrderList.fulfilled]: (state, {payload}) => {
+        [fetchOrderList.fulfilled]: (state, { payload }) => {
             state.isLoading = false
-            state.isLoaded = true
             state.data = payload
         },
     }
