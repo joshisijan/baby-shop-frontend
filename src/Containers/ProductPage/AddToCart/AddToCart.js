@@ -9,6 +9,7 @@ import FadeTransition from '../../../Components/Transition/FadeTransition'
 import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
 import { addCartItem } from '../../../features/cart/cartAction'
 import CircularProgressIndicator from '../../../Components/CircularProgressIndicator/CircularProgressIndicator'
+import { addToWishlist } from '../../../features/wishlist/wishlistAction'
 
 const AddToCart = () => {
     const dispatch = useDispatch()
@@ -41,7 +42,9 @@ const AddToCart = () => {
     }
 
     const handleWishlistClick = () => {
-        alert('wishlist')
+        dispatch(addToWishlist({
+            inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
+        }));
     }
 
     const setQuantity = (value) => {

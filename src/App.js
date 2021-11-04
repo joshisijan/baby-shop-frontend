@@ -20,6 +20,7 @@ import PaymentPage from './Containers/PaymentPage/PaymentPage';
 import PageNotFoundPage from './Containers/PageNotFoundPage/PageNotFoundPage';
 import OrderPage from './Containers/OrderPage/OrderPage';
 import WishlistPage from './Containers/WishlistPage/WishlistPage'
+import OrderDetail from './Containers/OrderDetail/OrderDetail';
 
 function App() {
   const location = useLocation();
@@ -77,6 +78,9 @@ function App() {
             </Route>
             <Route path="/order" exact>
               <OrderPage />
+            </Route>
+            <Route path="/order/:id/" exact>
+              <OrderDetail />
             </Route>
             <Route path="/wishlist" exact>
               <WishlistPage />

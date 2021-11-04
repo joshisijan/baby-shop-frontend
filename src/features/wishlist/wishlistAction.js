@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { wishlistListUrl } from "../../constants/apiUrl";
 import {handleRefreshToken} from '../../services/refreshToken'
 
@@ -44,14 +45,16 @@ export const addToWishlist = createAsyncThunk(
         const { refreshToken } = userDetail;
         if(accessToken === null) return;
         try {
-            let response = await axios.get(
+            let response = await axios.post(
                 wishlistListUrl,
+                data,
                 {
                   headers: {
                     'Authorization': `Bearer ${accessToken}`,
                  } 
                 }
             );
+            toast.success('Successfully added product to cart');
             return response.data;
         } catch (e) {
             if (e.response)  {
@@ -59,6 +62,7 @@ export const addToWishlist = createAsyncThunk(
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, addToWishlist(data));                    
                 }
             }
+            toast.error('Error adding product to your wishlist')
             return thunkApi.rejectWithValue('error');
         }
     }

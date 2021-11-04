@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { orderListUrl } from "../../constants/apiUrl";
+import { orderDetailUrl } from "../../constants/apiUrl";
 import {handleRefreshToken} from '../../services/refreshToken'
 
-export const fetchOrderList = createAsyncThunk(
-    'order/fetchOrderList',
-    async (_, thunkApi) => {
+export const fetchOrderDetail = createAsyncThunk(
+    'orderDetail/fetchOrderDetail',
+    async (orderId, thunkApi) => {
         // get userDetail state
         const {userDetail} = thunkApi.getState();
         // get  accessToken stored in storage
@@ -14,7 +14,7 @@ export const fetchOrderList = createAsyncThunk(
         if(accessToken === null) return;
         try {
             let response = await axios.get(
-                orderListUrl,
+                orderDetailUrl + orderId + '/',
                 {
                   headers: {
                     'Authorization': `Bearer ${accessToken}`,
@@ -25,7 +25,7 @@ export const fetchOrderList = createAsyncThunk(
         } catch (e) {
             if (e.response)  {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchOrderList);                    
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, fetchOrderDetail(orderId));                    
                 }
             }
             return thunkApi.rejectWithValue('error');

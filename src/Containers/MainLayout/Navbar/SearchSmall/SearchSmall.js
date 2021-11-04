@@ -39,7 +39,7 @@ const SearchSmall = ({ navbarShown }) => {
                         </Menu.Button>
                         {
                             open && navbarShown ?
-                                <Menu.Items static className="-mt-0.5 rounded-lg z-10 absolute right-4 top-full flex gap-0.5 flex-col items-end">
+                                <Menu.Items static className="-mt-0.5 rounded-lg z-10 absolute right-4 top-full flex gap-2 flex-col items-end border p-2 bg-white">
                                     {
                                         searchState.ordering !== '' ? 
                                         <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-red-50 border border-red-600 text-red-600 rounded-lg px-4 py-1.5 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">
