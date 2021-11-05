@@ -18,9 +18,11 @@ const orderSlice = createSlice({
     initialState: initialState,
     reducers: {
         setSelectedFilter: (state, { payload }) => {
+            state.isLoaded = false
             state.selectedFilter = payload
         },
         resetSelectedFilter: (state) => {
+            state.isLoaded = false
             state.selectedFilter = initialState.selectedFilter
         }
     },

@@ -3,8 +3,8 @@ import toast from 'react-hot-toast';
 import { verifyPayment } from './verifyPaymentAction';
 
 const initialState = {
-    orderId: null,
     isVerifying: false,
+    error: false,
     isPaid: null,
 }
 const verifyPaymentSlice = createSlice({
@@ -23,13 +23,18 @@ const verifyPaymentSlice = createSlice({
         },
         [verifyPayment.rejected]: (state) => {
             state.isPaid = {}
+            state.error = true
             state.isVerifying = false
+            toast.error('Payment unsuccessful. Try again later.')
         },
         [verifyPayment.fulfilled]: (state, {payload}) => {
-            state.isVerifying = false
-            console.log(payload)
-            toast.success('Payment successful. You check your order status.')
-            state.isPaid = payload
+            state.isVerifying = false            
+            state.isPaid = payload.order.is_paid
+            if(payload.order.is_paid) {
+                toast.success('Payment successful. You check your order status.')
+            } else {
+                toast.error('Payment unsuccessful. Try again later.')
+            }
         },
     }
 });
