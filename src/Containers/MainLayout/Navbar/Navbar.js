@@ -126,7 +126,7 @@ const Navbar = () => {
                 {
                     categoryListState.data.results.map(category => {
                         return (
-                            <Link key={category.slug} to={`category/${category.slug}`}>
+                            <Link key={category.id} to={`/category/${category.id}`}>
                                 <MenuLink>
                                     {category.name}
                                 </MenuLink>

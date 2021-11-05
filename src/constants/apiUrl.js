@@ -15,6 +15,9 @@ export const tokenRefreshUrl = baseUrl + '/api/account/token/refresh/'
 // for getting category list
 export const categoryListUrl = baseUrl + '/api/shop/category/'
 
+// get category product
+export const categoryProductUrl = baseUrl + '/api/shop/category/' // 1/products
+
 // get latest product
 export const latestProductListUrl = baseUrl + '/api/shop/products/latest/';
 

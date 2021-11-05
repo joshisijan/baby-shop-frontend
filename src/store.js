@@ -25,6 +25,7 @@ import orderSlice from "./features/order/orderSlice"
 import wishlistSlice from "./features/wishlist/wishlistSlice"
 import verifyPaymentSlice from "./features/verifyPayment/verifyPaymentSlice"
 import orderDetailSlice from "./features/orderDetail/orderDetailSlice"
+import categoryProductSlice from "./features/categoryProduct/categoryProductSlice"
 
 
 const reducers = combineReducers({
@@ -32,6 +33,7 @@ const reducers = combineReducers({
     login: loginSlice,
     userDetail: userDetailSlice,
     categoryList: categoryListSlice,
+    categoryProduct: categoryProductSlice,
     latestProduct: latestProductSlice,
     productDetail: productDetailSlice,
     userAddress: userAddressSlice,

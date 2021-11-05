@@ -15,10 +15,10 @@ const CategoryList = () => {
                     {
                         categoryListState.data.results.map((item) => {
                             return <CategoryListItem   
-                                key={item.slug}
+                                key={item.id}
                                 name={item.name}
                                 image={item.image}
-                                slug={item.slug}
+                                id={item.id}
                             />
                         })
                     }

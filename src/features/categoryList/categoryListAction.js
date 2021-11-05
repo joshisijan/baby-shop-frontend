@@ -14,3 +14,15 @@ export const fetchCategoryList = createAsyncThunk(
         }
     }
 );
+
+export const getNextCategoryList = createAsyncThunk(
+    'categoryList/fetchNextCategoryList', 
+    async (data, thunkApi) => {
+        try {
+            const response = await axios.get(data);
+            return response.data;
+        } catch(e) {
+            return thunkApi.rejectWithValue('An error occurred. Try again later.')
+        }
+    }
+);
