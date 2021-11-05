@@ -22,6 +22,7 @@ import OrderPage from './Containers/OrderPage/OrderPage';
 import WishlistPage from './Containers/WishlistPage/WishlistPage'
 import OrderDetail from './Containers/OrderDetail/OrderDetail';
 import VerifyPayment from './Containers/VerifyPayment/VerifyPayment';
+import NewArrivals from './Containers/HomePage/NewArrivals/NewArrivals';
 
 function App() {
   const location = useLocation();
@@ -58,6 +59,11 @@ function App() {
             </Route>
             <Route path="/category/:id" exact>
               <CategoryProductPage />
+            </Route>
+            <Route path="/product" exact>
+              <div className="mt-10">
+                <NewArrivals />
+              </div>
             </Route>
             <Route path="/product/:id" exact>
               <ProductPage />

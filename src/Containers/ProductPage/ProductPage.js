@@ -10,7 +10,7 @@ const ProductPage = () => {
     const { id } = useParams();
 
     const productDetailState = useSelector(state => state.productDetail)
-    
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,9 +22,9 @@ const ProductPage = () => {
                 productDetailState.isLoading || productDetailState.data === null ?
                     <ProductLoading />
                     :
-                    productDetailState.error ? 
-                    <ProductError productId={id} /> :
-                    <ProductMain />
+                    productDetailState.error ?
+                        <ProductError productId={id} /> :
+                        <ProductMain />
             }
         </div>
     )

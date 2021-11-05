@@ -16,16 +16,6 @@ const MainLayout = (props) => {
     const categoryListState = useSelector(state => state.categoryList)
     const cartState = useSelector(state => state.cart)
 
-    // scroll to top on every route change
-    useEffect(() => {
-        scrollToTop();
-    });
-    // scroll to top in new page
-    const scrollToTop = () => {
-        if (window.scrollY !== 0) {
-            window.scrollTo(0, 0);
-        }
-    }
 
     // fetching category only if not loaded
     useEffect(() => {

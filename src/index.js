@@ -8,10 +8,12 @@ import { persistor } from './store'
 import './index.css';
 import App from './App';
 import SimpleReactLightbox from 'simple-react-lightbox'
+import ScrollMemory from 'react-router-scroll-memory';
 
 
 ReactDOM.render(
   <Router>
+    <ScrollMemory />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <SimpleReactLightbox>

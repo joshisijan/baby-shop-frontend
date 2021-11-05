@@ -13,8 +13,8 @@ import appDetail from '../../../constants/appDetail'
 
 const Footer = () => {
     return (
-        <div className="bg-primary-varient p-4 md:p-6 pt-8 pb-24 grid justify-items-center">
-            <div className="max-w-6xl grid gap-4 lg:grid-cols-2">
+        <div className="bg-primary-varient p-4 md:p-6 pt-8 grid justify-items-center">
+            <div className="max-w-6xl grid gap-4 lg:grid-cols-2 pb-16">
                 <div className="space-y-2">
                     <h1 className="font-bold">{appDetail.appName} - {appDetail.appMoto}</h1>
                     <p className="text-xs font-semibold">

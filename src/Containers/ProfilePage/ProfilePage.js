@@ -36,10 +36,10 @@ const ProfilePage = () => {
                             if(disabled) return <div key={index} className="flex-1"></div>
 
                             return (
-                                <Tab key={index}  className="flex-1 md:flex-initial focus:outline-none">
+                                <Tab key={index}  className="flex-1 w-full md:flex-initial focus:outline-none">
                                     {({ selected }) => {
                                         return (
-                                            <div className={`w-full h-full rounded-2xl inline-flex gap-2  items-center md:border-none px-8 py-2 transition transform ${selected ? 'bg-secondary-varient' : 'bg-secondary bg-opacity-20 hover:bg-secondary hover:bg-opacity-30'}`}>
+                                            <div className={`w-full h-full rounded-2xl inline-flex gap-2  items-center md:border-none px-8 py-2 transition transform ${selected ? 'bg-secondary-varient' : 'bg-secondary bg-opacity-20 hover:bg-secondary hover:bg-opacity-40'}`}>
                                                 {tabHeader.icon}{tabHeader.label}
                                             </div>
                                         )
