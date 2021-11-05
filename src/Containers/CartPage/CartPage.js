@@ -32,11 +32,11 @@ const CartPage = () => {
                             cartState.data.cart_items.length === 0 ?
                                 <EmptyCart />
                                 :
-                                <div className="flex flex-col md:flex-row">
-                                    <div className="flex-1 p-4 border">
+                                <div className="flex flex-col lg:flex-row">
+                                    <div className="flex-1 p-4 border rounded-t-lg md:rounded-bl-lg lg:rounded-l-lg lg:rounded-t-none lg:rounded-br-lg">
                                         <CartItemList />
                                     </div>
-                                    <div className="self-start p-4 bg-secondary bg-opacity-20 w-full md:max-w-sm border">
+                                    <div className="self-start md:self-end lg:self-start p-4 bg-secondary bg-opacity-20 w-full md:max-w-sm border rounded-b-lg lg:rounded-bl-none lg:rounded-r-lg">
                                         <OrderSummary />
                                     </div>
                                 </div>

@@ -38,7 +38,7 @@ const SearchLarge = ({ navbarShown }) => {
                         </Menu.Button>
                         {
                             open && navbarShown ?
-                                <Menu.Items static className="mt-1.5 rounded-lg z-10 absolute right-0 top-full flex flex-col gap-2 items-end border p-2 bg-white">
+                                <Menu.Items static className="mt-1.5 shadow rounded-lg z-10 absolute right-0 top-full flex flex-col gap-2 items-end border p-2 bg-white">
                                     {
                                         searchState.ordering !== '' ?
                                             <Menu.Item onClick={handleResetFilter} as="button" className="flex flex-wrap items-center justify-center bg-red-50 border border-red-600 text-red-600 rounded-lg px-4 py-1.5 w-full text-right hover:bg-primary-light focus:outline-none focus:ring focus:ring-primary-varient">

@@ -1,61 +1,69 @@
 import React from 'react'
+import orderStatusType from '../../../../constants/orderStatusType'
 import currencyFormatter from '../../../../services/currencyFormatter'
 
-const OrderItem = ({ orderDetail }) => {
+const OrderItem = ({ orderDetail, paymentDetail }) => {
+
+    const statusColorExtractor = (value) => Object.values(orderStatusType).find(data => data.label === value).color
+
     return (
-        <div className="p-4 border rounded-3xl bg-secondary bg-opacity-5">
-            <div className="pt-4 px-4 text-sm font-semibold">
-                <span className="text-gray-900">Status:</span> <span className="text-gray-700">{orderDetail.status}</span>
+        <div className="p-4 border shadow rounded-3xl bg-secondary bg-opacity-20">
+            <div className="pt-4 px-4 text-xs font-semibold flex gap-2 flex-wrap items-center">
+                <div className={`w-4 h-4 rounded-full ${statusColorExtractor(orderDetail.status)}`}></div>
+                <div className="text-gray-700">{orderDetail.status}</div>
             </div>
             <div className="grid md:grid-cols-2">
-                <div className="p-4 grid grid-cols-2">
-                    <div className="text-sm text-gray-700">
+                <div className="p-4 grid grid-cols-2 text-xs">
+                    <div className="text-gray-700">
                         <h1 className="font-semibold text-gray-900 mb-2">Shipping address</h1>
                         <div>
-                            Sirutar
+                            {orderDetail.shipping_address.region}
                         </div>
                         <div>
-                            Bhaktapur
+                            {orderDetail.shipping_address.city}
                         </div>
                         <div>
-                            Bagmati Province
+                            {orderDetail.shipping_address.province}
                         </div>
                     </div>
-                    <div className="text-sm text-gray-700">
+                    <div className="text-gray-700">
                         <h1 className="font-semibold text-gray-900 mb-2">Payment information</h1>
                         <div>
-                            e-Sewa
+                            {paymentDetail.payment_method}
                         </div>
                         <div>
-                            9841235565
+                            {paymentDetail.status}
                         </div>
                         <div>
-                            joshisijan96@gmail.com
+                            {paymentDetail.phone}
+                        </div>
+                        <div>
+                            {paymentDetail.email}
                         </div>
                     </div>
                 </div>
-                <div className="p-4">
+                <div className="p-4 text-xs">
                     <div className="flex gap-2 flex-wrap justify-between items-center">
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="font-medium text-gray-700">
                             Subtotal
                         </span>
-                        <span className="font-medium">
+                        <span className="text-sm font-medium">
                             {currencyFormatter(orderDetail.total_price_without_discount)}
                         </span>
                     </div>
                     <div className="flex gap-2 flex-wrap justify-between items-center">
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="font-medium text-gray-700">
                             Shipping
                         </span>
-                        <span className="font-medium">
+                        <span className="text-sm font-medium">
                             {currencyFormatter(orderDetail.shipping_fee)}
                         </span>
                     </div>
                     <div className="flex gap-2 flex-wrap justify-between items-center">
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="font-medium text-gray-700">
                             Discount
                         </span>
-                        <span className="font-medium">
+                        <span className="text-sm font-medium">
                             {currencyFormatter(orderDetail.total_discount)}
                         </span>
                     </div>
@@ -64,7 +72,7 @@ const OrderItem = ({ orderDetail }) => {
                         <span className="font-medium text-gray-700">
                             Total
                         </span>
-                        <span className="text-lg font-bold">
+                        <span className="text-sm font-bold">
                             {currencyFormatter(orderDetail.total_amount)}
                         </span>
                     </div>

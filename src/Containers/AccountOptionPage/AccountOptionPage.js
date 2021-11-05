@@ -11,15 +11,15 @@ const AccountOptionPage = () => {
     return (
         <div className="grid justify-items-center p-2">
             <div className="my-10 w-full max-w-md">
-                <Tab.Group as="div" defaultIndex={0} className="border">
+                <Tab.Group as="div" defaultIndex={0} className="border rounded-2xl">
                     <Tab.List className="flex gap-1">
                         {
                             tabHeaders.map((tabHeader) => {
                                 return (
-                                    <Tab key={tabHeader} className="flex-1 focus:outline-none bg-secondary-varient">
+                                    <Tab key={tabHeader} className="flex-1 focus:outline-none">
                                         {({selected}) => {
                                             return (
-                                                <div className={`px-4 py-2 font-bold text-lg w-full transition ${selected ? 'bg-white' : 'hover:bg-secondary-light'}`}>
+                                                <div className={`px-4 py-2 font-bold rounded-2xl text-lg w-full transition ${selected ? 'bg-secondary-varient' : 'bg-secondary bg-opacity-5 hover:bg-secondary hover:bg-opacity-30'}`}>
                                                     {tabHeader}
                                                 </div>
                                             )

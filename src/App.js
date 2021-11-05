@@ -21,6 +21,7 @@ import PageNotFoundPage from './Containers/PageNotFoundPage/PageNotFoundPage';
 import OrderPage from './Containers/OrderPage/OrderPage';
 import WishlistPage from './Containers/WishlistPage/WishlistPage'
 import OrderDetail from './Containers/OrderDetail/OrderDetail';
+import VerifyPayment from './Containers/VerifyPayment/VerifyPayment';
 
 function App() {
   const location = useLocation();
@@ -28,7 +29,7 @@ function App() {
 
 
   // listen route change
-  useEffect(() => { 
+  useEffect(() => {
     // hide search
     dispatch(resetSearchQuery());
   }, [dispatch, location.pathname]);
@@ -47,7 +48,7 @@ function App() {
               <HomePage />
             </Route>
             <Route path="/account" exact>
-              <ProtectedRoute   
+              <ProtectedRoute
                 unprotectedComponent={AccountOptionPage}
                 protectedComponent={ProfilePage}
               />
@@ -63,15 +64,15 @@ function App() {
             </Route>
             <Route path="/cart" exact>
               <CartPage />
-            </Route>            
+            </Route>
             <Route path="/cart/checkout" exact>
-              <RedirectProtectedRoute 
+              <RedirectProtectedRoute
                 redirect="/"
                 component={CheckoutPage}
               />
             </Route>
             <Route path="/cart/payment" exact>
-              <RedirectProtectedRoute 
+              <RedirectProtectedRoute
                 redirect="/"
                 component={PaymentPage}
               />
@@ -87,6 +88,12 @@ function App() {
             </Route>
             <Route path="/about" exact>
               <AboutPage />
+            </Route>
+            <Route path="/verify-payment/:id" exact>
+              <RedirectProtectedRoute
+                redirect="/"
+                component={VerifyPayment}
+              />
             </Route>
             <Route>
               <PageNotFoundPage />

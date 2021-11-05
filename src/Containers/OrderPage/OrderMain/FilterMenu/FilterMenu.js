@@ -34,7 +34,7 @@ const FilterMenu = () => {
                             </div>
                     }
                 </Menu.Button>
-                <Menu.Items className="mt-1 rounded-lg z-10 absolute right-0 top-full flex gap-2 flex-col items-stretch border p-2 bg-white">
+                <Menu.Items className="mt-1 shadow rounded-lg z-10 absolute right-0 top-full flex gap-2 flex-col items-stretch border p-2 bg-white">
                     {
                         orderState.selectedFilter !== null ?
                         <Menu.Item

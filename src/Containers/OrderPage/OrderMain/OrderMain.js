@@ -25,26 +25,30 @@ const OrderMain = () => {
                         No order found
                     </div>
                     :
-                    <div className="mt-4 space-y-4">
-                        {
-                            data.map((order) => {
-                                const orderDetail = order.order
-                                return (
-                                    <div key={orderDetail.id}>
-                                        <Link
-                                            to={`/order/${orderDetail.id}/`}
-                                        >
-                                            <OrderItem
-                                                orderDetail={orderDetail}
-                                            />
-                                        </Link>
-                                    </div>
-                                )
-                            })
-                        }
+                    <div>
+                        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+                            {
+                                data.map((order) => {
+                                    const orderDetail = order.order
+                                    const paymentDetail = order.payment
+                                    return (
+                                        <div key={orderDetail.id}>
+                                            <Link
+                                                to={`/order/${orderDetail.id}/`}
+                                            >
+                                                <OrderItem
+                                                    orderDetail={orderDetail}
+                                                    paymentDetail={paymentDetail}
+                                                />
+                                            </Link>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                         {
                             orderState.data.next !== null ?
-                                <div className="flex justify-center">
+                                <div className="flex justify-center pt-8 pb-6">
                                     <PrimaryTextButton isLoading={orderState.isLoadingNext} onClick={handleNext}>
                                         Load More
                                     </PrimaryTextButton>

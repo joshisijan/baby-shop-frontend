@@ -17,7 +17,7 @@ const CartItemList = () => {
                 <LoadingOverlay label="Updating cart item..." />
             </FadeTransition>
 
-            <div className="divide-y">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
                 {cartState.data.cart_items.map((cartItem) => {
                     return (
                         <CartItem

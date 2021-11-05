@@ -40,13 +40,13 @@ const CartItem = ({
     }
 
     return (
-        <div className="py-4 space-y-2">
+        <div className="p-4 space-y-2 shadow bg-secondary bg-opacity-20 rounded-2xl">
             <div
                 {...rest}
                 className="flex items-start gap-2 md:gap-4 lg:gap-8"
             >
-                <Link to={`/product/${productId}/`} className="self-top bg-primary-varient w-24 h-24 overflow-hidden">
-                    <img className="object-cover w-full h-full" alt={name} src={image} />
+                <Link to={`/product/${productId}/`} className="rounded-lg self-top bg-primary-varient w-24 h-24 overflow-hidden">
+                    <img className="rounded-lg object-cover w-full h-full" alt={name} src={image} />
                 </Link>
                 <div className="flex-1 flex gap-2">
                     <div className="flex-1 flex gap-1 flex-col">

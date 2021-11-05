@@ -16,15 +16,15 @@ const ShippingInfo = () => {
     ]
     return (
         <div className="md:px-4">
-            <Tab.Group as="div" className="border">
+            <Tab.Group as="div" className="border rounded-2xl">
                 <Tab.List className="flex">
                     {
                         tabHeaders.map((tabHeader) => {
                             return (
-                                <Tab key={tabHeader.label} className="flex-1 focus:outline-none bg-secondary-varient bg-opacity-50">
+                                <Tab key={tabHeader.label} className="rounded-2xl flex-1 focus:outline-none bg-opacity-50">
                                     {({ selected }) => {
                                         return (
-                                            <div className={`w-full h-full px-4 py-2 font-medium inline-flex gap-2 items-center transition ${selected ? 'bg-white' : 'hover:bg-secondary-light'}`}>
+                                            <div className={`w-full h-full px-4 py-2 rounded-2xl font-medium inline-flex gap-2 items-center transition ${selected ? 'bg-secondary-varient' : 'hover:bg-secondary'}`}>
                                                 {tabHeader.icon}{tabHeader.label}
                                             </div>
                                         )

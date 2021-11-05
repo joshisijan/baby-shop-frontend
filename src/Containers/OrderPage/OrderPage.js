@@ -19,7 +19,7 @@ const OrderPage = () => {
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
-            <div className="w-full max-w-6xl">
+            <div className="px-4 w-full max-w-6xl">
                 <h1 className="mb-4 text-xl font-bold">My orders</h1>
                 {
                     userDetailState.accessToken === null ?
