@@ -22,6 +22,12 @@ const wishlistSlice = createSlice({
                 const tempData = state.data.results.filter((data) => data.inventory.id !== payload)
                 state.data.results = tempData   
             }
+        },
+        localRemoveAllWishlist: (state) => {
+            if(state.data !== null) {
+                state.data.results = []
+                state.data.next = null   
+            }
         }
     },
     extraReducers: {
@@ -78,6 +84,7 @@ const wishlistSlice = createSlice({
         [removeFromWishlist.fulfilled]: (state) => {
             state.isRemoving = false
         },
+        // remove through product
         [removeFromWishlistFromProduct.pending]: (state) => {
             state.isRemoving = true
         },
@@ -103,4 +110,7 @@ const wishlistSlice = createSlice({
 
 export default wishlistSlice.reducer
 
-export const { localRemoveWishlist } = wishlistSlice.actions
+export const { 
+    localRemoveWishlist, 
+    localRemoveAllWishlist 
+} = wishlistSlice.actions

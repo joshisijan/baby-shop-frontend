@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { wishlistListUrl, wishlistRemoveUrl } from "../../constants/apiUrl";
 import {handleRefreshToken} from '../../services/refreshToken'
 import { localAddWatchlist as localAddWatchlistFromProduct, localRemoveWatchlist  as localRemoveWatchlistFromProduct} from "../productDetail/productDetailSlice";
-import { localRemoveWishlist } from "./wishlistSlice";
+import { localRemoveAllWishlist, localRemoveWishlist } from "./wishlistSlice";
 
 
 export const fetchWishlistList = createAsyncThunk(
@@ -199,7 +199,7 @@ export const removeAllWishlist = createAsyncThunk(
                 }
             );
             toast.success('Successfully removed all products from wishlist');
-            thunkApi.dispatch(fetchWishlistList())
+            thunkApi.dispatch(localRemoveAllWishlist())
             return response.data;
         } catch (e) {
             console.log(e.response)
@@ -208,7 +208,7 @@ export const removeAllWishlist = createAsyncThunk(
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeAllWishlist());                    
                 }
             }
-            toast.error('Error removing product to your wishlist')
+            toast.error('Error removing all product to your wishlist')
             return thunkApi.rejectWithValue('error');
         }
     }
