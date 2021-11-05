@@ -35,14 +35,12 @@ export const fetchProductDetail = createAsyncThunk(
                 };
             }            
         } catch (e) {
-            if (!e.response) {
-                return thunkApi.rejectWithValue('Network error.');
-            } else {
+            console.log(e.response)
+            if(e.response) {
                 if (e.response.status === 401) {
                     return handleRefreshTokenNoError(refreshToken, thunkApi.dispatch, fetchProductDetail(productId));
-                } else {
-                    return thunkApi.rejectWithValue('An error occurred. Try again later');
-                }
+                } 
+                return thunkApi.rejectWithValue('An error occurred. Try again later');
             }
         }
     }
