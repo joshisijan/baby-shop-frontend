@@ -52,7 +52,6 @@ const persistConfig = {
     storage,
     whitelist: [ 
         "userDetail",
-        "categoryList",
     ],
 }
 
