@@ -3,7 +3,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { wishlistListUrl, wishlistRemoveUrl } from "../../constants/apiUrl";
 import {handleRefreshToken} from '../../services/refreshToken'
-import { fetchProductDetail } from "../productDetail/productDetailAction";
+import { localAddWatchlist as localAddWatchlistFromProduct, localRemoveWatchlist  as localRemoveWatchlistFromProduct} from "../productDetail/productDetailSlice";
+import { localRemoveWishlist } from "./wishlistSlice";
+
 
 export const fetchWishlistList = createAsyncThunk(
     'wishlist/fetchWishlistList',
@@ -42,9 +44,9 @@ export const fetchWishlistList = createAsyncThunk(
 );
 
 
-export const addToWishlist = createAsyncThunk(
-    'wishlist/addToWishlist',
-    async (data, thunkApi) => {
+export const addToWishlistFromProduct = createAsyncThunk(
+    'wishlist/addToWishlistFromProduct',
+    async (inventoryId, thunkApi) => {
         // get userDetail state
         const {userDetail} = thunkApi.getState();
         // get  accessToken stored in storage
@@ -54,20 +56,22 @@ export const addToWishlist = createAsyncThunk(
         try {
             let response = await axios.post(
                 wishlistListUrl,
-                data.formData,
+                {
+                    inventory: inventoryId,
+                },
                 {
                   headers: {
                     'Authorization': `Bearer ${accessToken}`,
                  } 
                 }
             );
-            thunkApi.dispatch(fetchProductDetail(data.productId));
             toast.success('Successfully added product to wishlist');
+            thunkApi.dispatch(localAddWatchlistFromProduct())
             return response.data;
         } catch (e) {
             if (e.response)  {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, addToWishlist(data));                    
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, addToWishlistFromProduct(inventoryId));                    
                 }
             }
             toast.error('Error adding product to your wishlist')
@@ -79,7 +83,7 @@ export const addToWishlist = createAsyncThunk(
 
 export const removeFromWishlist = createAsyncThunk(
     'wishlist/removeFromWishlist',
-    async (data, thunkApi) => {
+    async (inventoryId, thunkApi) => {
         // get userDetail state
         const {userDetail} = thunkApi.getState();
         // get  accessToken stored in storage
@@ -88,21 +92,55 @@ export const removeFromWishlist = createAsyncThunk(
         if(accessToken === null) return;
         try {
             let response = await axios.delete(
-                wishlistRemoveUrl + data.inventoryId + '/update/',
+                wishlistRemoveUrl + inventoryId + '/update/',
                 {
                   headers: {
                     'Authorization': `Bearer ${accessToken}`,
                  } 
                 }
             );
-            thunkApi.dispatch(fetchProductDetail(data.productId));
             toast.success('Successfully removed product from wishlist');
+            thunkApi.dispatch(localRemoveWishlist(inventoryId));
             return response.data;
         } catch (e) {
             console.log(e.response)
             if (e.response)  {
                 if (e.response.status === 401) {
-                    return handleRefreshToken(refreshToken, thunkApi.dispatch, removeFromWishlist(data));                    
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, removeFromWishlist(inventoryId));                    
+                }
+            }
+            toast.error('Error removing product to your wishlist')
+            return thunkApi.rejectWithValue('error');
+        }
+    }
+);
+
+export const removeFromWishlistFromProduct = createAsyncThunk(
+    'wishlist/removeFromWishlistFromProduct',
+    async (inventoryId, thunkApi) => {
+        // get userDetail state
+        const {userDetail} = thunkApi.getState();
+        // get  accessToken stored in storage
+        const { accessToken } = userDetail;
+        const { refreshToken } = userDetail;
+        if(accessToken === null) return;
+        try {
+            let response = await axios.delete(
+                wishlistRemoveUrl + inventoryId + '/update/',
+                {
+                  headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                 } 
+                }
+            );
+            toast.success('Successfully removed product from wishlist');
+            thunkApi.dispatch(localRemoveWatchlistFromProduct());
+            return response.data;
+        } catch (e) {
+            console.log(e.response)
+            if (e.response)  {
+                if (e.response.status === 401) {
+                    return handleRefreshToken(refreshToken, thunkApi.dispatch, removeFromWishlistFromProduct(inventoryId));                    
                 }
             }
             toast.error('Error removing product to your wishlist')

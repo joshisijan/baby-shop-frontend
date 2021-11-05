@@ -1,16 +1,16 @@
 import React from 'react'
-import SecondaryTextButton from '../../../Components/Button/SecondaryTextButton'
+import SecondaryTextButton from '../../../../Components/Button/SecondaryTextButton'
 import { HeartIcon } from '@heroicons/react/outline'
 import { HeartIcon as FilledHeartIcon } from '@heroicons/react/solid'
-import DarkOutlineTextButton from '../../../Components/Button/DarkOutlineTextButton'
+import DarkOutlineTextButton from '../../../../Components/Button/DarkOutlineTextButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } from '../../../features/productDetail/productDetailSlice'
+import { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } from '../../../../features/productDetail/productDetailSlice'
 import ProductQuantitySelector from '../ProductQuantitySelector/ProductQuantitySelector'
-import FadeTransition from '../../../Components/Transition/FadeTransition'
-import LoadingOverlay from '../../../Components/LoadingOverlay/LoadingOverlay'
-import { addCartItem } from '../../../features/cart/cartAction'
-import CircularProgressIndicator from '../../../Components/CircularProgressIndicator/CircularProgressIndicator'
-import { addToWishlist, removeFromWishlist } from '../../../features/wishlist/wishlistAction'
+import FadeTransition from '../../../../Components/Transition/FadeTransition'
+import LoadingOverlay from '../../../../Components/LoadingOverlay/LoadingOverlay'
+import { addCartItem } from '../../../../features/cart/cartAction'
+import CircularProgressIndicator from '../../../../Components/CircularProgressIndicator/CircularProgressIndicator'
+import { addToWishlistFromProduct, removeFromWishlistFromProduct } from '../../../../features/wishlist/wishlistAction'
 
 const AddToCart = () => {
     const dispatch = useDispatch()
@@ -45,19 +45,11 @@ const AddToCart = () => {
     }
 
     const handleWishlistAdd = () => {
-        dispatch(addToWishlist({
-            formData: {
-                inventory: activeProductData.sizes[activeSizeIndex].inventory_id,
-            },
-            productId: productDetailState.data.product.id,
-        }));
+        dispatch(addToWishlistFromProduct(activeProductData.sizes[activeSizeIndex].inventory_id));
     }
 
     const handleWishlistRemove = () => {
-        dispatch(removeFromWishlist({
-            inventoryId: activeProductData.sizes[activeSizeIndex].inventory_id,
-            productId: productDetailState.data.product.id,
-        }));
+        dispatch(removeFromWishlistFromProduct(activeProductData.sizes[activeSizeIndex].inventory_id));
     }
 
     const setQuantity = (value) => {

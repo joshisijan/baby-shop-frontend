@@ -1,4 +1,4 @@
-import StarGenerator from "../../../Components/StarGenerator/StarGenerator"
+import StarGenerator from "../../../../Components/StarGenerator/StarGenerator"
 
 const RecentReviewContainer = () => {
     return (

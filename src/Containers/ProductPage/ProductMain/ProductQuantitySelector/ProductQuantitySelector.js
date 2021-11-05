@@ -2,7 +2,7 @@ import {
     PlusIcon,
     MinusSmIcon,
 } from '@heroicons/react/solid'
-import DarkTextButton from '../../../Components/Button/DarkTextButton'
+import DarkTextButton from '../../../../Components/Button/DarkTextButton'
 
 
 const ProductQuantitySelector = ({ quantity = 1, setQuantity, availableQuantity }) => {

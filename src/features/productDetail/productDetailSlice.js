@@ -8,27 +8,14 @@ const initialState = {
     auth: false,
     activeSizeIndex: 0,
     selectedQuantity: 1,
-    data: {
-        product: {
-            id: 1,
-        },
-        product_variant: {},
-        activeProductDetail: { 
-            sizes: [ 
-                {
-                    available_quantity: 1,
-                    max_qty_for_cart: 1,
-                }
-            ],
-        },
-    },
+    data: null,
 }
 
 const productDetailSlice = createSlice({
     name: 'productDetail',
     initialState,
     reducers: {
-        setActiveSizeIndex: (state, {payload}) => {
+        setActiveSizeIndex: (state, { payload }) => {
             state.activeSizeIndex = payload
             state.selectedQuantity = 1
         },
@@ -36,20 +23,37 @@ const productDetailSlice = createSlice({
             // setting active product detail
             state.activeSizeIndex = 0
             state.selectedQuantity = 1
-            state.data.activeProductDetail = payload            
+            state.data.activeProductDetail = payload
         },
-        setSelectedQuantity: (state, {payload}) => {
+        setSelectedQuantity: (state, { payload }) => {
             state.selectedQuantity = payload
-        }
+        },
+        localAddWatchlist: (state) => {
+            if (state.data !== null) {
+                const tempActiveProductDetail = state.data.activeProductDetail
+                tempActiveProductDetail.sizes[state.activeSizeIndex].in_wishlist = true
+                state.data.activeProductDetail = tempActiveProductDetail
+            }
+        },
+        localRemoveWatchlist: (state) => {
+            if (state.data !== null) {
+                const tempActiveProductDetail = state.data.activeProductDetail
+                tempActiveProductDetail.sizes[state.activeSizeIndex].in_wishlist = false
+                state.data.activeProductDetail = tempActiveProductDetail
+            }
+        },
     },
     extraReducers: {
         [fetchProductDetail.pending]: (state) => {
-            if(!state.isLoaded) {
+            if (!state.isLoaded) {
                 state.isLoading = true
             }
         },
         [fetchProductDetail.rejected]: (state) => {
             state.isLoading = false
+            if (!state.isLoaded) {
+                state.data = {}
+            }
             state.error = true
         },
         [fetchProductDetail.fulfilled]: (state, { payload }) => {
@@ -64,4 +68,10 @@ const productDetailSlice = createSlice({
 });
 
 export default productDetailSlice.reducer
-export const { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } = productDetailSlice.actions
+export const {
+    changeActiveColor,
+    setActiveSizeIndex,
+    setSelectedQuantity,
+    localAddWatchlist,
+    localRemoveWatchlist
+} = productDetailSlice.actions

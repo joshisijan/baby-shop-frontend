@@ -1,5 +1,5 @@
-import NormalLink from '../../../Components/NormalLink/NormalLink'
-import StarGenerator from '../../../Components/StarGenerator/StarGenerator'
+import NormalLink from '../../../../Components/NormalLink/NormalLink'
+import StarGenerator from '../../../../Components/StarGenerator/StarGenerator'
 
 const RatingContainer = (props) => {
     return (

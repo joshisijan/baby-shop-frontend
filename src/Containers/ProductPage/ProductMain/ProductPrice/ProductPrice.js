@@ -1,4 +1,4 @@
-import currencyFormatter from '../../../services/currencyFormatter'
+import currencyFormatter from '../../../../services/currencyFormatter'
 
 const ProductPrice = ({price, discount}) => {
     const actualPrice = price - price * (discount / 100);

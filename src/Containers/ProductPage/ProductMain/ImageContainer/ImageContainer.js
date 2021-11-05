@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../constants/apiUrl'
+import { baseUrl } from '../../../../constants/apiUrl'
 import { SRLWrapper } from 'simple-react-lightbox'
 
 

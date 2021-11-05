@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToWishlist, fetchWishlistList, getNextData, removeAllWishlist, removeFromWishlist } from "./wishlistAction";
+import { addToWishlistFromProduct, removeFromWishlistFromProduct,fetchWishlistList, getNextData, removeAllWishlist, removeFromWishlist } from "./wishlistAction";
 
 
 const initialState = {
@@ -16,7 +16,14 @@ const initialState = {
 const wishlistSlice = createSlice({
     name: 'wishlist',
     initialState: initialState,
-    reducers: {},
+    reducers: { 
+        localRemoveWishlist: (state, {payload}) => {
+            if(state.data !== null) {
+                const tempData = state.data.results.filter((data) => data.inventory.id !== payload)
+                state.data.results = tempData   
+            }
+        }
+    },
     extraReducers: {
         // fetch
         [fetchWishlistList.pending]: (state) => {
@@ -54,13 +61,13 @@ const wishlistSlice = createSlice({
             state.data.results = tempResult //setting new result to temp result
         },
         // add
-        [addToWishlist.pending]: (state) => {
+        [addToWishlistFromProduct.pending]: (state) => {
             state.isAdding = true
         },
-        [addToWishlist.rejected]: (state) => {
+        [addToWishlistFromProduct.rejected]: (state) => {
             state.isAdding = false
         },
-        [addToWishlist.fulfilled]: (state) => {
+        [addToWishlistFromProduct.fulfilled]: (state) => {
             state.isAdding = false
         },
         // remove
@@ -71,6 +78,15 @@ const wishlistSlice = createSlice({
             state.isRemoving = false
         },
         [removeFromWishlist.fulfilled]: (state) => {
+            state.isRemoving = false
+        },
+        [removeFromWishlistFromProduct.pending]: (state) => {
+            state.isRemoving = true
+        },
+        [removeFromWishlistFromProduct.rejected]: (state) => {
+            state.isRemoving = false
+        },
+        [removeFromWishlistFromProduct.fulfilled]: (state) => {
             state.isRemoving = false
         },
         // remove all
@@ -88,3 +104,5 @@ const wishlistSlice = createSlice({
 
 
 export default wishlistSlice.reducer
+
+export const { localRemoveWishlist } = wishlistSlice.actions

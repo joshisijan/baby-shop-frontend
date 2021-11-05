@@ -22,18 +22,20 @@ const WishlistMain = () => {
                         No wishlist found
                     </div>
                     :
-                    <div className="mt-4 space-y-4">
-                        {
-                            data.map((wishlist) => {
-                                return (
-                                    <div key={wishlist.id}>
-                                        <WishlistItem
-                                            item={wishlist}
-                                        />
-                                    </div>
-                                )
-                            })
-                        }
+                    <div className="mt-4">
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {
+                                data.map((wishlist) => {
+                                    return (
+                                        <div key={wishlist.id}>
+                                            <WishlistItem
+                                                item={wishlist}
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                         {
                             wishlistState.data.next !== null ?
                                 <div className="flex justify-center">
