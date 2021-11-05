@@ -38,7 +38,7 @@ const WishlistMain = () => {
                         </div>
                         {
                             wishlistState.data.next !== null ?
-                                <div className="flex justify-center">
+                                <div className="flex justify-center pt-8 pb-6">
                                     <PrimaryTextButton isLoading={wishlistState.isLoadingNext} onClick={handleNext}>
                                         Load More
                                     </PrimaryTextButton>
