@@ -7,7 +7,9 @@ const initialState = {
     isLoaded: false,
     isLoadingNext: false,
     error: false,
-    selectedFilter: null,
+    selectedFilter: {
+        label: '',
+    },
     data: null,
 }
 
@@ -19,7 +21,7 @@ const orderSlice = createSlice({
             state.selectedFilter = payload
         },
         resetSelectedFilter: (state) => {
-            state.selectedFilter = null
+            state.selectedFilter = initialState.selectedFilter
         }
     },
     extraReducers: {

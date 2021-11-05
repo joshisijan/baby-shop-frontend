@@ -19,7 +19,7 @@ const FilterMenu = () => {
             <Menu>
                 <Menu.Button>
                     {
-                        orderState.selectedFilter === null ?
+                        orderState.selectedFilter.label === '' ?
                             <div className="flex gap-2 items-center rounded-lg relative transition bg-primary-dark text-gray-800 hover:bg-primary focus:outline-none focus:ring focus:ring-primary-varient px-4 py-2">
                                 <span>All orders</span>
                                 <AdjustmentsIcon className="w-5 h-5" />

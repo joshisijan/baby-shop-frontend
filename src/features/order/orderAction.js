@@ -5,7 +5,7 @@ import {handleRefreshToken} from '../../services/refreshToken'
 
 export const fetchOrderList = createAsyncThunk(
     'order/fetchOrderList',
-    async (_, thunkApi) => {
+    async (status = '', thunkApi) => {
         // get userDetail state
         const {userDetail} = thunkApi.getState();
         // get  accessToken stored in storage
@@ -17,8 +17,11 @@ export const fetchOrderList = createAsyncThunk(
                 orderListUrl,
                 {
                   headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                 } 
+                    'Authorization': `Bearer ${accessToken}`,                
+                 },
+                 params: {
+                    status: status,
+                 }, 
                 }
             );
             if(response.status === 204) {

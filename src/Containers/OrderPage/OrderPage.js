@@ -13,9 +13,9 @@ const OrderPage = () => {
 
     useEffect(() => {
         if(userDetailState.accessToken !== null) {
-            dispatch(fetchOrderList())
+            dispatch(fetchOrderList(orderState.selectedFilter.label))
         }
-    }, [dispatch, userDetailState.accessToken])
+    }, [dispatch, userDetailState.accessToken, orderState.selectedFilter])
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
