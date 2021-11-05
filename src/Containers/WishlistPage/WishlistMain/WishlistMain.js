@@ -19,7 +19,7 @@ const WishlistMain = () => {
             {
                 data.length === 0 ?
                     <div className="p-4 my-10 rounded-lg border border-red-600 bg-red-50 font-medium text-red-600">
-                        No wishlist found
+                        Your wishlist is empty
                     </div>
                     :
                     <div className="mt-4">

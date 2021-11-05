@@ -22,9 +22,9 @@ const ProgressTimeline = () => {
 
     return (
         <div className="border p-4 rounded-b-lg">
-            <div className="font-medium text-sm">
+            {/* <div className="font-medium text-sm">
                 Preparing to ship on December 26,2021
-            </div>
+            </div> */}
             <div className="py-4">
                 {
                     onlySuccessOrderStatusType.map((type, index) => {

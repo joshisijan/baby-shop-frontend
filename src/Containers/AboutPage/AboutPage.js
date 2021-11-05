@@ -1,21 +1,16 @@
 import React from 'react'
+import appDetail from '../../constants/appDetail'
 
 const AboutPage = () => {
     return (
-        <div>
-            About page
-            <h1 className="text-4xl">1</h1>
-            <h1 className="text-4xl">2</h1>
-            <h1 className="text-4xl">3</h1>
-            <h1 className="text-4xl">4</h1>
-            <h1 className="text-4xl">5</h1>
-            <h1 className="text-4xl">6</h1>
-            <h1 className="text-4xl">7</h1>
-            <h1 className="text-4xl">8</h1>
-            <h1 className="text-4xl">9</h1>
-            <h1 className="text-4xl">10</h1>
-            <h1 className="text-4xl">11</h1>
-            <h1 className="text-4xl">12</h1>
+        <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
+            <div className="w-full max-w-6xl">
+                <h1 className="mb-4 text-xl font-bold">About us</h1>
+                <h1 className="mb-4 text-lg font-medium">{appDetail.appName}</h1>
+                <p>
+                    {appDetail.appDescription}
+                </p>
+            </div>
         </div>
     )
 }
