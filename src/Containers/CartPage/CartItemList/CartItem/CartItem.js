@@ -31,7 +31,7 @@ const CartItem = ({
     const handleRemove = () => {
         dispatch(showDialog({
             header: 'Remove from cart',
-            description: `Remove product ${name} with quantiy ${quantity} from your cart?`,
+            description: `Remove ${name} with quantiy ${quantity} from your cart?`,
             onYes: () => {
                 dispatch(hideDialog())
                 dispatch(removeCartitem(id))

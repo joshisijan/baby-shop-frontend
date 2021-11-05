@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import {handleRefreshToken} from '../../services/refreshToken'
 import { fetchProductDetail } from "../productDetail/productDetailAction";
 import { setSelectedQuantity } from "../productDetail/productDetailSlice";
+import { localRemoveFromCart, localUpdateCart } from "./cartSlice";
 
 export const fetchCartList = createAsyncThunk(
     'cart/fetchCartList',
@@ -54,14 +55,11 @@ export const removeCartitem = createAsyncThunk(
                  } 
                 }
             );
-            thunkApi.dispatch(fetchCartList());
             toast.success('Successfully removed item from cart.');
+            thunkApi.dispatch(localRemoveFromCart(id))
             return response.data;
         } catch (e) {
-            thunkApi.dispatch(fetchCartList());
-            if (!e.response) {
-                toast.error('Network error');
-            } else {
+            if (e.response) {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeCartitem);                    
                 } else {
@@ -91,14 +89,12 @@ export const updateCartItem = createAsyncThunk(
                     'Authorization': `Bearer ${accessToken}`,
                  },
                 }
-            );
-            thunkApi.dispatch(fetchCartList());
+            );            
             toast.success('Successfully updated item from cart.');
+            thunkApi.dispatch(localUpdateCart({id, quantity}));
             return response.data;
         } catch (e) {
-            if (!e.response) {
-                toast.error('Network error');
-            } else {
+            if (e.response) {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeCartitem);                    
                 } else {
@@ -133,9 +129,7 @@ export const addCartItem = createAsyncThunk(
             toast.success('Successfully added item to cart.');
             return response.data;
         } catch (e) {            
-            if (!e.response) {
-                toast.error('Network error');
-            } else {                
+            if (e.response) {                
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeCartitem);                    
                 } else {

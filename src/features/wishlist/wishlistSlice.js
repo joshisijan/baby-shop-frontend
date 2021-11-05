@@ -33,9 +33,7 @@ const wishlistSlice = createSlice({
         },
         [fetchWishlistList.rejected]: (state) => {
             state.isLoading = false
-            if (!state.isLoaded) {
-                state.data = {}
-            }
+            state.data = {}
             state.error = true
         },
         [fetchWishlistList.fulfilled]: (state, { payload }) => {

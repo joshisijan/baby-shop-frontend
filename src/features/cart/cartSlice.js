@@ -7,16 +7,32 @@ const initialState = {
     isLoading: false,
     isUpdating: false,
     isLoaded: false,
-    data: {
-        cart_items: [],
-    },
+    data: null,
 }
 
 const cartSlice = createSlice({  
     name: 'cart',
     initialState,
     reducers: {
-        resetCartState: () => initialState
+        resetCartState: () => initialState,
+        localRemoveFromCart: (state, {payload}) => {
+            if(state.data !== null) {
+                const tempCartItem = state.data.cart_items.filter(data => data.id !== payload)
+                state.data.cart_items = tempCartItem
+            }
+        },
+        localUpdateCart: (state, {payload}) => {
+            if(state.data !== null) {
+                const tempCartItem = state.data.cart_items
+                tempCartItem.map((item) => {
+                    if(item.id === payload.id) {
+                        item.quantity = payload.quantity
+                    }
+                    return null
+                })
+                state.data.cart_items = tempCartItem
+            }
+        },
     },  
     extraReducers: {
         [fetchCartList.pending]: (state) => {
@@ -25,6 +41,7 @@ const cartSlice = createSlice({
             }
         },
         [fetchCartList.rejected]: (state) => {
+            state.data = {}
             state.isLoading = false
         },
         [fetchCartList.fulfilled]:(state, {payload}) => {
@@ -71,4 +88,8 @@ const cartSlice = createSlice({
 
 export default cartSlice.reducer
 
-export const { resetCartState } = cartSlice.actions
+export const { 
+    resetCartState, 
+    localRemoveFromCart, 
+    localUpdateCart 
+} = cartSlice.actions

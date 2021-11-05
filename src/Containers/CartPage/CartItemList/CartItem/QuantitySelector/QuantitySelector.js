@@ -37,7 +37,7 @@ const QuantitySelector = ({ id, name, quantity = 1, price, discount, availableQu
     const handleUpdate = () => {
         dispatch(showDialog({
             header: 'Update cart item',
-            description: `Update product ${name}'s quantiy from ${quantity} to ${cartQuantity}?`,
+            description: `Update ${name}'s quantiy from ${quantity} to ${cartQuantity}?`,
             onYes: () => {
                 dispatch(hideDialog())
                 dispatch(updateCartItem({ id, quantity: cartQuantity }));

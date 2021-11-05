@@ -26,7 +26,7 @@ const CartPage = () => {
                     userDetailState.accessToken === null ?
                         <NoLoginCart />
                         :
-                        cartState.isLoading ?
+                        cartState.isLoading || cartState.data === null ?
                             <CartLoading />
                             :
                             cartState.data.cart_items.length === 0 ?

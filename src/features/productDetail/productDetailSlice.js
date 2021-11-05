@@ -51,9 +51,7 @@ const productDetailSlice = createSlice({
         },
         [fetchProductDetail.rejected]: (state) => {
             state.isLoading = false
-            if (!state.isLoaded) {
-                state.data = {}
-            }
+            state.data = {}
             state.error = true
         },
         [fetchProductDetail.fulfilled]: (state, { payload }) => {
