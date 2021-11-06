@@ -7,7 +7,7 @@ const ProductLoading = () => {
                 <CircularProgressIndicator />
             </div>
             <span className="font-bold">
-                Loading produc tdetail...
+                Loading product detail...
             </span>
         </div>
     )

@@ -55,7 +55,6 @@ export const addUserAddress = createAsyncThunk(
                  } 
                 }
             );
-            console.log(response.data)
             toast.success('Successfully added the address in your shipping information.');
             return response.data;
         } catch (e) {
@@ -97,7 +96,6 @@ export const updateUserAddress = createAsyncThunk(
             if (!e.response) {
                 toast.error('Network error');
             } else {
-                console.log(e.response)
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, addUserAddress);                    
                 } else {

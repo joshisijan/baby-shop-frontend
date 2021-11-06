@@ -103,7 +103,6 @@ export const removeFromWishlist = createAsyncThunk(
             thunkApi.dispatch(localRemoveWishlist(inventoryId));
             return response.data;
         } catch (e) {
-            console.log(e.response)
             if (e.response)  {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeFromWishlist(inventoryId));                    
@@ -137,7 +136,6 @@ export const removeFromWishlistFromProduct = createAsyncThunk(
             thunkApi.dispatch(localRemoveWatchlistFromProduct());
             return response.data;
         } catch (e) {
-            console.log(e.response)
             if (e.response)  {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeFromWishlistFromProduct(inventoryId));                    
@@ -202,7 +200,6 @@ export const removeAllWishlist = createAsyncThunk(
             thunkApi.dispatch(localRemoveAllWishlist())
             return response.data;
         } catch (e) {
-            console.log(e.response)
             if (e.response)  {
                 if (e.response.status === 401) {
                     return handleRefreshToken(refreshToken, thunkApi.dispatch, removeAllWishlist());                    
