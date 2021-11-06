@@ -35,7 +35,6 @@ export const fetchProductDetail = createAsyncThunk(
                 };
             }            
         } catch (e) {
-            console.log(e.response)
             if(e.response) {
                 if (e.response.status === 401) {
                     return handleRefreshTokenNoError(refreshToken, thunkApi.dispatch, fetchProductDetail(productId));
