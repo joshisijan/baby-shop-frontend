@@ -28,7 +28,8 @@ const wishlistSlice = createSlice({
                 state.data.results = []
                 state.data.next = null   
             }
-        }
+        },
+
     },
     extraReducers: {
         // fetch
@@ -71,7 +72,7 @@ const wishlistSlice = createSlice({
         [addToWishlistFromProduct.rejected]: (state) => {
             state.isAdding = false
         },
-        [addToWishlistFromProduct.fulfilled]: (state) => {
+        [addToWishlistFromProduct.fulfilled]: (state, {payload}) => {
             state.isAdding = false
         },
         // remove

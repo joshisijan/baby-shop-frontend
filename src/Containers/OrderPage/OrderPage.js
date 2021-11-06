@@ -5,17 +5,19 @@ import NoLoginOrder from './NoLoginOrder/NoLoginOrder'
 import OrderError from './OrderError/OrderError'
 import OrderLoading from './OrderLoading/OrderLoading'
 import OrderMain from './OrderMain/OrderMain'
+import { useHistory } from 'react-router-dom'
 
 const OrderPage = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const userDetailState = useSelector(state => state.userDetail)
     const orderState = useSelector(state => state.order)
 
     useEffect(() => {
-        if(userDetailState.accessToken !== null && !orderState.isLoaded) {
+        if(userDetailState.accessToken !== null && history.action === 'PUSH') {
             dispatch(fetchOrderList(orderState.selectedFilter.label))
         }
-    }, [dispatch, userDetailState.accessToken, orderState.selectedFilter, orderState.isLoaded])
+    }, [dispatch, userDetailState.accessToken, orderState.selectedFilter, history.action])
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
