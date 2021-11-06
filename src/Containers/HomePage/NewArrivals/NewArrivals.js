@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchLatestProduct, fetchNextLatestProduct } from '../../../features/latestProduct/latestProductAction'
 import PrimaryTextButton from '../../../Components/Button/PrimaryTextButton'
 import EndOfTag from '../../../Components/EndOfTag/EndOfTag'
-import { Helmet } from 'react-helmet'
 
-const NewArrivals = ({ className }) => {
+const NewArrivals = () => {
     const dispatch = useDispatch();
     const latestProductState = useSelector(state => state.latestProduct);
 
@@ -23,9 +22,6 @@ const NewArrivals = ({ className }) => {
 
     return (
         <div className="-mt-10 p-6 grid justify-items-center">
-            <Helmet>
-                <title>New arrivals</title>
-            </Helmet>
             <div className="max-w-6xl w-full">
                 <div className="flex justify-between">
                     <h1 className="text-xl font-bold">
