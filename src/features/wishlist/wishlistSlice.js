@@ -34,9 +34,7 @@ const wishlistSlice = createSlice({
     extraReducers: {
         // fetch
         [fetchWishlistList.pending]: (state) => {
-            if (!state.isLoaded) {
-                state.isLoading = true
-            }
+            state.isLoading = true
         },
         [fetchWishlistList.rejected]: (state) => {
             state.isLoading = false
