@@ -38,6 +38,11 @@ const MainLayout = (props) => {
         }
     }, [dispatch, userDetailState.accessToken, userDetailState.isLoaded]);
 
+    let topPadding = 10
+    if(window.screen.width < 380) {
+        topPadding = 13.5
+    }
+
     return (
         <>
             <AlertDialog />
@@ -46,7 +51,7 @@ const MainLayout = (props) => {
                     position="top-right"
                 />
                 <Navbar />
-                <div style={{ paddingTop: '10rem' }}>
+                <div style={{ paddingTop: `${topPadding}rem` }}>
                     {props.children}
                 </div>
                 <Footer />

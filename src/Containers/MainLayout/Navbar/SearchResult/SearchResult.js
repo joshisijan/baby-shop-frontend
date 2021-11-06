@@ -40,7 +40,7 @@ const SearchResult = ({ className }) => {
  
     return (
         <div className={`overflow-y-auto p-4 max-w-6xl bg-white border-t h-full w-full ${className}`}>
-            <div className="hidden md:flex justify-end">
+            <div className="hidden md:flex justify-end mb-4">
                 <PrimaryTextButton onClick={handleReset} className="text-sm flex gap-2">
                     <XIcon className="w-5 h-5" />
                     Close Search
