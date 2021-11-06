@@ -95,16 +95,7 @@ const Navbar = () => {
                         <HomeIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>
-                <Link 
-                    to={
-                        {
-                            pathname: '/account',
-                            state: {
-                                test: 'hello'
-                            }
-                        }
-                    }
-                >
+                <Link to='/account'>
                     <IconButton label="Account">
                         <UserIcon className="w-5 h-5" />
                     </IconButton>
@@ -133,9 +124,18 @@ const Navbar = () => {
                     <MenuIcon className="w-5 h-5" /> <span>All Categories</span>
                 </MenuLink>
                 {
-                    categoryListState.data.results.map(category => {
+                    categoryListState.data.results.slice(0,5).map(category => {
                         return (
-                            <Link key={category.id} to={`/category/${category.id}`}>
+                            <Link 
+                                key={category.id} 
+                                to={{
+                                    pathname: `/category/${category.id}`,
+                                    state: {
+                                        name: category.name,
+                                        description: category.description,
+                                    }
+                                }}
+                            >
                                 <MenuLink>
                                     {category.name}
                                 </MenuLink>

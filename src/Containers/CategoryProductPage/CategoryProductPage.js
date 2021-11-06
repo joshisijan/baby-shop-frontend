@@ -23,11 +23,11 @@ const CategoryProductPage = () => {
             {
                 locationState === undefined ?
                     <Helmet>
-                        <title>Products for category</title>
+                        <title>Category Product List</title>
                     </Helmet>
                     :
                     <Helmet>
-                        <title>Products for {locationState.name}</title>
+                        <title>{locationState.name}</title>
                         <meta
                             name="description"
                             content={locationState.description.substring(0, 100)}
@@ -42,9 +42,9 @@ const CategoryProductPage = () => {
                 <h1 className="mb-4 text-xl font-bold">
                     {
                         locationState === undefined ?
-                        'Product List'
+                        'Category Product List'
                         :
-                        `Products for ${locationState.name}`
+                        `${locationState.name}`
                     }   
                 </h1>
                 {

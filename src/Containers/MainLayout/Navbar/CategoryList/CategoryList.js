@@ -17,6 +17,7 @@ const CategoryList = () => {
                             return <CategoryListItem   
                                 key={item.id}
                                 name={item.name}
+                                description={item.description}
                                 image={item.image}
                                 id={item.id}
                             />
