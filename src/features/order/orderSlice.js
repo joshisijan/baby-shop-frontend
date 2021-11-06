@@ -29,7 +29,9 @@ const orderSlice = createSlice({
     extraReducers: {
         // fetch list
         [fetchOrderList.pending]: (state) => {
-            state.isLoading = true
+            if(!state.isLoaded) {
+                state.isLoading = true
+            }
         },
         [fetchOrderList.rejected]: (state) => {
             state.isLoading = false
