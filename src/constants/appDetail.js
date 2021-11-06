@@ -1,4 +1,5 @@
 const appDetail = {
+    url: 'http://my-share-nepal.herokuapp.com',
     appName: "Baby Shop",
     appMoto: "Everything for baby",
     appShortDescription: "A complete solution for everything you need for a baby.",
