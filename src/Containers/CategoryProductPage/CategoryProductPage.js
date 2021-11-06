@@ -17,22 +17,36 @@ const CategoryProductPage = () => {
     useEffect(() => {
         dispatch(fetchCategoryProduct(id))
     }, [dispatch, id])
-
+    
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
-            <Helmet>
-                <title>Products for {locationState.name}</title>
-                <meta
-                    name="description"
-                    content={locationState.description.substring(0, 100)}
-                />
-                <meta
-                    name="keywords"
-                    content={locationState.name}
-                />
-            </Helmet>
+            {
+                locationState === undefined ?
+                    <Helmet>
+                        <title>Products for category</title>
+                    </Helmet>
+                    :
+                    <Helmet>
+                        <title>Products for {locationState.name}</title>
+                        <meta
+                            name="description"
+                            content={locationState.description.substring(0, 100)}
+                        />
+                        <meta
+                            name="keywords"
+                            content={locationState.name}
+                        />
+                    </Helmet>
+            }
             <div className="px-4 w-full max-w-6xl">
-                <h1 className="mb-4 text-xl font-bold">Product List</h1>
+                <h1 className="mb-4 text-xl font-bold">
+                    {
+                        locationState === undefined ?
+                        'Product List'
+                        :
+                        `Products for ${locationState.name}`
+                    }   
+                </h1>
                 {
                     categoryProductState.isLoading || categoryProductState.data === null ?
                         <CategoryProductLoading />

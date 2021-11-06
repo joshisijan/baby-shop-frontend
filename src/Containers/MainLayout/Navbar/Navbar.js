@@ -95,7 +95,16 @@ const Navbar = () => {
                         <HomeIcon className="w-5 h-5" />
                     </IconButton>
                 </Link>
-                <Link to="/account">
+                <Link 
+                    to={
+                        {
+                            pathname: '/account',
+                            state: {
+                                test: 'hello'
+                            }
+                        }
+                    }
+                >
                     <IconButton label="Account">
                         <UserIcon className="w-5 h-5" />
                     </IconButton>
