@@ -15,10 +15,10 @@ const WishlistPage = () => {
     const wishlistState = useSelector(state => state.wishlist)
 
     useEffect(() => {
-        if (userDetailState.accessToken !== null) {
+        if (userDetailState.accessToken !== null && !wishlistState.isLoaded) {
             dispatch(fetchWishlistList())
         }
-    }, [dispatch, userDetailState.accessToken])
+    }, [dispatch, userDetailState.accessToken, wishlistState.isLoaded])
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">

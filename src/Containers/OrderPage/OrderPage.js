@@ -12,10 +12,10 @@ const OrderPage = () => {
     const orderState = useSelector(state => state.order)
 
     useEffect(() => {
-        if(userDetailState.accessToken !== null) {
+        if(userDetailState.accessToken !== null && !orderState.isLoaded) {
             dispatch(fetchOrderList(orderState.selectedFilter.label))
         }
-    }, [dispatch, userDetailState.accessToken, orderState.selectedFilter])
+    }, [dispatch, userDetailState.accessToken, orderState.selectedFilter, orderState.isLoaded])
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">

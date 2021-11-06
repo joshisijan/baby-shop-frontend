@@ -11,8 +11,10 @@ const NewArrivals = ({ className }) => {
     const latestProductState = useSelector(state => state.latestProduct);
 
     useEffect(() => {
-        dispatch(fetchLatestProduct());
-    }, [dispatch]);
+        if(!latestProductState.isLoaded) {
+            dispatch(fetchLatestProduct());
+        }
+    }, [dispatch,latestProductState.isLoaded]);
 
     const handleNext = () => {
         dispatch(fetchNextLatestProduct(latestProductState.data.next));

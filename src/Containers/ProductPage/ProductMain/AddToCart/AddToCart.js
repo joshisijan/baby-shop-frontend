@@ -6,8 +6,6 @@ import DarkOutlineTextButton from '../../../../Components/Button/DarkOutlineText
 import { useDispatch, useSelector } from 'react-redux'
 import { changeActiveColor, setActiveSizeIndex, setSelectedQuantity } from '../../../../features/productDetail/productDetailSlice'
 import ProductQuantitySelector from '../ProductQuantitySelector/ProductQuantitySelector'
-import FadeTransition from '../../../../Components/Transition/FadeTransition'
-import LoadingOverlay from '../../../../Components/LoadingOverlay/LoadingOverlay'
 import { addCartItem } from '../../../../features/cart/cartAction'
 import CircularProgressIndicator from '../../../../Components/CircularProgressIndicator/CircularProgressIndicator'
 import { addToWishlistFromProduct, removeFromWishlistFromProduct } from '../../../../features/wishlist/wishlistAction'
@@ -58,9 +56,6 @@ const AddToCart = () => {
 
     return (
         <div className="space-y-4">
-            <FadeTransition show={cartState.isAdding}>
-                <LoadingOverlay label="Adding to cart..." />
-            </FadeTransition>
             <div className="space-y-1">
                 <span className="text-xs font-semibold">Color</span>
                 <div className="mt-1 flex gap-2 flex-wrap">
@@ -149,6 +144,8 @@ const AddToCart = () => {
                 <div className="flex-1">
                     <SecondaryTextButton
                         disabled={!canAddInCart}
+                        isLoading={cartState.isAdding}
+                        loadingText="Adding to cart..."
                         onClick={handleAddToCart}
                         className={`w-full ${!canAddInCart ? 'cursor-not-allowed' : ''}`}
                     >

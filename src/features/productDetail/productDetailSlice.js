@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProductDetail } from "./productDetailAction";
+import { fetchProductDetail, fetchProductDetailWithoutLoading } from "./productDetailAction";
 
 const initialState = {
     isLoading: false,
@@ -44,10 +44,9 @@ const productDetailSlice = createSlice({
         },
     },
     extraReducers: {
+        //fetch
         [fetchProductDetail.pending]: (state) => {
-            if (!state.isLoaded) {
-                state.isLoading = true
-            }
+            state.isLoading = true
         },
         [fetchProductDetail.rejected]: (state) => {
             state.isLoading = false
@@ -58,6 +57,12 @@ const productDetailSlice = createSlice({
             state.isLoading = false
             state.isLoaded = true
             state.error = false
+            state.data = payload.responseData
+            state.auth = payload.auth
+            state.data.activeProductDetail = Object.values(state.data.product_variant)[0] // adding first product as active
+        },
+        //fetch without loading 
+        [fetchProductDetailWithoutLoading.fulfilled]: (state, { payload }) => {
             state.data = payload.responseData
             state.auth = payload.auth
             state.data.activeProductDetail = Object.values(state.data.product_variant)[0] // adding first product as active
