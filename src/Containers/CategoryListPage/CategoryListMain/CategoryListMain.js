@@ -29,6 +29,7 @@ const CategoryListMain = () => {
                                     return <CategoryListItem
                                         key={category.id}
                                         name={category.name}
+                                        description={category.description}
                                         image={category.image}
                                         id={category.id}
                                     />

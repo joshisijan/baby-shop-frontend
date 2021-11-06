@@ -48,10 +48,10 @@ const CategoryProductMain = () => {
                                 <div className="flex justify-center pt-8 pb-6">
                                     <PrimaryTextButton isLoading={categoryProductState.isLoadingNext} onClick={handleNext}>
                                         Load More
-                                    </PrimaryTextButton>                                    
+                                    </PrimaryTextButton>
                                 </div>
                                 :
-                                <EndOfTag />                                
+                                <EndOfTag />
                         }
                     </div>
             }

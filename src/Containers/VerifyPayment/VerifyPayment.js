@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory, useParams } from 'react-router'
 import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay'
@@ -17,15 +18,18 @@ const VerifyPayment = () => {
     if (verifyPaymentState.isVerifying || verifyPaymentState.isPaid === null) {
         return (
             <div>
+                <Helmet>
+                    <title>Verify payment</title>
+                </Helmet>
                 <LoadingOverlay label="Verifying payment..." />
             </div>
         )
     } else {
-        if(verifyPaymentState.error) {
+        if (verifyPaymentState.error) {
             return <Redirect to="/cart/checkout" />
-        }else if(verifyPaymentState.isPaid){
+        } else if (verifyPaymentState.isPaid) {
             return <Redirect to="/order" />
-        }else{
+        } else {
             return <Redirect to="/cart/checkout" />
         }
     }

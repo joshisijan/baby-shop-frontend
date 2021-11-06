@@ -5,6 +5,7 @@ import { checkoutAddressPatchForPayment } from '../../features/checkout/checkout
 import PaymentLoading from './PaymentLoading/PaymentLoading'
 import PaymentMain from './PaymentMain/PaymentMain'
 import PaymentError from './PaymentError/PaymentError'
+import { Helmet } from 'react-helmet'
 
 
 const PaymentPage = () => {
@@ -33,6 +34,9 @@ const PaymentPage = () => {
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
+            <Helmet>
+                <title>Payment</title>
+            </Helmet>
             <div className="w-full max-w-6xl">
                 <h1 className="mb-4 text-xl font-bold">Payment</h1>
                 {

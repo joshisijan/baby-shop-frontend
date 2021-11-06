@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 import CategoryListError from '../MainLayout/Navbar/CategoryList/CategoryListError/CategoryListError'
 import CategoryListLoading from './CategoryListLoading/CategoryListLoading'
@@ -8,6 +9,9 @@ const CategoryListPage = () => {
     const categoryListState = useSelector(state => state.categoryList)
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
+            <Helmet>
+                <title>Categories</title>
+            </Helmet>
             <div className="px-4 w-full max-w-6xl">
                 <h1 className="mb-4 text-xl font-bold">Categories</h1>
                 {

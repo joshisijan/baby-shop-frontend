@@ -6,6 +6,7 @@ import { fetchOrderDetail } from '../../features/orderDetail/orderDetailAction'
 import OrderDetailMain from './OrderDetailMain/OrderDetailMain'
 import OrderDetailLoading from './OrderDetailLoading/OrderDetailLoading'
 import OrderDetailError from './OrderDetailError/OrderDetailError'
+import { Helmet } from 'react-helmet'
 
 const OrderDetail = () => {
     const { id } = useParams()
@@ -19,6 +20,9 @@ const OrderDetail = () => {
     return (
 
         <div className="grid justify-items-center">
+            <Helmet>
+                <title>Detail for order</title>
+            </Helmet>
             <div className="max-w-6xl w-full">
                 {
                     orderDetailState.isLoading || orderDetailState.data === null ?

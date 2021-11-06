@@ -3,6 +3,7 @@ import Logout from './Logout/Logout';
 import Detail from './Detail/Detail';
 import ShippingInfo from './ShippingInfo/ShippingInfo'
 import { IdentificationIcon, LocationMarkerIcon, LogoutIcon } from '@heroicons/react/outline';
+import { Helmet } from 'react-helmet';
 
 const ProfilePage = () => {
 
@@ -27,6 +28,9 @@ const ProfilePage = () => {
 
     return (
         <div className="grid justify-items-center">
+            <Helmet>
+                <title>Account</title>
+            </Helmet>
             <Tab.Group as="div" vertical className="p-6 max-w-6xl h-full w-full flex flex-col md:flex-row">
                 <Tab.List className="flex md:flex-col md:items-start flex-wrap gap-2">
                     {

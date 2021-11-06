@@ -4,6 +4,7 @@ import CheckoutLoading from './CheckoutLoading/CheckoutLoading'
 import CheckoutMain from './CheckoutMain/CheckoutMain'
 import CheckoutError from './CheckoutError/CheckoutError'
 import { checkout } from '../../features/checkout/checkoutAction'
+import { Helmet } from 'react-helmet'
 
 const CheckoutPage = () => {
     const dispatch = useDispatch()
@@ -15,6 +16,9 @@ const CheckoutPage = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Checkout</title>
+            </Helmet>
             {
                 checkoutState.isLoading ?
                     <CheckoutLoading />

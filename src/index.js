@@ -9,10 +9,23 @@ import './index.css';
 import App from './App';
 import SimpleReactLightbox from 'simple-react-lightbox'
 import ScrollMemory from 'react-router-scroll-memory';
+import Helmet from 'react-helmet'
+import appDetail from './constants/appDetail';
 
 
 ReactDOM.render(
   <Router>
+    <Helmet> 
+      <title>{appDetail.appName}</title>
+      <meta 
+        name="description"
+        content={appDetail.appDescription}
+      />
+      <meta 
+        name="keywords"
+        content={appDetail.keywords}
+      />
+    </Helmet>
     <ScrollMemory />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

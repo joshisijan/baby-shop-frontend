@@ -8,6 +8,7 @@ import WishlistLoading from './WishlistLoading/WishlistLoading'
 import WishlistMain from './WishlistMain/WishlistMain'
 import WishlistMenu from './WishlistMain/WishlistMenu/WishlistMenu'
 import { useHistory } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 
 const WishlistPage = () => { 
@@ -24,6 +25,9 @@ const WishlistPage = () => {
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
+            <Helmet>
+                <title>Wishlist</title>
+            </Helmet>
             <div className="px-4 w-full max-w-6xl">
                 <h1 className="mb-4 flex justify-between items-center relative">
                     <span className="text-xl font-bold">My wishlist</span>

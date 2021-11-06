@@ -6,6 +6,7 @@ import EmptyCart from './EmptyCart/EmptyCart'
 import NoLoginCart from './NoLoginCart/NoLoginCart'
 import CartLoading from './CartLoading/CartLoading'
 import { fetchCartList } from '../../features/cart/cartAction'
+import { Helmet } from 'react-helmet'
 
 const CartPage = () => {
     const dispatch = useDispatch()
@@ -20,6 +21,9 @@ const CartPage = () => {
 
     return (
         <div className="mt-4 md:-mt-1 p-2 md:p-6 grid justify-items-center">
+            <Helmet>
+                <title>Cart</title>
+            </Helmet>
             <div className="w-full max-w-6xl">
                 <h1 className="mb-4 text-xl font-bold">Shopping Cart</h1>
                 {

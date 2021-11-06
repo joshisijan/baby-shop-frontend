@@ -48,7 +48,7 @@ function App() {
             <Route path="/" exact>
               <HomePage />
             </Route>
-            <Route path="/account" exact>
+            <Route path="/account" exact> 
               <ProtectedRoute
                 unprotectedComponent={AccountOptionPage}
                 protectedComponent={ProfilePage}
@@ -58,7 +58,7 @@ function App() {
               <CategoryListPage />
             </Route>
             <Route path="/category/:id" exact>
-              <CategoryProductPage />
+              <CategoryProductPage />  
             </Route>
             <Route path="/product" exact>
               <div className="mt-10">

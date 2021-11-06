@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import AddToCart from './AddToCart/AddToCart';
 import ImageContainer from './ImageContainer/ImageContainer';
@@ -12,6 +13,17 @@ const ProductMain = () => {
     const activeProductData = productDetailState.data.activeProductDetail
     return (
         <div className="mx-auto p-4 max-w-6xl text-gray-800">
+            <Helmet>
+                <title>{productDetailData.name}</title>
+                <meta 
+                    name="description"
+                    content={productDetailData.description.substring(0,100)}
+                />
+                <meta 
+                    name="keywords"
+                    content={productDetailData.name}
+                />
+            </Helmet>
             {/* main product section */}
             <div className="grid gap-4 sm:grid-cols-2">
                 {/* name and rating for smmaller devices */}
