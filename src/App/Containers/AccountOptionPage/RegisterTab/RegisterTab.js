@@ -186,7 +186,7 @@ const RegisterTab = () => {
                 <FadeTransition show={ Object.keys(errors).length > 0 }>{/* show when error occur on front side */}
                     <div className="py-4 px-6 bg-red-50 border border-red-600 rounded-lg">
                         <div className="font-bold text-red-600 text-xs">
-                            Fix all upper errors first to sign up.
+                            Fix all errors first to create account.
                         </div>
                     </div>
                 </FadeTransition>
