@@ -6,11 +6,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import store from './store';
 import { persistor } from './store'
 import './index.css';
-import App from './App';
+import App from './App/App';
 import SimpleReactLightbox from 'simple-react-lightbox'
 import ScrollMemory from 'react-router-scroll-memory';
 import Helmet from 'react-helmet'
-import appDetail from './constants/appDetail';
+import appDetail from './App/constants/appDetail';
 
 
 ReactDOM.render(

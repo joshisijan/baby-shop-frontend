@@ -10,22 +10,22 @@ import {
     REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import registrationSlice from "./features/registration/registrationSlice"
-import loginSlice from './features/login/loginSlice'
-import userDetailSlice from "./features/userDetail/userDetailSlice"
-import categoryListSlice from "./features/categoryList/categoryListSlice"
-import latestProductSlice from "./features/latestProduct/latestProductSlice"
-import productDetailSlice from "./features/productDetail/productDetailSlice"
-import userAddressSlice from "./features/userAddress/userAddressSlice"
-import cartSlice from "./features/cart/cartSlice"
-import searchSlice from "./features/search/searchSlice"
-import alertDialogSlice from "./features/alertDialog/alertDialogSlice"
-import checkoutSlice from "./features/checkout/checkoutSlice"
-import orderSlice from "./features/order/orderSlice"
-import wishlistSlice from "./features/wishlist/wishlistSlice"
-import verifyPaymentSlice from "./features/verifyPayment/verifyPaymentSlice"
-import orderDetailSlice from "./features/orderDetail/orderDetailSlice"
-import categoryProductSlice from "./features/categoryProduct/categoryProductSlice"
+import registrationSlice from "./App/features/registration/registrationSlice"
+import loginSlice from './App/features/login/loginSlice'
+import userDetailSlice from "./App/features/userDetail/userDetailSlice"
+import categoryListSlice from "./App/features/categoryList/categoryListSlice"
+import latestProductSlice from "./App/features/latestProduct/latestProductSlice"
+import productDetailSlice from "./App/features/productDetail/productDetailSlice"
+import userAddressSlice from "./App/features/userAddress/userAddressSlice"
+import cartSlice from "./App/features/cart/cartSlice"
+import searchSlice from "./App/features/search/searchSlice"
+import alertDialogSlice from "./App/features/alertDialog/alertDialogSlice"
+import checkoutSlice from "./App/features/checkout/checkoutSlice"
+import orderSlice from "./App/features/order/orderSlice"
+import wishlistSlice from "./App/features/wishlist/wishlistSlice"
+import verifyPaymentSlice from "./App/features/verifyPayment/verifyPaymentSlice"
+import orderDetailSlice from "./App/features/orderDetail/orderDetailSlice"
+import categoryProductSlice from "./App/features/categoryProduct/categoryProductSlice"
 
 
 const reducers = combineReducers({
