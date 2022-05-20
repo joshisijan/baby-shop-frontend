@@ -1,4 +1,4 @@
-export const baseUrl = 'http://20.198.109.214'
+export const baseUrl = 'https://baby-shop-4494.herokuapp.com'
 
 // for user registration
 export const registrationUrl = baseUrl + '/api/account/registration/'
